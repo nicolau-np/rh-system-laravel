@@ -1,6 +1,6 @@
 <?php
 
-use App\TabelaIRT;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-     /*$this->call(TabelaIRTSeeder::class);
+     $this->call(TabelaIRTSeeder::class);
         $this->call(PaisSeeder::class);
         $this->call(ProvinciaSeeder::class);
         $this->call(MunicipioSeeder::class);
@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoSubcidiosSeeder::class);
         $this->call(BancoSeeder::class);
         $this->call(PessoaSeeder::class);
-        $this->call(UserSeeder::class);*/
-       $this->call(FaltaSeeder::class);
+        $this->call(UserSeeder::class);
+       /*$this->call(FaltaSeeder::class);*/
         
     }
 }

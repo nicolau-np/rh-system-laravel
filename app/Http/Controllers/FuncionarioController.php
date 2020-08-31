@@ -43,9 +43,7 @@ class FuncionarioController extends Controller
     public function index()
     {
 
-        $funcionarios = Funcionario::select('*')
-            ->join('pessoas', 'funcionarios.id_pessoa', '=', 'pessoas.id')->orderBy('pessoas.nome', 'ASC')
-            ->paginate(4);
+        $funcionarios = Funcionario::paginate(4);
 
 
         $data = [
@@ -177,10 +175,12 @@ class FuncionarioController extends Controller
      */
     public function show($id)
     {
-        $funcionario = $this->funcionario->find($id);
+       $funcionario = $this->funcionario->where('id',$id)->first();
+
         if (!$funcionario) {
             return back()->with(['error' => 'Funcionário não Encontrado']);
         }
+
         $data = [
             'titulo' => "Funcionários",
             'menu' => "Funcionários",
@@ -190,6 +190,7 @@ class FuncionarioController extends Controller
         ];
 
         return view('funcionario.show', $data);
+
     }
 
     /**
@@ -234,5 +235,23 @@ class FuncionarioController extends Controller
             'getMunicipio' => $municipio
         ];
         return view('ajax_load.municipio', $data);
+    }
+
+    public function formFalta($id){
+        $funcionario = $this->funcionario->where('id',$id)->first();
+
+        if (!$funcionario) {
+            return back()->with(['error' => 'Funcionário não Encontrado']);
+        }
+
+        $data = [
+            'titulo' => "Funcionários",
+            'menu' => "Funcionários",
+            'submenu' => "Visualizar",
+            'tipo' => "view",
+            'getFuncionario' => $funcionario
+        ];
+
+        return view('funcionario.fault', $data);
     }
 }

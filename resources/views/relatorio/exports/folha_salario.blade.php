@@ -12,64 +12,105 @@
         NIF:<br /><br />
 
 
-        <table boder="1">
-            <thead>
+
+
+        <table border=2 style="font-family:'arial'; font-size:12px;">
+           
                 <tr>
-                <th>N.O.</th>
-                    <th>Nome</th>
-                    <th>Categoria</th>
-                    <th>Salário Base</th>
-                    <th>Nº de Dias Trab.</th>
-                    <th>Nº de Faltas</th>
-                    <th>Salar. P Tempo de Trab.</th>
-                    <th>Remuneração Adicional</th>
-                    <th>Seg. Social</th>
-                    <th>IRT</th>
-                </tr>
-            </thead>
+                <td rowspan="2">Nº</td>
+                    <td rowspan="2">Beneficiário</td>
+                    <td rowspan="2" style="width:23;">Categoria Ocupacional</td>
+                    <td rowspan="2" style="width:23;">Salário Base</td>
+                    <td rowspan="2" style="width:23;">Dias de Trabalho</td>
+                    <td rowspan="2" style="width:23;">Salários P/ tempo de trabalho</td>
+                    <td colspan="3">Remunerações Adicionais</td>
+                    <td rowspan="2" style="width:23;">Remuneração Íliquida</td>
+                    <td colspan="4">Descontos Oficiais</td>
+                    <td colspan="3">Subsídios</td>
+                    <td rowspan="2" style="width:23;">Líquido a Receber</td>
+       </tr>
+
+       <tr>
+               
+               <td>Horas Extras</td>
+               <td>Prémios</td>
+               <td>Outras</td>
+
+                <td>I.R.T.</td>
+                <td>S.S.</td>
+                <td>Outros</td>
+                <td>Total</td>
+
+                <td>Alimentação</td>
+                <td>Transporte</td>
+                <td>Comunicação</td>  
+
+               
+       </tr>
+            
+         
 
 
-            <tbody>
+         
+            <?php 
+            $desconto_falta = 0;
+            $salario_tempo_trab = 0;
+            $cont = 0;
+            $irt = null;
+            if(session()->has('prioridade')){
 
+    foreach(session('prioridade') as $value){
+        $resposta = RelatorioController::getFuncionarioPriorit($value);
+        foreach($resposta as $funcionarios){    
+            $cont++;
+            $desconto_falta = 0;
+            $salario_tempo_trab = 0;
+            $irt = null;
 
-                <?php
-                $desconto_falta = 0;
-                $salario_tempo_trab = 0;
-                $cont = 0;
-                $irt = null;
-                foreach ($getFuncionarios as $funcionarios) {
-                    $cont++;
-                    $desconto_falta = 0;
-                    $salario_tempo_trab = 0;
-                    $irt = null;
-
-                    $falta = RelatorioController::ver_falta($funcionarios->id, $ano, $mes);
-                    if ($falta->count() != 0) {
-                        foreach ($falta as $f) {
-                            $desconto_falta = $desconto_falta + $f->tipo_falta->desconto;
-                        }
-                        
-                    }else{
-                        $desconto_falta = 0;
-                    }
-                 $salario_tempo_trab = $funcionarios->salario_base - $desconto_falta;   
+            $falta = RelatorioController::ver_falta($funcionarios->id, $ano, $mes);
+            if ($falta->count() != 0) {
+                foreach ($falta as $f) {
+                    $desconto_falta = $desconto_falta + $f->tipo_falta->desconto;
+                }
                 
-                $seg_social = RelatorioController::seg_social($funcionarios->salario_base);
+            }else{
+                $desconto_falta = 0;
+            }
+         $salario_tempo_trab = $funcionarios->salario_base - $desconto_falta;   
+        
+        $seg_social = RelatorioController::seg_social($funcionarios->salario_base);
 
-                $irt = RelatorioController::irt($funcionarios->salario_base);
-                ?>
-                    <tr>
-                        <td>{{$cont}}</td>
-                        <td>{{$funcionarios->pessoa->nome}}</td>
-                        <td>{{$funcionarios->cargo->cargo}}</td>
-                        <td>{{number_format($funcionarios->salario_base, 2, ',', '.')}}</td>
-                        <td>22</td>
-                        <td>{{$falta->count()}}</td>
-                        <td>{{number_format($salario_tempo_trab, 2, ',', '.')}}</td>
-                    <td>0</td>
-                    <td>{{number_format($seg_social, 2, ',', '.')}}</td>
-                    <td>{{$irt}}</td>
-                    </tr>
-                <?php } ?>
-            </tbody>
+        $irt = RelatorioController::irt($funcionarios->salario_base, $seg_social);
+        
+?>
+
+<tr>
+<td>{{$cont}}</td>
+<td>{{$funcionarios->pessoa->nome}}</td>
+<td>{{$funcionarios->cargo->cargo}}</td>
+<td>{{number_format($funcionarios->salario_base,2,',','.')}}</td>
+<td>24</td>
+<td>{{number_format($salario_tempo_trab,2,',','.')}}</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>{{number_format($irt,2,',','.')}}</td>
+<td>{{number_format($seg_social,2,',','.')}}</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+
+</tr>
+    <?php
+        
+     }
+        }
+}else{
+    echo "nao tem sessao";
+}?>
+         
         </table>

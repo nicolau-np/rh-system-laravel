@@ -24,6 +24,7 @@ Route::group(['prefix'=>'/funcionarios', 'middleware'=>'auth'], function(){
     Route::get('/new', 'FuncionarioController@create');
     Route::post('/store', "FuncionarioController@store");
     Route::get('/show/{id}', "FuncionarioController@show");
+    Route::get('/formFalta/{id}', "FuncionarioController@formFalta");
 });
 
 Route::group(['prefix'=>'/relatorios', 'middleware'=>'auth'], function(){
@@ -34,5 +35,7 @@ Route::group(['prefix'=>'/relatorios', 'middleware'=>'auth'], function(){
 Route::post('/login', "UsuarioController@login");
 Route::post('/getMunicipio', "FuncionarioController@getMunicipio")->name('getMunicipio');
 //Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/setPrioridade', 'RelatorioController@setPrioridade')->name('setPrioridade');
 
+Route::post('/remPrioridade', 'RelatorioController@remPrioridade')->name('remPrioridade');
 

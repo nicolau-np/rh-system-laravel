@@ -21,7 +21,7 @@ class CreateFaltasTable extends Migration
             $table->bigInteger('ano');
             $table->bigInteger('mes');
             $table->text('motivo')->nullable();
-            $table->string('dia_semana');
+            $table->string('dia_semana')->nullable();
             $table->string('estado');
             $table->timestamps();
         });

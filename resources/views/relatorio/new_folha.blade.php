@@ -1,7 +1,45 @@
 @extends('template')
 
 @section('content')
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".prioridade").change(function(e){
+        e.preventDefault();
+        data = {
+            prioridade: $(this).val()
+        }
+        //alert($(this).val());
+$.ajax({
+    url: "{{ route('setPrioridade') }}",
+    type: "post",
+    data: data,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+    success: function(ret){
+        alert(ret);
+    }
+});
 
+    });
+
+$(".remPrioridade").click(function(e){
+e.preventDefault();
+$.ajax({
+    url: "{{ route('remPrioridade') }}",
+    type: "post",
+    data: null,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+    success: function(){
+        alert("removidaTodas");
+    }
+});
+});
+
+});
+</script>
 <section role="main" class="content-body">
     <header class="page-header">
         <h2>{{$titulo}}</h2>
@@ -87,6 +125,18 @@
                             </div>
 
                         </div>
+
+<div class="row form-group">
+<div class="col-lg-4">
+{{Form::label('prioridade', "Prioridade")}} <span class="text-danger">*</span> &nbsp; &nbsp; <a href="{{route('remPrioridade')}}" class="remPrioridade"> rem </a><br/> 
+@foreach($getCargos as $cargo)
+<input type="checkbox" name="prioridade[]" value="{{$cargo->id}}" class="prioridade" /> {{$cargo->cargo}} <br/>
+@endforeach
+@if($errors->has('prioridade'))
+                                <span class="text-danger">{{$errors->first('prioridade')}}</span>
+                                @endif
+</div>
+</div>
 
                     </fieldset>
 

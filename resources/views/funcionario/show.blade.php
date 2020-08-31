@@ -123,8 +123,8 @@
             <h4 class="mb-md">Estado</h4>
             <ul class="simple-card-list mb-xlg">
                 <li class="danger">
-                    <a href="#" style="text-decoration: none;">
-                    <h3>Marcar Falta</h3>
+                    <a href="/funcionarios/formFalta/{{ $getFuncionario->id }}" style="text-decoration: none;">
+                    <h3>Faltas</h3>
                     </a>
                 </li>
                 <li class="primary">
