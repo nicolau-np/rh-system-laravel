@@ -9,6 +9,8 @@ use App\Funcionario;
 use App\Municipio;
 use App\Pessoa;
 use App\Provincia;
+use App\TipoFalta;
+use App\Falta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -28,8 +30,11 @@ class FuncionarioController extends Controller
     protected $cargo;
     protected $banco;
     protected $conta_bancaria;
+    protected $tipo_falta;
+    protected $falta;
 
-    public function __construct(Provincia $provincia, Municipio $municipio, Pessoa $pessoa, Funcionario $funcionario, Cargo $cargo, Banco $banco, ContaBancaria $conta_bancaria)
+    public function __construct(Provincia $provincia, Municipio $municipio, Pessoa $pessoa, Funcionario $funcionario, 
+    Cargo $cargo, Banco $banco, ContaBancaria $conta_bancaria, TipoFalta $tipo_falta, Falta $falta)
     {
         $this->provincia = $provincia;
         $this->municipio = $municipio;
@@ -38,6 +43,8 @@ class FuncionarioController extends Controller
         $this->cargo = $cargo;
         $this->banco = $banco;
         $this->conta_bancaria = $conta_bancaria;
+        $this->tipo_falta = $tipo_falta;
+        $this->falta = $falta;
     }
 
     public function index()
@@ -239,6 +246,8 @@ class FuncionarioController extends Controller
 
     public function formFalta($id){
         $funcionario = $this->funcionario->where('id',$id)->first();
+        $tipo_falta = $this->tipo_falta->pluck('tipo', 'id');
+        $faltas = $this->falta->where('id_funcionario', $id)->where('estado', 'on')->get();
 
         if (!$funcionario) {
             return back()->with(['error' => 'Funcionário não Encontrado']);
@@ -249,9 +258,37 @@ class FuncionarioController extends Controller
             'menu' => "Funcionários",
             'submenu' => "Visualizar",
             'tipo' => "view",
-            'getFuncionario' => $funcionario
+            'getFuncionario' => $funcionario,
+            'getTipoFaltas'=>$tipo_falta,
+            'getFaltas'=>$faltas
         ];
 
         return view('funcionario.fault', $data);
+    }
+
+    public function marcFalta(Request $request, $id){
+      $request->validate(
+          [
+              'nome'=>['required', 'string'],
+              'tipo'=>['required'],
+              'data_falta'=>['required'],
+
+          ]);
+        $string = explode('-',$request->data_falta);
+
+          $data = [
+              'id_tipo'=>$request->tipo,
+            'id_funcionario'=>$id,
+            'motivo'=>$request->motivo,
+            'dia_semana'=>$string[2],
+            'mes'=>$string[1],
+            'ano'=>$string[0],
+            'estado'=>"on"
+          ];
+
+         
+         if($this->falta->create($data)){
+            return back()->with(['success'=>"Marcação Feita com Sucesso"]);
+         }
     }
 }

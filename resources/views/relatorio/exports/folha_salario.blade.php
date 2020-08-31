@@ -4,6 +4,14 @@
 
         ?>
 
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
+<body style="margin:0px">
         Folha de Remunerações<br />
 
 
@@ -57,6 +65,8 @@
             $salario_tempo_trab = 0;
             $cont = 0;
             $irt = null;
+            $liquido_receber = 0;
+            $total_desconto = 0;
             if(session()->has('prioridade')){
 
     foreach(session('prioridade') as $value){
@@ -66,6 +76,8 @@
             $desconto_falta = 0;
             $salario_tempo_trab = 0;
             $irt = null;
+            $liquido_receber = 0;
+            $total_desconto = 0;
 
             $falta = RelatorioController::ver_falta($funcionarios->id, $ano, $mes);
             if ($falta->count() != 0) {
@@ -79,8 +91,10 @@
          $salario_tempo_trab = $funcionarios->salario_base - $desconto_falta;   
         
         $seg_social = RelatorioController::seg_social($funcionarios->salario_base);
-
+        
         $irt = RelatorioController::irt($funcionarios->salario_base, $seg_social);
+        $liquido_receber = $funcionarios->salario_base - $irt - $seg_social;
+        $total_desconto = $irt+$seg_social;
         
 ?>
 
@@ -94,15 +108,15 @@
 <td></td>
 <td></td>
 <td></td>
-<td></td>
+<td>{{number_format($salario_tempo_trab,2,',','.')}}</td>
 <td>{{number_format($irt,2,',','.')}}</td>
 <td>{{number_format($seg_social,2,',','.')}}</td>
 <td></td>
+<td>{{number_format($total_desconto,2,',','.')}}</td>
 <td></td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
+<td>{{number_format($liquido_receber,2,',','.')}}</td>
 
 </tr>
     <?php
@@ -114,3 +128,5 @@
 }?>
          
         </table>
+        </body>
+        </html>

@@ -25,6 +25,7 @@ Route::group(['prefix'=>'/funcionarios', 'middleware'=>'auth'], function(){
     Route::post('/store', "FuncionarioController@store");
     Route::get('/show/{id}', "FuncionarioController@show");
     Route::get('/formFalta/{id}', "FuncionarioController@formFalta");
+    Route::put('/marcFalta/{id}', "FuncionarioController@marcFalta");
 });
 
 Route::group(['prefix'=>'/relatorios', 'middleware'=>'auth'], function(){

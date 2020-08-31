@@ -58,7 +58,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            {{Form::open(['class'=>'formFuncionario', 'url'=>'/funcionarios/store', 'enctype'=>"multipart/form-data"])}}
+            {{Form::open(['class'=>'formFuncionario', 'url'=>'/funcionarios/store', 'enctype'=>"multipart/form-data", 'method'=>'post'])}}
             <section class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions">

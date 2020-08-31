@@ -23,9 +23,10 @@ class Calculos
         return $this->inss_resto;
     }
 
-    public function irt($inss_resto, $inss_desconto, $percentagem, $excesso)
+    public function irt($inss_resto, $parcela_fixa, $percentagem, $excesso)
     {
-        $this->irt = $inss_desconto + $percentagem * ($inss_resto - $excesso);
+        $total = $inss_resto - $excesso;
+        $this->irt = $parcela_fixa + $percentagem * ($total);
 
         return $this->irt;
     }

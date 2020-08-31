@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-
 <section role="main" class="content-body">
 
 
@@ -29,7 +27,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            {{Form::open(['class'=>'formFuncionario', 'url'=>'/funcionarios/marcFalta', 'enctype'=>"multipart/form-data"])}}
+            {{Form::open(['class'=>'formFuncionario', 'url'=>"/funcionarios/marcFalta/$getFuncionario->id", 'enctype'=>"multipart/form-data", 'method'=>'put'])}}
             <section class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions">
@@ -69,10 +67,7 @@
 
                             <div class="col-lg-3">
                                 {{Form::label('tipo', "Tipo de Falta")}} <span class="text-danger">*</span>
-                                {{Form::select('estado_civil',
-                                        ['solteiro(a)'=>'solteiro(a)',
-                                          'casado(a)'=>'casado(a)'
-                                        ],null,
+                                {{Form::select('tipo',$getTipoFaltas, 1,
                                         ['placeholder'=>'Tipo de Falta',
                                          'class'=>'form-control input-sm'
                                         ]
@@ -121,6 +116,51 @@
             </section>
             {{Form::close()}}
         </div>
+    </div>
+
+    <div class="row">
+    <div class="col-md-12">
+    <section class="panel">
+              
+                <div class="panel-body">
+                   
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover mb-none">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nome Completo</th>
+                                            <th>Tipo</th>
+                                            <th>Data</th>
+                                            <th>Operações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($getFaltas as $faltas)
+                                        <tr>
+                                            <td>{{$faltas->id}}</td>
+                                            <td>{{$faltas->funcionario->pessoa->nome}}</td>
+                                            <td>{{$faltas->tipo_falta->tipo}}</td>
+                                            <td>{{$faltas->dia_semana}}-{{$faltas->mes}}-{{$faltas->ano}}</td>
+                                            <td class="actions-hover actions-fade">
+                                               
+                                                <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+    </div>
     </div>
     <!-- end: page -->
 </section>

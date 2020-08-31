@@ -100,18 +100,19 @@ class RelatorioController extends Controller
         $inss_resto = $salario_base - $inss_desconto; 
        $percentagem = 0;
 
-      $irt = TabelaIRT::where('inicio','<=',$salario_base)->where('ate','>=', $salario_base)->first();
+      $irt = TabelaIRT::where('inicio','<=',$inss_resto)->where('ate','>=', $inss_resto)->first();
 
-  if($irt){
+    if($irt){
       if($irt->inicio == 0){
-return 0;
+            return 0;
       }else{
 
         //calculo da percentagem nos 3 simples
-        $percentagem = (0.03 * $irt->taxa_percentagem)/3;
+        $percentagem = $irt->taxa_percentagem/100;
 
-        $irt_resultado = self::$calculos->irt($inss_resto, $inss_desconto, $percentagem, $irt->excesso);
-        return $irt_resultado;
+        $irt_resultado = self::$calculos->irt($inss_resto, $irt->parcela_fixa, $percentagem, $irt->excesso);
+       return $irt_resultado;
+       
       }
       
   }
