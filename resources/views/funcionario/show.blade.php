@@ -31,7 +31,7 @@
                         <img src="@if($getFuncionario->pessoa->foto == '')
                         {{asset('assets/images/novo/profile.png')}}
                         @else
-                        {{asset("storage")}}/{{$getFuncionario->pessoa->foto}}
+                        {{asset($getFuncionario->pessoa->foto)}}
                         @endif" style="width:100%; height:16em; border-radius: 5px;" alt="{{$getFuncionario->pessoa->foto}}" />
 
                         <div class="thumb-info-title">

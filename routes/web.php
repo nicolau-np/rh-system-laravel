@@ -12,10 +12,12 @@ Route::get('/logout', "UsuarioController@logout")->name("logout");
 Route::group(['prefix'=>'/funcionarios', 'middleware'=>'auth'], function(){
     Route::get('/list', 'FuncionarioController@index');
     Route::get('/new', 'FuncionarioController@create');
+    Route::get('/edit/{id}', "FuncionarioController@edit");
     Route::post('/store', "FuncionarioController@store");
     Route::get('/show/{id}', "FuncionarioController@show");
     Route::get('/formFalta/{id}', "FuncionarioController@formFalta");
     Route::put('/marcFalta/{id}', "FuncionarioController@marcFalta");
+    Route::put('/update/{id_funcionario}/{id_pessoa}', "FuncionarioController@update");
 });
 
 Route::group(['prefix'=>'/relatorios', 'middleware'=>'auth'], function(){
@@ -29,4 +31,6 @@ Route::post('/getMunicipio', "FuncionarioController@getMunicipio")->name('getMun
 Route::post('/setPrioridade', 'RelatorioController@setPrioridade')->name('setPrioridade');
 
 Route::post('/remPrioridade', 'RelatorioController@remPrioridade')->name('remPrioridade');
+
+Route::get('/excel', "ExcelDoc@index");
 

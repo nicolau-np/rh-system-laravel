@@ -80,7 +80,7 @@
                                             <td>{{$funcionarios->data_entrada}}</td>
                                             <td class="actions-hover actions-fade">
                                                 <a href="/funcionarios/show/{{$funcionarios->id}}"><i class="fa fa-eye fa-2x"></i></a>&nbsp;
-                                                <a href="#"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
+                                                <a href="/funcionarios/edit/{{$funcionarios->id}}"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
                                                 <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
                                             </td>
                                         </tr>

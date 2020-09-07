@@ -144,20 +144,8 @@ class FuncionarioController extends Controller
             'iban' => $request->iban
         ];
 
-        if ($request->hasFile('foto')) {
-
-            // Get filename with the extension
-            $filenameWithExt = $request->file('foto')->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('foto')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            // Upload Image
-            $path = $request->file('foto')->storeAs('public/fotosFuncionarios', $fileNameToStore);
-
-            //  $filePath = $request->foto->store('fotosFuncionarios');
+        if ($request->hasFile('foto') && $request->foto->isValid()) {
+            $path = $request->file('foto')->store('fotosFuncionarios');
             $data['pessoa']['foto'] = $path;
         }
 
@@ -208,7 +196,26 @@ class FuncionarioController extends Controller
      */
     public function edit($id)
     {
-        //
+$funcionario = $this->funcionario->where('id', $id)->first();
+if(!$funcionario){
+return back()->with(['error'=>"nao encontrou"]);
+}
+
+        $bancos = $this->banco->pluck('sigla', 'id');
+        $provincias = $this->provincia->orderBy('provincia', 'asc')->pluck('provincia', 'id');
+        $cargos = $this->cargo->pluck('cargo', 'id');
+        $data = [
+            'titulo' => "Funcionários",
+            'menu' => "Funcionários",
+            'submenu' => "Editar",
+            'tipo' => "form",
+            'getProvincia' => $provincias,
+            'getCargo' => $cargos,
+            'getBancos' => $bancos,
+            'getFuncionario'=>$funcionario
+        ];
+
+        return view('funcionario.edit', $data);
     }
 
     /**
@@ -218,9 +225,75 @@ class FuncionarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_funcionario, $id_pessoa)
     {
-        //
+        $request->validate(
+            [
+                'nome' => ['required', 'string', 'min:10', 'max:255'],
+                'genero' => ['required', 'string', 'max:2'],
+                'data_nascimento' => ['required', 'date'],
+                'estado_civil' => ['required', 'string', 'max:25'],
+                'telefone' => ['required', 'Integer'],
+                'provincia' => ['required', 'Integer'],
+                'municipio' => ['required', 'Integer'],
+                'bi' => ['required', 'string', 'min:14', 'max:14'],
+                'cargo' => ['required', 'Integer'],
+                'salario_base' => ['required', 'Integer'],
+                'data_ingresso' => ['required', 'date'],
+                'banco' => ['required', 'Integer'],
+                'conta' => ['required', 'string', 'min:9', 'max:20'],
+                'iban' => ['required', 'string', 'min:9', 'max:50']
+            ]
+        );
+
+        $data['pessoa'] = [
+            'id_municipio' => $request->municipio,
+            'nome' => $request->nome,
+            'genero' => $request->genero,
+            'data_nascimento' => $request->data_nascimento,
+            'estado_civil' => $request->estado_civil,
+            'telefone' => $request->telefone,
+            'bi' => $request->bi,
+            'data_emissao' => $request->data_emissao,
+            'local_emissao' => $request->local_emissao,
+            'comuna' => $request->comuna,
+            'foto' => $request->foto_antiga,
+            'pai' => $request->pai,
+            'mae' => $request->mae
+        ];
+
+        $data['funcionario'] = [
+            'id_pessoa' => $id_pessoa,
+            'id_cargo' => $request->cargo,
+            'salario_base' => $request->salario_base,
+            'data_entrada' => $request->data_ingresso
+        ];
+
+        $data['conta_bancaria'] = [
+            'id_funcionario' => $id_funcionario,
+            'id_banco' => $request->banco,
+            'conta' => $request->conta,
+            'iban' => $request->iban
+        ];
+
+        if ($request->hasFile('foto') && $request->foto->isValid()) {
+            if($request->foto_antiga!="" && file_exists($request->foto_antiga)){
+                unlink($request->foto_antiga);
+            }
+            $path = $request->file('foto')->store('fotosFuncionarios');
+            $data['pessoa']['foto'] = $path;
+        }
+
+        $return = $this->pessoa->find($id_pessoa)->update($data['pessoa']);
+        if ($return) {
+            $return2 = $this->funcionario->find($id_funcionario)->update($data['funcionario']);
+            if ($return2) {
+                if ($this->conta_bancaria->where('id_funcionario', $id_funcionario)->update($data['conta_bancaria'])) {
+                    return back()->with(['success' => 'Cadastro Feito com Sucesso']);
+                }
+            }
+        }
+
     }
 
     /**
