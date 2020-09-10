@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Banco;
 use App\Cargo;
 use App\ContaBancaria;
+use App\Exports\FolhaSalarial;
 use App\Funcionario;
 use App\Municipio;
 use App\Pessoa;
@@ -14,6 +15,7 @@ use App\Falta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Excel;
 use PhpParser\Node\Expr\FuncCall;
 
 class FuncionarioController extends Controller
@@ -32,9 +34,10 @@ class FuncionarioController extends Controller
     protected $conta_bancaria;
     protected $tipo_falta;
     protected $falta;
+    protected $excel;
 
     public function __construct(Provincia $provincia, Municipio $municipio, Pessoa $pessoa, Funcionario $funcionario, 
-    Cargo $cargo, Banco $banco, ContaBancaria $conta_bancaria, TipoFalta $tipo_falta, Falta $falta)
+    Cargo $cargo, Banco $banco, ContaBancaria $conta_bancaria, TipoFalta $tipo_falta, Falta $falta, Excel $excel)
     {
         $this->provincia = $provincia;
         $this->municipio = $municipio;
@@ -45,6 +48,7 @@ class FuncionarioController extends Controller
         $this->conta_bancaria = $conta_bancaria;
         $this->tipo_falta = $tipo_falta;
         $this->falta = $falta;
+        $this->excel = $excel;
     }
 
     public function index()
@@ -363,5 +367,9 @@ return back()->with(['error'=>"nao encontrou"]);
          if($this->falta->create($data)){
             return back()->with(['success'=>"Marcação Feita com Sucesso"]);
          }
+    }
+
+    public function export(){
+       return $this->excel->download(new FolhaSalarial, 'folha_salarial.xlsx');
     }
 }

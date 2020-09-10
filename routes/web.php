@@ -34,3 +34,4 @@ Route::post('/remPrioridade', 'RelatorioController@remPrioridade')->name('remPri
 
 Route::get('/excel', "ExcelDoc@index");
 
+Route::get('/funcionario/export', "FuncionarioController@export");

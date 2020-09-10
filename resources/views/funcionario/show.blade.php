@@ -67,7 +67,7 @@
 
                     <h6 class="text-muted">Sobre</h6>
                     <p>
-                        Ingressou em: {{$getFuncionario->data_entrada}}
+                        Ingressou em: {{date('d/m/Y', strtotime($getFuncionario->data_entrada))}} 
                     </p>
                     <div class="clearfix">
                         <a class="text-uppercase text-muted pull-right" href="#">(Ver Tudo)</a>
@@ -76,9 +76,9 @@
                     <hr class="dotted short">
 
                     <div class="social-icons-list">
-                        <a rel="tooltip" data-placement="bottom" target="_blank" href="http://www.facebook.com" data-original-title="Facebook"><i class="fa fa-facebook"></i><span>Facebook</span></a>
-                        <a rel="tooltip" data-placement="bottom" href="http://www.twitter.com" data-original-title="Twitter"><i class="fa fa-twitter"></i><span>Twitter</span></a>
-                        <a rel="tooltip" data-placement="bottom" href="http://www.linkedin.com" data-original-title="Linkedin"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>
+                        <a rel="tooltip" data-placement="bottom" target="_blank" href="#" data-original-title="Facebook"><i class="fa fa-facebook"></i><span>Facebook</span></a>
+                        <a rel="tooltip" data-placement="bottom" href="#" data-original-title="Twitter"><i class="fa fa-twitter"></i><span>Twitter</span></a>
+                        <a rel="tooltip" data-placement="bottom" href="#" data-original-title="Linkedin"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>
                     </div>
 
                 </div>
@@ -101,12 +101,12 @@
                     <div id="overview" class="tab-pane active">
                         <h4 class="mb-md">Nome: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->nome}}</span></h4>
                         <h5 class="mb-md">Gênero: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->genero}}</h6>
-                                <h5 class="mb-md">Data de Nascimento: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->data_nascimento}}</h6>
+                                <h5 class="mb-md">Data de Nascimento: <span style="color:cornflowerblue;">{{date('d/m/Y', strtotime($getFuncionario->pessoa->data_nascimento)}}</h6>
                                         <h5 class="mb-md">Província: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->municipio->provincia->provincia}}</h6>
                                                 <h5 class="mb-md">Município: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->municipio->municipio}}</h6>
                                                         <h5 class="mb-md">Nº de Telefone: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->telefone}}</h6>
                                                                 <h5 class="mb-md">Nº de Bilhete: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->bi}}</h6>
-                                                                        <h5 class="mb-md">Data de Emissão: <span style="color:cornflowerblue;">@if($getFuncionario->pessoa->data_emissao == "") nenhum(a) @else {{$getFuncionario->pessoa->data_emissao}} @endif</h6>
+                                                                        <h5 class="mb-md">Data de Emissão: <span style="color:cornflowerblue;">@if($getFuncionario->pessoa->data_emissao == "") nenhum(a) @else {{date('d/m/Y', strtotime($getFuncionario->pessoa->data_emissao)}} @endif</h6>
                                                                                 <h5 class="mb-md">Local de Emissão: <span style="color:cornflowerblue;">@if($getFuncionario->pessoa->local_emissao == "") nenhum(a) @else {{$getFuncionario->pessoa->local_emissao}} @endif</h6>
                                                                                         <h5 class="mb-md">Pai: <span style="color:cornflowerblue;">@if($getFuncionario->pessoa->pai == "") nenhum(a) @else {{$getFuncionario->pessoa->pai}} @endif</h6>
                                                                                                 <h5 class="mb-md">Mãe: <span style="color:cornflowerblue;">@if($getFuncionario->pessoa->mae == "") nenhum(a) @else {{$getFuncionario->pessoa->mae}} @endif</h6>

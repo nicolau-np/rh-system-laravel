@@ -10,7 +10,13 @@
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Folha de Salário</title>
+            <style>
+            @page{
+                margin:0;
+            }
+            </style>
         </head>
+   
 <body>
         Folha de Remunerações<br />
 
@@ -22,36 +28,36 @@
 
 
 
-        <table border=2 style="font-family:'arial'; font-size:12px;">
+        <table border=2 style="font-family:'arial'; font-size:12px; table-layout: fixed;">
            
                 <tr>
-                <td rowspan="2">Nº</td>
-                    <td rowspan="2">Beneficiário</td>
-                    <td rowspan="2" style="width:23;">Categoria Ocupacional</td>
-                    <td rowspan="2" style="width:23;">Salário Base</td>
-                    <td rowspan="2" style="width:23;">Dias de Trabalho</td>
-                    <td rowspan="2" style="width:23;">Salários P/ tempo de trabalho</td>
-                    <td colspan="3">Remunerações Adicionais</td>
-                    <td rowspan="2" style="width:23;">Remuneração Íliquida</td>
-                    <td colspan="4">Descontos Oficiais</td>
-                    <td colspan="3">Subsídios</td>
-                    <td rowspan="2" style="width:23;">Líquido a Receber</td>
+                <td rowspan="2" style="width: 25px;">Nº</td>
+                    <td rowspan="2" style="width: 100px;">Beneficiário</td>
+                    <td rowspan="2" style="width:25px;">Categoria Ocupacional</td>
+                    <td rowspan="2" style="width:1.5cm;">Salário Base</td>
+                    <td rowspan="2" style="width:0.2cm;">Dias de Trabalho</td>
+                    <td rowspan="2" style="width:1cm;">Salários P/ tempo de trabalho</td>
+                    <td colspan="3" style="width: 1cm;">Remunerações Adicionais</td>
+                    <td rowspan="2" style="width:1cm;">Remuneração Íliquida</td>
+                    <td colspan="4" style="width:1cm;">Descontos Oficiais</td>
+                    <td colspan="3" style="width: 2cm;">Subsídios</td>
+                    <td rowspan="2" style="width:1cm;">Líquido a Receber</td>
        </tr>
 
        <tr>
                
-               <td>Horas Extras</td>
-               <td>Prémios</td>
-               <td>Outras</td>
+               <td style="width: 0.1cm;">Horas Extras</td>
+               <td style="width: 0.1cm;">Prémios</td>
+               <td style="width: 0.1cm;">Outras</td>
 
-                <td>I.R.T.</td>
-                <td>S.S.</td>
-                <td>Outros</td>
-                <td>Total</td>
+                <td style="width: 0.1cm;">I.R.T.</td>
+                <td style="width: 0.1cm;">S.S.</td>
+                <td style="width: 0.1cm;">Outros</td>
+                <td style="width: 0.1cm;">Total</td>
 
-                <td>Alimentação</td>
-                <td>Transporte</td>
-                <td>Comunicação</td>  
+                <td style="width: 0.1cm;">Alimentação</td>
+                <td style="width: 0.1cm;">Transporte</td>
+                <td style="width: 0.1cm;">Comunicação</td>  
 
                
        </tr>
