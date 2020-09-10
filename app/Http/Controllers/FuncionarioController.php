@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Banco;
 use App\Cargo;
 use App\ContaBancaria;
+use App\DocsEscaneado;
 use App\Exports\FolhaSalarial;
 use App\Funcionario;
 use App\Municipio;
@@ -12,6 +13,7 @@ use App\Pessoa;
 use App\Provincia;
 use App\TipoFalta;
 use App\Falta;
+use App\TipoDoc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -35,10 +37,23 @@ class FuncionarioController extends Controller
     protected $tipo_falta;
     protected $falta;
     protected $excel;
+    protected $tipo_docs;
+    protected $docs;
 
-    public function __construct(Provincia $provincia, Municipio $municipio, Pessoa $pessoa, Funcionario $funcionario, 
-    Cargo $cargo, Banco $banco, ContaBancaria $conta_bancaria, TipoFalta $tipo_falta, Falta $falta, Excel $excel)
-    {
+    public function __construct(
+        Provincia $provincia,
+        Municipio $municipio,
+        Pessoa $pessoa,
+        Funcionario $funcionario,
+        Cargo $cargo,
+        Banco $banco,
+        ContaBancaria $conta_bancaria,
+        TipoFalta $tipo_falta,
+        Falta $falta,
+        Excel $excel,
+        TipoDoc $tipo_docs,
+        DocsEscaneado $docs
+    ) {
         $this->provincia = $provincia;
         $this->municipio = $municipio;
         $this->pessoa = $pessoa;
@@ -49,6 +64,8 @@ class FuncionarioController extends Controller
         $this->tipo_falta = $tipo_falta;
         $this->falta = $falta;
         $this->excel = $excel;
+        $this->docs = $docs;
+        $this->tipo_docs = $tipo_docs;
     }
 
     public function index()
@@ -174,22 +191,24 @@ class FuncionarioController extends Controller
      */
     public function show($id)
     {
-       $funcionario = $this->funcionario->where('id',$id)->first();
+        $funcionario = $this->funcionario->where('id', $id)->first();
 
         if (!$funcionario) {
             return back()->with(['error' => 'Funcionário não Encontrado']);
         }
+
+        $docs = $this->docs->where('id_funcionario', $id)->get();
 
         $data = [
             'titulo' => "Funcionários",
             'menu' => "Funcionários",
             'submenu' => "Visualizar",
             'tipo' => "view",
-            'getFuncionario' => $funcionario
+            'getFuncionario' => $funcionario,
+            'getDocs'=>$docs
         ];
 
         return view('funcionario.show', $data);
-
     }
 
     /**
@@ -200,10 +219,10 @@ class FuncionarioController extends Controller
      */
     public function edit($id)
     {
-$funcionario = $this->funcionario->where('id', $id)->first();
-if(!$funcionario){
-return back()->with(['error'=>"nao encontrou"]);
-}
+        $funcionario = $this->funcionario->where('id', $id)->first();
+        if (!$funcionario) {
+            return back()->with(['error' => "nao encontrou"]);
+        }
 
         $bancos = $this->banco->pluck('sigla', 'id');
         $provincias = $this->provincia->orderBy('provincia', 'asc')->pluck('provincia', 'id');
@@ -216,7 +235,7 @@ return back()->with(['error'=>"nao encontrou"]);
             'getProvincia' => $provincias,
             'getCargo' => $cargos,
             'getBancos' => $bancos,
-            'getFuncionario'=>$funcionario
+            'getFuncionario' => $funcionario
         ];
 
         return view('funcionario.edit', $data);
@@ -281,7 +300,7 @@ return back()->with(['error'=>"nao encontrou"]);
         ];
 
         if ($request->hasFile('foto') && $request->foto->isValid()) {
-            if($request->foto_antiga!="" && file_exists($request->foto_antiga)){
+            if ($request->foto_antiga != "" && file_exists($request->foto_antiga)) {
                 unlink($request->foto_antiga);
             }
             $path = $request->file('foto')->store('fotosFuncionarios');
@@ -297,7 +316,6 @@ return back()->with(['error'=>"nao encontrou"]);
                 }
             }
         }
-
     }
 
     /**
@@ -321,8 +339,9 @@ return back()->with(['error'=>"nao encontrou"]);
         return view('ajax_load.municipio', $data);
     }
 
-    public function formFalta($id){
-        $funcionario = $this->funcionario->where('id',$id)->first();
+    public function formFalta($id)
+    {
+        $funcionario = $this->funcionario->where('id', $id)->first();
         $tipo_falta = $this->tipo_falta->pluck('tipo', 'id');
         $faltas = $this->falta->where('id_funcionario', $id)->where('estado', 'on')->get();
 
@@ -336,40 +355,99 @@ return back()->with(['error'=>"nao encontrou"]);
             'submenu' => "Visualizar",
             'tipo' => "view",
             'getFuncionario' => $funcionario,
-            'getTipoFaltas'=>$tipo_falta,
-            'getFaltas'=>$faltas
+            'getTipoFaltas' => $tipo_falta,
+            'getFaltas' => $faltas
         ];
 
         return view('funcionario.fault', $data);
     }
 
-    public function marcFalta(Request $request, $id){
-      $request->validate(
-          [
-              'nome'=>['required', 'string'],
-              'tipo'=>['required'],
-              'data_falta'=>['required'],
+    public function marcFalta(Request $request, $id)
+    {
+        $request->validate(
+            [
+                'nome' => ['required', 'string'],
+                'tipo' => ['required'],
+                'data_falta' => ['required'],
 
-          ]);
-        $string = explode('-',$request->data_falta);
+            ]
+        );
+        $string = explode('-', $request->data_falta);
 
-          $data = [
-              'id_tipo'=>$request->tipo,
-            'id_funcionario'=>$id,
-            'motivo'=>$request->motivo,
-            'dia_semana'=>$string[2],
-            'mes'=>$string[1],
-            'ano'=>$string[0],
-            'estado'=>"on"
-          ];
+        $data = [
+            'id_tipo' => $request->tipo,
+            'id_funcionario' => $id,
+            'motivo' => $request->motivo,
+            'dia_semana' => $string[2],
+            'mes' => $string[1],
+            'ano' => $string[0],
+            'estado' => "on"
+        ];
 
-         
-         if($this->falta->create($data)){
-            return back()->with(['success'=>"Marcação Feita com Sucesso"]);
-         }
+
+        if ($this->falta->create($data)) {
+            return back()->with(['success' => "Marcação Feita com Sucesso"]);
+        }
     }
 
-    public function export(){
-       return $this->excel->download(new FolhaSalarial, 'folha_salarial.xlsx');
+    public function export()
+    {
+        return $this->excel->download(new FolhaSalarial, 'folha_salarial.xlsx');
+    }
+
+    public function formDocumentos($id)
+    {
+        $funcionario = $this->funcionario->where('id', $id)->first();
+        if (!$funcionario) {
+            return back()->with(['error' => "Nao encontrou"]);
+        }
+        $tipo_docs = $this->tipo_docs->pluck('tipo', 'id');
+        $docs = $this->docs->where('id_funcionario', $id)->get();
+        $data = [
+            'titulo' => "Funcionários",
+            'menu' => "Funcionários",
+            'submenu' => "Documentos",
+            'tipo' => "view",
+            'getFuncionario' => $funcionario,
+            'getTipo_docs' => $tipo_docs,
+            'getDocs' => $docs
+        ];
+
+        return view('funcionario.docs', $data);
+    }
+
+    public function store_docs(Request $request, $id)
+    {
+        $funcionario = $this->funcionario->where('id', $id)->first();
+        if (!$funcionario) {
+            return back()->with(['error' => "Nao encontrou"]);
+        }
+
+        $request->validate(
+            [
+                'nome' => ['required', 'string'],
+                'tipo' => ['required', 'Integer'],
+                'documento' => ['required', 'mimes:png,jpg,pdf,doc,docx']
+            ]
+        );
+        $data = [
+            'id_tipo' => $request->tipo,
+            'id_funcionario' => $id,
+            'ficheiro' => null
+        ];
+        $docs = $this->docs->where('id_tipo', $data['id_tipo'])
+            ->where('id_funcionario', $id)->first();
+        if ($docs) {
+            return back()->with(['error' => "Já Fez o cadastro deste Documento"]);
+        }
+
+        if ($request->hasFile('documento') && $request->documento->isValid()) {
+            $path_file = $request->documento->store('docsEscaneados');
+            $data['ficheiro'] = $path_file;
+        }
+
+        if ($this->docs->create($data)) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 }

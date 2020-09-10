@@ -239,7 +239,7 @@
 				<div id="userbox" class="userbox">
 					<a href="#" data-toggle="dropdown">
 						<figure class="profile-picture">
-							<img src="@if(Auth::user()->pessoa->foto == '') {{asset('assets/images/novo/profile.png')}} @endif" alt="{{Auth::user()->pessoa->nome}}" class="img-circle" data-lock-picture="@if(Auth::user()->pessoa->foto == '') {{asset('assets/images/novo/profile.png')}} @endif" />
+							<img src="@if(Auth::user()->pessoa->foto == '') {{asset('assets/images/novo/profile.png')}} @else {{asset(Auth::user()->pessoa->foto)}} @endif" alt="{{Auth::user()->pessoa->nome}}" class="img-circle" data-lock-picture="@if(Auth::user()->pessoa->foto == '') {{asset('assets/images/novo/profile.png')}} @else {{asset(Auth::user()->pessoa->foto)}} @endif" />
 						</figure>
 						<div class="profile-info" data-lock-name="{{Auth::user()->pessoa->nome}}" data-lock-email="{{Auth::user()->email}}">
 							<span class="name">{{Auth::user()->pessoa->nome}}</span>
@@ -253,7 +253,7 @@
 						<ul class="list-unstyled">
 							<li class="divider"></li>
 							<li>
-								<a role="menuitem" tabindex="-1" href="pages-user-profile.html"><i class="fa fa-user"></i> Meu Perfil</a>
+								<a role="menuitem" tabindex="-1" href="/usuarios/perfil"><i class="fa fa-user"></i> Meu Perfil</a>
 							</li>
 							<li>
 								<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Bloquear</a>
@@ -292,8 +292,8 @@
 										<span>Home</span>
 									</a>
 								</li>
-								<li>
-									<a href="mailbox-folder.html">
+								<li class="@if($menu=='Usuários') nav-active @endif">
+									<a href="/usuarios/list">
 										<i class="fa fa-user" aria-hidden="true"></i>
 										<span>Usuários</span>
 									</a>

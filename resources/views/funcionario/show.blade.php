@@ -100,20 +100,21 @@
                 <div class="tab-content">
                     <div id="overview" class="tab-pane active">
                         <h4 class="mb-md">Nome: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->nome}}</span></h4>
-                        <h5 class="mb-md">Gênero: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->genero}}</h6>
-                                <h5 class="mb-md">Data de Nascimento: <span style="color:cornflowerblue;">{{date('d/m/Y', strtotime($getFuncionario->pessoa->data_nascimento)}}</h6>
-                                        <h5 class="mb-md">Província: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->municipio->provincia->provincia}}</h6>
-                                                <h5 class="mb-md">Município: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->municipio->municipio}}</h6>
-                                                        <h5 class="mb-md">Nº de Telefone: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->telefone}}</h6>
-                                                                <h5 class="mb-md">Nº de Bilhete: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->bi}}</h6>
-                                                                        <h5 class="mb-md">Data de Emissão: <span style="color:cornflowerblue;">@if($getFuncionario->pessoa->data_emissao == "") nenhum(a) @else {{date('d/m/Y', strtotime($getFuncionario->pessoa->data_emissao)}} @endif</h6>
-                                                                                <h5 class="mb-md">Local de Emissão: <span style="color:cornflowerblue;">@if($getFuncionario->pessoa->local_emissao == "") nenhum(a) @else {{$getFuncionario->pessoa->local_emissao}} @endif</h6>
-                                                                                        <h5 class="mb-md">Pai: <span style="color:cornflowerblue;">@if($getFuncionario->pessoa->pai == "") nenhum(a) @else {{$getFuncionario->pessoa->pai}} @endif</h6>
-                                                                                                <h5 class="mb-md">Mãe: <span style="color:cornflowerblue;">@if($getFuncionario->pessoa->mae == "") nenhum(a) @else {{$getFuncionario->pessoa->mae}} @endif</h6>
+                        <h5 class="mb-md">Gênero: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->genero}}</h5>
+                                <h5 class="mb-md">Data de Nascimento: <span style="color:cornflowerblue;">{{date('d/m/Y', strtotime($getFuncionario->pessoa->data_nascimento))}}</h5>
+                                        <h5 class="mb-md">Província: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->municipio->provincia->provincia}}</h5>
+                                                <h5 class="mb-md">Município: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->municipio->municipio}}</h5>
+                                                        <h5 class="mb-md">Nº de Telefone: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->telefone}}</h5>
+                                                                <h5 class="mb-md">Nº de Bilhete: <span style="color:cornflowerblue;">{{$getFuncionario->pessoa->bi}}</h5>
+                                                                        <h5 class="mb-md">Data de Emissão: <span style="color:cornflowerblue;">@if($getFuncionario->pessoa->data_emissao == "") nenhum(a) @else {{date('d/m/Y', strtotime($getFuncionario->pessoa->data_emissao))}} @endif</h5>
+                                                                                <h5 class="mb-md">Local de Emissão: <span style="color:cornflowerblue;">@if($getFuncionario->pessoa->local_emissao == "") nenhum(a) @else {{$getFuncionario->pessoa->local_emissao}} @endif</h5>
+                                                                                        <h5 class="mb-md">Pai: <span style="color:cornflowerblue;">@if($getFuncionario->pessoa->pai == "") nenhum(a) @else {{$getFuncionario->pessoa->pai}} @endif</h5>
+                                                                                                <h5 class="mb-md">Mãe: <span style="color:cornflowerblue;">@if($getFuncionario->pessoa->mae == "") nenhum(a) @else {{$getFuncionario->pessoa->mae}} @endif</h5>
                     </div>
                     <div id="edit" class="tab-pane">
-                        <h4 class="mb-md">Informação</h4>
-
+                        <h4 class="mb-md">Categoria: <span style="color:cornflowerblue;">{{$getFuncionario->cargo->cargo}}</span></h4>   
+                        <h5 class="mb-md">Salário Base: <span style="color:cornflowerblue;">Akz {{number_format($getFuncionario->salario_base, 2, ',', '.')}}</h5>
+                            <h5 class="mb-md">Data de Ingresso: <span style="color:cornflowerblue;">{{date('d/m/Y', strtotime($getFuncionario->data_entrada))}}</h5>
                     </div>
                 </div>
             </div>
@@ -123,8 +124,8 @@
             <h4 class="mb-md">Estado</h4>
             <ul class="simple-card-list mb-xlg">
                 <li class="danger">
-                    <a href="/funcionarios/formFalta/{{ $getFuncionario->id }}" style="text-decoration: none;">
-                    <h3>Faltas</h3>
+                    <a href="/funcionarios/formFalta/{{ $getFuncionario->id }}" style="text-decoration: none; color:#fff;">
+                    <h4>Marcar Falta</h4>
                     </a>
                 </li>
                 <li class="primary">
@@ -150,18 +151,16 @@
 
             <h4 class="mb-md">Documentos Escaneados</h4>
             <ul class="simple-bullet-list mb-xlg">
-                <li class="red">
-                    <span class="title">Bilhete de Identidate</span>
-                    <span class="description truncate">Download</span>
+                @if($getDocs->count()==0)
+                Nenhum Documento encontrado
+                @else
+                @foreach ($getDocs as $docs)
+                 <li class="green">
+                    <span class="title">{{$docs->tipo_documento->tipo}}</span>
+                 <span class="description truncate"><a href="{{$docs->ficheiro}}">Download</a></span>
                 </li>
-                <li class="green">
-                    <span class="title">Currículo Vitae</span>
-                    <span class="description truncate">Download</span>
-                </li>
-                <li class="blue">
-                    <span class="title">Atestado de Residência</span>
-                    <span class="description truncate">Download</span>
-                </li>
+                @endforeach
+            @endif
             </ul>
 
 

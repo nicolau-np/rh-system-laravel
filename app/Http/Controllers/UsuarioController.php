@@ -2,19 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Pessoa;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
+
+    protected $usuarios;
+    protected $pessoa;
+
+    public function __construct(User $usuarios, Pessoa $pessoa)
+    {
+        $this->usuarios = $usuarios;
+        $this->pessoa = $pessoa;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-
+        $usuarios = $this->usuarios->where('acesso', '!=', 'admin')->paginate(2);
+        $data = [
+            'titulo' => "Usuários",
+            'menu' => "Usuários",
+            'submenu' => "Listar",
+            'tipo' => "view",
+            'getUsuarios' => $usuarios
+        ];
+        return view('usuario.list', $data);
     }
 
     /**
@@ -24,7 +44,13 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'titulo' => "Usuários",
+            'menu' => "Usuários",
+            'submenu' => "Novo",
+            'tipo' => "form"
+        ];
+        return view('usuario.new', $data);
     }
 
     /**
@@ -83,12 +109,13 @@ class UsuarioController extends Controller
         //
     }
 
-    public function loginForm(){
+    public function loginForm()
+    {
         $data = [
-            'titulo'=>"Iniciar Sessão Sistema RH",
-            'menu'=>"Login",
-            'submenu'=>"",
-            'tipo'=>"login"
+            'titulo' => "Iniciar Sessão Sistema RH",
+            'menu' => "Login",
+            'submenu' => "",
+            'tipo' => "login"
         ];
         return view('usuario.login', $data);
     }
@@ -99,23 +126,71 @@ class UsuarioController extends Controller
             [
                 'email' => ['required', 'string', 'email', 'max:255'],
                 'password' => ['required', 'string', 'min:8', 'max:255']
-            ],
-            [
-                'email.required' => 'Email Obrigatorio',
-                'password.required' => 'Palavra-Passe Obrigatorio'
             ]
         );
 
         $credencials = $request->only('email', 'password');
         if (Auth::attempt($credencials)) {
             return redirect()->route('home');
-        }else{
-            return back()->with(['error'=>"Email ou Palavra-Passe Incorrectos"]);
+        } else {
+            return back()->with(['error' => "Email ou Palavra-Passe Incorrectos"]);
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('loginForm');
+    }
+
+    public function perfil()
+    {
+        //echo Auth::user()->pessoa->id;
+        $id = Auth::user()->pessoa->id;
+        $perfil = $this->usuarios->where('id_pessoa', $id)->first();
+        $data = [
+            'titulo' => "Meu Perfil",
+            'menu' => "Usuários",
+            'submenu' => "Meu Perfil",
+            'tipo' => "view",
+            'getPerfil' => $perfil
+        ];
+        return view('usuario.perfil', $data);
+    }
+
+    public function update_perfil(Request $request)
+    {
+        $foto_antiga = Auth::user()->pessoa->foto;
+        $id = Auth::user()->pessoa->id;
+        if ($request->palavra_passe != "") {
+            $request->validate(
+                [
+                    'palavra_passe' => ['required', 'string', 'max:255'],
+                    'palavra_nova' => ['required', 'string', 'max:255'],
+                    'palavra_confirm' => ['required', 'string', 'max:255']
+                ]
+            );
+        }
+
+        $data['pessoa'] = [
+            'foto' => null
+        ];
+
+        if ($request->hasFile('foto') && $request->foto->isValid()) {
+            $request->validate(
+                [
+                    'foto' => ['required', "mimes:png,jpg,jpeg"]
+                ]
+            );
+            if ($foto_antiga != "" && file_exists($foto_antiga)) {
+                unlink($foto_antiga);
+            }
+            $path = $request->file('foto')->store('fotosFuncionarios');
+            $data['pessoa']['foto'] = $path;
+        }
+
+        if ($this->pessoa->find(Auth::user()->pessoa->id)->update($data['pessoa'])) {
+            return back()->with(['success' => "Feito Com sucesso"]);
+        }
     }
 }

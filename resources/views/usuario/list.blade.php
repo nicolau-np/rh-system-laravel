@@ -44,9 +44,8 @@
                                 <div class="form-inline">
                                     <input type="search" class="form-control" placeholder="Search" aria-controls="datatable-default">&nbsp;
                                     <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-search"></i></a>&nbsp;
-                                    <a href="/funcionarios/new" class="btn btn-success btn-sm" title="Novo"><i class="fa fa-plus"></i></a>&nbsp;
-                                    <a href="/relatorios/folha_salario" class="btn btn-primary btn-sm" title="Folha de Salário"><i class="fa fa-file"></i></a>&nbsp;
-                                    <a href="#" class="btn btn-info btn-sm" title="Contas Bancárias"><i class="fa fa-file-excel-o"></i></a>&nbsp;
+                                    <a href="/usuarios/new" class="btn btn-success btn-sm" title="Novo"><i class="fa fa-plus"></i></a>&nbsp;
+                                   
                                 </div>
                             </form>
 
@@ -63,25 +62,23 @@
                                             <th>#</th>
                                             <th>Nome Completo</th>
                                             <th>Gênero</th>
-                                            <th>B.I</th>
-                                            <th>Cargo</th>
-                                            <th>Data de Ingresso</th>
+                                            <th>Email</th>
+                                            <th>Access</th>
+                                            <th>Estado</th>
                                             <th>Operações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($getFuncionarios as $funcionarios)
+                                        @foreach($getUsuarios as $usuarios)
                                         <tr>
-                                            <td>{{$funcionarios->id}}</td>
-                                            <td>{{$funcionarios->pessoa->nome}}</td>
-                                            <td>{{$funcionarios->pessoa->genero}}</td>
-                                            <td>{{$funcionarios->pessoa->bi}}</td>
-                                            <td>{{$funcionarios->cargo->cargo}}</td>
-                                            <td>{{$funcionarios->data_entrada}}</td>
+                                            <td>{{$usuarios->id}}</td>
+                                            <td>{{$usuarios->pessoa->nome}}</td>
+                                            <td>{{$usuarios->pessoa->genero}}</td>
+                                            <td>{{$usuarios->email}}</td>
+                                            <td>{{$usuarios->acesso}}</td>
+                                            <td>{{$usuarios->estado}}</td>
                                             <td class="actions-hover actions-fade">
-                                                <a href="/funcionarios/show/{{$funcionarios->id}}"><i class="fa fa-eye fa-2x"></i></a>&nbsp;
-                                                <a href="/funcionarios/edit/{{$funcionarios->id}}"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
-                                                <a href="/funcionarios/docs/{{$funcionarios->id}}"><i class="fa fa-briefcase fa-2x"></i></a>&nbsp;
+                                                <a href="/usuarios/edit/{{$usuarios->id}}"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
                                                 <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
                                             </td>
                                         </tr>
@@ -95,7 +92,7 @@
 
                     <div class="row">
                         <div class="col-sm-12 col-md-6" style="text-align: right;">
-                            {{$getFuncionarios->links()}}
+                            {{$getUsuarios->links()}}
                         </div>
                     </div>
                 </div>

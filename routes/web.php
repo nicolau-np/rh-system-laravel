@@ -18,11 +18,20 @@ Route::group(['prefix'=>'/funcionarios', 'middleware'=>'auth'], function(){
     Route::get('/formFalta/{id}', "FuncionarioController@formFalta");
     Route::put('/marcFalta/{id}', "FuncionarioController@marcFalta");
     Route::put('/update/{id_funcionario}/{id_pessoa}', "FuncionarioController@update");
+    Route::get('/docs/{id}', "FuncionarioController@formDocumentos");
+    Route::put('/store_docs/{id}', "FuncionarioController@store_docs");
 });
 
 Route::group(['prefix'=>'/relatorios', 'middleware'=>'auth'], function(){
     Route::get('/folha_salario', "RelatorioController@create_folha");
     Route::post('/export_folha', "RelatorioController@export_folha");
+});
+
+Route::group(['prefix'=>'/usuarios', 'middleware'=>'auth'], function(){
+    Route::get('/perfil', "UsuarioController@perfil");
+    Route::get('/list', "UsuarioController@index");
+    Route::get('/new', "UsuarioController@create");
+    Route::post('/update_perfil', "UsuarioController@update_perfil");
 });
 
 Route::post('/login', "UsuarioController@login");
