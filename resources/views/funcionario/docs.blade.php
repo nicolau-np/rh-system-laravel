@@ -124,8 +124,21 @@
                                     </thead>
                                     <tbody>
                                         @foreach($getDocs as $docs)
+                                        <?php 
+                                            $string = explode(".", $docs->ficheiro);
+                                            $mimes = $string[1];
+                                        ?>
                                         <tr>
-                                            <td><img src="" alt="" width="50px" height="50px"></td>
+                                            <td width="50px">
+                                            @if($mimes=="jpg" || $mimes=="png" || $mimes=="jpeg")
+                                            <img src="{{asset('assets/images/images.png')}}" alt="" width="50px" height="50px" />
+                                            @elseif($mimes=="doc" || $mimes=="docx")
+                                            <img src="{{asset('assets/images/docx.png')}}" alt="" width="50px" height="50px" />
+                                            @elseif($mimes=="pdf")
+                                            <img src="{{asset('assets/images/pdf.png')}}" alt="" width="50px" height="50px" />
+                                            @endif
+                                        </td>
+                                                
                                             <td>{{$getFuncionario->pessoa->nome}}</td>
                                             <td>{{$docs->tipo_documento->tipo}}</td>
                                             <td class="actions-hover actions-fade">
