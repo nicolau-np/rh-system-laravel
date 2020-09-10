@@ -125,7 +125,7 @@
                                     <tbody>
                                         @foreach($getDocs as $docs)
                                         <tr>
-                                            <td>{{$docs->id}}</td>
+                                            <td><img src="" alt="" width="50px" height="50px"></td>
                                             <td>{{$getFuncionario->pessoa->nome}}</td>
                                             <td>{{$docs->tipo_documento->tipo}}</td>
                                             <td class="actions-hover actions-fade">
