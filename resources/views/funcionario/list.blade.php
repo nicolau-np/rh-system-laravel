@@ -46,7 +46,7 @@
                                     <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-search"></i></a>&nbsp;
                                     <a href="/funcionarios/new" class="btn btn-success btn-sm" title="Novo"><i class="fa fa-plus"></i></a>&nbsp;
                                     <a href="/relatorios/folha_salario" class="btn btn-primary btn-sm" title="Folha de Salário"><i class="fa fa-file"></i></a>&nbsp;
-                                    <a href="#" class="btn btn-info btn-sm" title="Contas Bancárias"><i class="fa fa-file-excel-o"></i></a>&nbsp;
+                                    <a href="/funcionarios/ibans" class="btn btn-info btn-sm" title="Contas Bancárias"><i class="fa fa-file-excel-o"></i></a>&nbsp;
                                 </div>
                             </form>
 
@@ -77,7 +77,7 @@
                                             <td>{{$funcionarios->pessoa->genero}}</td>
                                             <td>{{$funcionarios->pessoa->bi}}</td>
                                             <td>{{$funcionarios->cargo->cargo}}</td>
-                                            <td>{{$funcionarios->data_entrada}}</td>
+                                            <td>{{date('d/m/Y', strtotime($funcionarios->data_entrada))}}</td>
                                             <td class="actions-hover actions-fade">
                                                 <a href="/funcionarios/show/{{$funcionarios->id}}"><i class="fa fa-eye fa-2x"></i></a>&nbsp;
                                                 <a href="/funcionarios/edit/{{$funcionarios->id}}"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;

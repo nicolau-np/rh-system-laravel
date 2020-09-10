@@ -7,6 +7,7 @@ use App\Cargo;
 use App\ContaBancaria;
 use App\DocsEscaneado;
 use App\Exports\FolhaSalarial;
+use App\Exports\IbansExport;
 use App\Funcionario;
 use App\Municipio;
 use App\Pessoa;
@@ -453,5 +454,9 @@ class FuncionarioController extends Controller
 
     public function download($ficheiro){
             return response()->download(public_path("docsEscaneados/".$ficheiro));
+    }
+
+    public function ibans(){
+        return $this->excel->download(new IbansExport, 'contas_bancarias.xlsx');
     }
 }
