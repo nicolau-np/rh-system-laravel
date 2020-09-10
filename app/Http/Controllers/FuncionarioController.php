@@ -450,4 +450,8 @@ class FuncionarioController extends Controller
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }
+
+    public function download($ficheiro){
+            return response()->download(public_path("docsEscaneados/".$ficheiro));
+    }
 }

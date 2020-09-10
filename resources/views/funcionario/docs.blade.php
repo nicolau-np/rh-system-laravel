@@ -129,7 +129,11 @@
                                             <td>{{$getFuncionario->pessoa->nome}}</td>
                                             <td>{{$docs->tipo_documento->tipo}}</td>
                                             <td class="actions-hover actions-fade">
-                                            <a href="{{$docs->ficheiro}}"><i class="fa fa-eye fa-2x"></i></a>&nbsp;
+                                                <?php 
+                                                $string = explode("/", $docs->ficheiro);
+                                                $ficheiro_download = $string[1];
+                                                ?>
+                                            <a href="/funcionarios/download/{{$ficheiro_download}}" class="preview_doc"><i class="fa fa-download fa-2x"></i></a>&nbsp;
                                                 <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
                                             </td>
                                         </tr>
@@ -146,6 +150,7 @@
     </div>
     </div>
     <!-- end: page -->
+
 </section>
 
 @endsection

@@ -20,6 +20,7 @@ Route::group(['prefix'=>'/funcionarios', 'middleware'=>'auth'], function(){
     Route::put('/update/{id_funcionario}/{id_pessoa}', "FuncionarioController@update");
     Route::get('/docs/{id}', "FuncionarioController@formDocumentos");
     Route::put('/store_docs/{id}', "FuncionarioController@store_docs");
+    Route::get('/download/{ficheiro}', "FuncionarioController@download");
 });
 
 Route::group(['prefix'=>'/relatorios', 'middleware'=>'auth'], function(){

@@ -157,7 +157,14 @@
                 @foreach ($getDocs as $docs)
                  <li class="green">
                     <span class="title">{{$docs->tipo_documento->tipo}}</span>
-                 <span class="description truncate"><a href="{{$docs->ficheiro}}">Download</a></span>
+                 <span class="description truncate">
+                     <?php 
+                     $string = explode("/", $docs->ficheiro);
+                     $ficheiro_download = $string[1];
+                     ?>
+                 <a href="/funcionarios/download/{{$ficheiro_download}}" class="preview_doc">Download</a>&nbsp;
+                     
+                    </span>
                 </li>
                 @endforeach
             @endif
