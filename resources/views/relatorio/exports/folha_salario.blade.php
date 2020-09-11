@@ -28,7 +28,7 @@
 
 
 
-        <table border=2 style="font-family:'arial'; font-size:12px; table-layout: fixed;">
+        <table border=2 style="font-family:'arial'; font-size:12px;">
            
                 <tr>
                 <td rowspan="2" style="width: 25px;">Nº</td>

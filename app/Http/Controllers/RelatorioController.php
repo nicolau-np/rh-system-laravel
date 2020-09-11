@@ -58,7 +58,7 @@ class RelatorioController extends Controller
         $mes_extenso = $this->globais->converterMes();
 
 
-        $funcionario = $this->funcionario->all();
+        $funcionario = $this->funcionario->get();
 
         $data = [
             'getFuncionarios' => $funcionario,
@@ -67,11 +67,26 @@ class RelatorioController extends Controller
             'mes' => $request->mes
         ];
 
-      /*  $pdf = PDF::loadView('relatorio.exports.folha_salario', $data)->setPaper('A4', 'landscape');
+      $pdf = PDF::loadView('relatorio.exports.folha_salario', $data)->setPaper('A4', 'landscape');
 
-        return $pdf->stream('folha_salario_' . $mes_extenso . '-' . date('Y') . '.pdf');*/
-
-        return view('relatorio.pdf.folha_salario');
+        return $pdf->stream('folha_salario_' . $mes_extenso . '-' . date('Y') . '.pdf');
+ /* $fileName = "folha_salario.pdf";
+$mpdf = new \Mpdf\Mpdf([
+    'margin_left' =>10,
+    'margin_right'=>10,
+    'margin_top'=>15,
+    'margin_bottom'=>20,
+'margin_header'=>10,
+'margin_footer'=>10
+]);
+$html = \view('relatorio.pdf.folha_salario', $data);
+$html=$html->render();
+$url = asset('folha_salario.css');
+$stylesheet = file_get_contents($url);
+$mpdf->WriteHTML($stylesheet, 1);
+$mpdf->WriteHTML($html, 2);
+$mpdf->Output($fileName, "I");
+exit;*/
 
         
     }
