@@ -459,4 +459,5 @@ class FuncionarioController extends Controller
     public function ibans(){
         return $this->excel->download(new IbansExport, 'contas_bancarias.xlsx');
     }
+
 }

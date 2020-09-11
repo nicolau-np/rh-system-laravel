@@ -67,9 +67,11 @@ class RelatorioController extends Controller
             'mes' => $request->mes
         ];
 
-        $pdf = PDF::loadView('relatorio.exports.folha_salario', $data)->setPaper('A4', 'landscape');
+      /*  $pdf = PDF::loadView('relatorio.exports.folha_salario', $data)->setPaper('A4', 'landscape');
 
-        return $pdf->stream('folha_salario_' . $mes_extenso . '-' . date('Y') . '.pdf');
+        return $pdf->stream('folha_salario_' . $mes_extenso . '-' . date('Y') . '.pdf');*/
+
+        return view('relatorio.pdf.folha_salario');
 
         
     }

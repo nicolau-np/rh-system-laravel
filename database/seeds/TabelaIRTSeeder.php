@@ -15,7 +15,7 @@ class TabelaIRTSeeder extends Seeder
         DB::table('tabela_i_r_t_s')->insert(array(
             array(
                 'escalao'=>"1º Escalão",
-                'inicio'=> null,
+                'inicio'=> 0,
                 'ate'=>70000,
                 'parcela_fixa'=>null,
                 'taxa_percentagem'=> null,
@@ -112,7 +112,7 @@ class TabelaIRTSeeder extends Seeder
             ),array(
                 'escalao'=>"13º Escalão",
                 'inicio'=> 10000001,
-                'ate'=>null,
+                'ate'=>50000000,
                 'parcela_fixa'=>2342250,
                 'taxa_percentagem'=> 25,
                 'taxa_numeral'=>null,
