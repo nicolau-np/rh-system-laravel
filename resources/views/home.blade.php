@@ -25,28 +25,11 @@
             <section class="panel">
                
                 <div class="panel-body">
-ola
+                <img src="{{asset('assets/images/postrh_blog.png')}}" style="width:100%; height: 30em;" alt="">
                 </div>
             </section>
         </div>
-        <div class="col-md-6">
-            <section class="panel">
-                <header class="panel-heading">
-                    <div class="panel-actions">
-                        <a href="#" class="fa fa-caret-down"></a>
-                        <a href="#" class="fa fa-times"></a>
-                    </div>
-                    <h2 class="panel-title">Server Usage</h2>
-                    <p class="panel-subtitle">It's easy to create custom graphs on JSOFT Admin Template, there are several graph types that you can use, such as lines, bars, pie charts, etc...</p>
-                </header>
-                <div class="panel-body">
-
-                    <!-- Flot: Curves -->
-                    <div class="chart chart-md" id="flotDashRealTime"></div>
-
-                </div>
-            </section>
-        </div>
+     
     </div>
 
     <!-- start: page -->
