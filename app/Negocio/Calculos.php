@@ -11,7 +11,7 @@ class Calculos
 
     public function inss_desconto($salario_base)
     {
-        $this->inss_desconto = $salario_base * 0.03; //salario_base * 3%
+        $this->inss_desconto = $salario_base * (3/100); //salario_base * 3%
 
         return $this->inss_desconto;
     }
