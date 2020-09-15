@@ -36,6 +36,18 @@ Route::group(['prefix'=>'/usuarios', 'middleware'=>'auth'], function(){
     Route::post('/update_perfil', "UsuarioController@update_perfil");
 });
 
+Route::group(['prefix' => '/ferias', 'middleware'=>'auth'], function () {
+    Route::get('/list/{id}', 'FeriaController@index');
+    Route::put('/store/{id}', 'FeriaController@store');
+   
+});
+
+Route::group(['prefix' => '/reports'], function () {
+    Route::get('/declaracao/{id}', 'ReportController@declaracao');
+    Route::get('/carta_recomend/{id}', 'ReportController@carta_recomend');
+    Route::get('/guia_feria/{id}', 'ReportController@guia_feria');
+});
+
 Route::post('/login', "UsuarioController@login");
 Route::post('/getMunicipio', "FuncionarioController@getMunicipio")->name('getMunicipio');
 //Route::get('/home', 'HomeController@index')->name('home');

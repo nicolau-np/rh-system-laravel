@@ -55,8 +55,8 @@
                         <div class="widget-content-expanded">
                             <ul class="simple-todo-list">
                                 <li>
-                                    <a href="#" class="btn btn-success btn-sm"><i class="fa fa-download"></i> Decl.</a>
-                                    <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> Cart. Rec.</a>
+                                <a href="/reports/declaracao/{{$getFuncionario->id}}" class="btn btn-success btn-sm"><i class="fa fa-download"></i> Decl.</a>
+                                    <a href="/reports/carta_recomend/{{$getFuncionario->id}}" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> Cart. Rec.</a>
                                 </li>
 
                             </ul>
@@ -75,10 +75,8 @@
 
                     <hr class="dotted short">
 
-                    <div class="social-icons-list">
-                        <a rel="tooltip" data-placement="bottom" target="_blank" href="#" data-original-title="Facebook"><i class="fa fa-facebook"></i><span>Facebook</span></a>
-                        <a rel="tooltip" data-placement="bottom" href="#" data-original-title="Twitter"><i class="fa fa-twitter"></i><span>Twitter</span></a>
-                        <a rel="tooltip" data-placement="bottom" href="#" data-original-title="Linkedin"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>
+                    <div class="ferias" style="display: block; float:right;">
+                        <a class="btn btn-primary btn-sm" href="/ferias/list/{{$getFuncionario->id}}">Ferias</a>
                     </div>
 
                 </div>

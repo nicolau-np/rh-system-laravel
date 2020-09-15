@@ -19,6 +19,8 @@ class CreateFeriasTable extends Migration
             $table->bigInteger('id_funcionario')->unsigned()->index();
             $table->date('data_entrada');
             $table->date('data_saida');
+            $table->string('estado');
+            $table->bigInteger('ano');
             $table->timestamps();
         });
 

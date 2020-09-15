@@ -11,7 +11,9 @@ class Feria extends Model
     protected $fillable = [
         'id_funcionario',
         'data_entrada',
-        'data_saida'
+        'data_saida',
+        'estado',
+        'ano'
     ];
 
     public function funcionario(){

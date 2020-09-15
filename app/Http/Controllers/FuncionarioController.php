@@ -344,7 +344,7 @@ class FuncionarioController extends Controller
     {
         $funcionario = $this->funcionario->where('id', $id)->first();
         $tipo_falta = $this->tipo_falta->pluck('tipo', 'id');
-        $faltas = $this->falta->where('id_funcionario', $id)->where('estado', 'on')->get();
+        $faltas = $this->falta->where('id_funcionario', $id)->where('estado', 'on')->orderBy('id', 'desc')->get();
 
         if (!$funcionario) {
             return back()->with(['error' => 'Funcionário não Encontrado']);
@@ -459,5 +459,7 @@ class FuncionarioController extends Controller
     public function ibans(){
         return $this->excel->download(new IbansExport, 'contas_bancarias.xlsx');
     }
+
+ 
 
 }
