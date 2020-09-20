@@ -42,18 +42,26 @@ Route::group(['prefix' => '/ferias', 'middleware'=>'auth'], function () {
    
 });
 
-Route::group(['prefix' => '/reports'], function () {
+Route::group(['prefix' => '/reports', 'middleware'=>'auth'], function () {
     Route::get('/declaracao/{id}', 'ReportController@declaracao');
     Route::get('/carta_recomend/{id}', 'ReportController@carta_recomend');
     Route::get('/guia_feria/{id}', 'ReportController@guia_feria');
 });
 
+Route::group(['prefix' => '/salarios', 'middleware'=>'auth'], function () {
+    Route::get('/list', 'SalarioController@index');
+    Route::get('/new', 'SalarioController@create');
+    Route::post('/store', 'SalarioController@store');
+    Route::get('/lacamento/{id_salario}', 'SalarioController@lancamento');
+    Route::post('/updateFolhaSalarial', 'SalarioController@updateFolhaSalarial')->name("updateFolhaSalarial");
+});
+
 Route::post('/login', "UsuarioController@login");
 Route::post('/getMunicipio', "FuncionarioController@getMunicipio")->name('getMunicipio');
-//Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/setPrioridade', 'RelatorioController@setPrioridade')->name('setPrioridade');
 
-Route::post('/remPrioridade', 'RelatorioController@remPrioridade')->name('remPrioridade');
+Route::post('/setPrioridade', 'SalarioController@setPrioridade')->name('setPrioridade');
+
+Route::post('/remPrioridade', 'SalarioController@remPrioridade')->name('remPrioridade');
 
 Route::get('/excel', "ExcelDoc@index");
 

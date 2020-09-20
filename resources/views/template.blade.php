@@ -306,6 +306,13 @@
 									</a>
 								</li>
 
+								<li class="@if($menu=='Salários') nav-active @endif">
+									<a href="/salarios/list">
+										<i class="fa fa-money" aria-hidden="true"></i>
+										<span>Salários</span>
+									</a>
+								</li>
+
 								<li class="nav-parent">
 									<a>
 										<i class="fa fa-table" aria-hidden="true"></i>

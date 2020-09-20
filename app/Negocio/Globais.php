@@ -13,6 +13,7 @@ class Globais {
     private $dia_semana_extenso;
     private $mes_extenso;
 
+
     function __construct() {
         $this->ano_lectivo = date("Y");
         $this->data = date("Ymd");

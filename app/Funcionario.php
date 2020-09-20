@@ -45,5 +45,9 @@ class Funcionario extends Model
         return $this->hasOne(ContaBancaria::class, 'id_funcionario', 'id');
     }
 
+    public function folha_salarial(){
+        return $this->hasMany(FolhaSalarial::class, 'id_funcionario', 'id');
+    }
+
 
 }
