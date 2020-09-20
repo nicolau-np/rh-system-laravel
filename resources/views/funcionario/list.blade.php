@@ -45,7 +45,6 @@
                                     <input type="search" class="form-control" placeholder="Search" aria-controls="datatable-default">&nbsp;
                                     <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-search"></i></a>&nbsp;
                                     <a href="/funcionarios/new" class="btn btn-success btn-sm" title="Novo"><i class="fa fa-plus"></i></a>&nbsp;
-                                    <a href="/relatorios/folha_salario" class="btn btn-primary btn-sm" title="Folha de Salário"><i class="fa fa-file"></i></a>&nbsp;
                                     <a href="/funcionarios/ibans" class="btn btn-info btn-sm" title="Contas Bancárias"><i class="fa fa-file-excel-o"></i></a>&nbsp;
                                 </div>
                             </form>
@@ -104,10 +103,6 @@
     </div>
     <!-- end: page -->
 </section>
-
-
-
-
 
 
 @endsection
