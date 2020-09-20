@@ -24,10 +24,10 @@ Route::group(['prefix'=>'/funcionarios', 'middleware'=>'auth'], function(){
     Route::get('/ibans', "FuncionarioController@ibans");
 });
 
-Route::group(['prefix'=>'/relatorios', 'middleware'=>'auth'], function(){
+/*Route::group(['prefix'=>'/relatorios', 'middleware'=>'auth'], function(){
     Route::get('/folha_salario', "RelatorioController@create_folha");
     Route::post('/export_folha', "RelatorioController@export_folha");
-});
+});*/
 
 Route::group(['prefix'=>'/usuarios', 'middleware'=>'auth'], function(){
     Route::get('/perfil', "UsuarioController@perfil");
@@ -46,6 +46,7 @@ Route::group(['prefix' => '/reports', 'middleware'=>'auth'], function () {
     Route::get('/declaracao/{id}', 'ReportController@declaracao');
     Route::get('/carta_recomend/{id}', 'ReportController@carta_recomend');
     Route::get('/guia_feria/{id}', 'ReportController@guia_feria');
+    Route::get('/folha_salario/{id_salario}', 'ReportController@folha_salario');
 });
 
 Route::group(['prefix' => '/salarios', 'middleware'=>'auth'], function () {
@@ -54,6 +55,8 @@ Route::group(['prefix' => '/salarios', 'middleware'=>'auth'], function () {
     Route::post('/store', 'SalarioController@store');
     Route::get('/lacamento/{id_salario}', 'SalarioController@lancamento');
     Route::post('/updateFolhaSalarial', 'SalarioController@updateFolhaSalarial')->name("updateFolhaSalarial");
+
+
 });
 
 Route::post('/login', "UsuarioController@login");

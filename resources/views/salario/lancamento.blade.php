@@ -1,9 +1,15 @@
-<?php 
-use App\Http\Controllers\SalarioController; 
-?>
+
 <style>
     .txt_folha{
         width: 75px;
+        color:#0088cc;
+    }
+    .td_salario{
+        color: green;
+    }
+
+    .td_nome{
+        color: #0088cc;
     }
     table{
         font-size: 13px;
@@ -55,7 +61,7 @@ use App\Http\Controllers\SalarioController;
                                 <div class="form-inline">
                                     <input type="search" class="form-control" placeholder="Search" aria-controls="datatable-default">&nbsp;
                                     <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-search"></i></a>&nbsp;
-                                <a href="/salarios/print/{{$getidSalario}}" class="btn btn-primary btn-sm" title="Imprimir"><i class="fa fa-print"></i></a>&nbsp;
+                                <a href="/reports/folha_salario/{{$getidSalario}}" class="btn btn-primary btn-sm" title="Imprimir"><i class="fa fa-print"></i></a>&nbsp;
                                     
                                 </div>
                             </form>
@@ -70,8 +76,8 @@ use App\Http\Controllers\SalarioController;
                                 <table class="table table-bordered table-hover mb-none">
                                     <thead>
                                         <tr>
-                                            <th rowspan="2">#</th>
                                             <th rowspan="2">Funcionário</th>
+                                            <th rowspan="2">Categoria</th>
                                             <th rowspan="2">Salário Base</th>
                                             <th colspan="3">Subcídios</th>
                                             <th colspan="3">Remunerações Adicionais</th>
@@ -88,13 +94,14 @@ use App\Http\Controllers\SalarioController;
                                         </tr>
                                     </thead>
                                     <tbody>
+                                       
                                        {{Form::open(['name'=>"formLancamento", 'class'=>"formLancamento", 'method'=>"post"])}}
                                         @foreach($getFolhaSalario as $folha_salarios)
-                                        
+                                       
                                         <tr>
-                                            <td>{{$folha_salarios->id}}</td>
-                                            <td>{{$folha_salarios->funcionario->pessoa->nome}}</td>
-                                            <td>{{number_format($folha_salarios->salario_base,2,',','.')}}</td>
+                                            <td class="td_nome">{{$folha_salarios->funcionario->pessoa->nome}}</td>
+                                            <td>{{$folha_salarios->funcionario->cargo->cargo}}</td>
+                                            <td class="td_salario">{{number_format($folha_salarios->salario_base,2,',','.')}}</td>
 
                                             <td>{{Form::number('sub_alimentacao', $folha_salarios->sub_alimentacao, ['placeholder'=>"Akz", 'class'=>"sub_alimentacao txt_folha", 'data-coluna'=>"sub_alimentacao", 'data-id'=>$folha_salarios->id])}}</td>
                                             <td>{{Form::number('sub_transporte', $folha_salarios->sub_transporte, ['placeholder'=>"Akz", 'class'=>"sub_transporte txt_folha", 'data-coluna'=>"sub_transporte", 'data-id'=>$folha_salarios->id])}}</td>
@@ -266,10 +273,5 @@ use App\Http\Controllers\SalarioController;
     </script>
     <!-- end: page -->
 </section>
-
-
-
-
-
 
 @endsection
