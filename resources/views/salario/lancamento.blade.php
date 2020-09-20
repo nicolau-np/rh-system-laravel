@@ -3,10 +3,10 @@ use App\Http\Controllers\SalarioController;
 ?>
 <style>
     .txt_folha{
-        width: 53px;
+        width: 75px;
     }
     table{
-        font-size: 12px;
+        font-size: 13px;
     }
 </style>
 @extends('template')
@@ -125,6 +125,8 @@ use App\Http\Controllers\SalarioController;
     </div>
     <script>
         $(document).ready(function(){
+
+            //subcidios
             $('.sub_alimentacao').on("keypress", function (e) {
             if (e.which == 13) {
                 var valor = $(this).val();
@@ -143,6 +145,102 @@ use App\Http\Controllers\SalarioController;
             }
         });
 
+        $('.sub_transporte').on("keypress", function (e) {
+            if (e.which == 13) {
+                var valor = $(this).val();
+                var id_folhaSalarial = $(this).data('id');
+                var coluna = $(this).data('coluna');
+               if (valor != "" && valor >= 0) {
+                    var pagina = "{{route('updateFolhaSalarial')}}";
+                   var retorno = update_salario(pagina, id_folhaSalarial, coluna, valor);
+                    if (retorno == true) {
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
+                    }
+                } else {
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }
+              
+            }
+        });
+
+        $('.sub_comunicacao').on("keypress", function (e) {
+            if (e.which == 13) {
+                var valor = $(this).val();
+                var id_folhaSalarial = $(this).data('id');
+                var coluna = $(this).data('coluna');
+               if (valor != "" && valor >= 0) {
+                    var pagina = "{{route('updateFolhaSalarial')}}";
+                   var retorno = update_salario(pagina, id_folhaSalarial, coluna, valor);
+                    if (retorno == true) {
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
+                    }
+                } else {
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }
+              
+            }
+        });
+        //fim
+
+        //remuneracoes
+        $('.rem_horas_extras').on("keypress", function (e) {
+            if (e.which == 13) {
+                var valor = $(this).val();
+                var id_folhaSalarial = $(this).data('id');
+                var coluna = $(this).data('coluna');
+               if (valor != "" && valor >= 0) {
+                    var pagina = "{{route('updateFolhaSalarial')}}";
+                   var retorno = update_salario(pagina, id_folhaSalarial, coluna, valor);
+                    if (retorno == true) {
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
+                    }
+                } else {
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }
+              
+            }
+        });
+
+        $('.rem_premios').on("keypress", function (e) {
+            if (e.which == 13) {
+                var valor = $(this).val();
+                var id_folhaSalarial = $(this).data('id');
+                var coluna = $(this).data('coluna');
+               if (valor != "" && valor >= 0) {
+                    var pagina = "{{route('updateFolhaSalarial')}}";
+                   var retorno = update_salario(pagina, id_folhaSalarial, coluna, valor);
+                    if (retorno == true) {
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
+                    }
+                } else {
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }
+              
+            }
+        });
+
+
+        $('.rem_outros').on("keypress", function (e) {
+            if (e.which == 13) {
+                var valor = $(this).val();
+                var id_folhaSalarial = $(this).data('id');
+                var coluna = $(this).data('coluna');
+               if (valor != "" && valor >= 0) {
+                    var pagina = "{{route('updateFolhaSalarial')}}";
+                   var retorno = update_salario(pagina, id_folhaSalarial, coluna, valor);
+                    if (retorno == true) {
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
+                    }
+                } else {
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }
+              
+            }
+        });
+        
+        
+        //fim
+
         function update_salario(pagina, id_folhaSalarial, coluna, valor) {
             $.ajax({
                 method: "post",
@@ -158,11 +256,11 @@ use App\Http\Controllers\SalarioController;
                 beforeSend: function () {
                 },
                 success: function (result) {
-                 
+                 console.log(result);
                 }
 
             });
-            return true;
+          return true;
         }
         });
     </script>

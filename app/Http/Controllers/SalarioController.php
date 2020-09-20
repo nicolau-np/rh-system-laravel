@@ -118,18 +118,19 @@ class SalarioController extends Controller
             'tipo' => "view",
             'getFolhaSalario' => $folha_salarial,
             'getidSalario' => $id_salario,
-            'getMes'=>$mes
+            'getMes' => $mes
         ];
         return view('salario.lancamento', $data);
     }
 
-    public function updateFolhaSalarial(Request $request){
-       $coluna = $request->coluna;
-$data = [
-    '".$coluna."'=>$request->valor
-];
-         if(FolhaSalarial::find($request->id_folhaSalarial)->update($data)){
-            return true;
-          }
+    public function updateFolhaSalarial(Request $request)
+    {
+        $coluna = $request->coluna;
+        $data = [
+            "$coluna" => $request->valor
+        ];
+
+        $folha_salarial = FolhaSalarial::find($request->id_folhaSalarial)->update($data);
+        return response()->json($data);
     }
 }
