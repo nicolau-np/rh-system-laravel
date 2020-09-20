@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GuiaMedicaController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -47,6 +48,7 @@ Route::group(['prefix' => '/reports', 'middleware'=>'auth'], function () {
     Route::get('/carta_recomend/{id}', 'ReportController@carta_recomend');
     Route::get('/guia_feria/{id}', 'ReportController@guia_feria');
     Route::get('/folha_salario/{id_salario}', 'ReportController@folha_salario');
+    Route::get('/guia_medica/{id_guia}', "ReportController@guia_medica");
 });
 
 Route::group(['prefix' => '/salarios', 'middleware'=>'auth'], function () {
@@ -57,6 +59,16 @@ Route::group(['prefix' => '/salarios', 'middleware'=>'auth'], function () {
     Route::post('/updateFolhaSalarial', 'SalarioController@updateFolhaSalarial')->name("updateFolhaSalarial");
 
 
+});
+
+Route::group(['prefix' => '/declaracao', 'middleware'=>"auth"], function () {
+    Route::get('/list/{id}', "DeclaracaoController@index");
+    Route::put('/store/{id}', "DeclaracaoController@store");
+});
+
+Route::group(['prefix' => '/guia_medica', 'middleware'=>"auth"], function () {
+    Route::get('/list/{id}', 'GuiaMedicaController@index');
+    Route::put('/store/{id}', 'GuiaMedicaController@store');
 });
 
 Route::post('/login', "UsuarioController@login");

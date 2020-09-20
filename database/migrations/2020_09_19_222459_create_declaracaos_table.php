@@ -14,8 +14,16 @@ class CreateDeclaracaosTable extends Migration
     public function up()
     {
         Schema::create('declaracaos', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->bigInteger('id_funcionario')->unsigned()->index();
+            $table->bigInteger('ano');
+            $table->bigInteger('numero')->nullable();
+            $table->text('efeito');
             $table->timestamps();
+        });
+
+        Schema::table('declaracaos', function (Blueprint $table) {
+            $table->foreign('id_funcionario')->references('id')->on('funcionarios')->onUpdate('cascade');
         });
     }
 

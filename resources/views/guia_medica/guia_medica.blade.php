@@ -27,7 +27,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            {{Form::open(['class'=>'formFuncionario', 'url'=>"/ferias/store/$getFuncionario->id", 'enctype'=>"multipart/form-data", 'method'=>'put'])}}
+            {{Form::open(['class'=>'formFuncionario', 'url'=>"/guia_medica/store/$getFuncionario->id", 'enctype'=>"multipart/form-data", 'method'=>'put'])}}
             <section class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions">
@@ -35,7 +35,7 @@
                         <a href="#" class="fa fa-times"></a>
                     </div>
 
-                    <h2 class="panel-title">Férias de Funcionários</h2>
+                    <h2 class="panel-title">Guia Médica de Funcionários</h2>
 
                     <p class="panel-subtitle">
                         Deve preencher os campos obrigatórios. <span class="text-danger">*</span>
@@ -63,25 +63,40 @@
                             </div>
 
                             <div class="mb-md hidden-lg hidden-xl"></div>
-
-
                             <div class="col-lg-3">
-                                {{Form::label('data_entrada', "Data de Entrada")}} <span class="text-danger">*</span>
-                                {{Form::date('data_entrada', null, ['placeholder'=>'Data de Entrada','class'=>'form-control input-sm'])}}
+                                {{Form::label('data_inicio', "Data de Início")}}
+                                {{Form::date('data_inicio', null, ['placeholder'=>'Data de Início','class'=>'form-control input-sm'])}}
 
-                                @if($errors->has('data_entrada'))
-                                <span class="text-danger">{{$errors->first('data_entrada')}}</span>
+                                @if($errors->has('data_inicio'))
+                                <span class="text-danger">{{$errors->first('data_inicio')}}</span>
                                 @endif
                             </div>
 
                             <div class="mb-md hidden-lg hidden-xl"></div>
-                            
                             <div class="col-lg-3">
-                                {{Form::label('data_saida', "Data de Fim")}} <span class="text-danger">*</span>
+                                {{Form::label('data_saida', "Data de Fim")}}
                                 {{Form::date('data_saida', null, ['placeholder'=>'Data de Fim','class'=>'form-control input-sm'])}}
 
                                 @if($errors->has('data_saida'))
                                 <span class="text-danger">{{$errors->first('data_saida')}}</span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                {{Form::label('local_apresentar', "Local à Apresentar")}} <span class="text-danger">*</span>
+                                {{ Form::textarea('local_apresentar', null, ['placeholder'=>"Local à Apresentar", 'class'=>"form-control input-sm", 'cols'=>"50", 'rows'=>"3"]) }}
+                                @if($errors->has('local_apresentar'))
+                                <span class="text-danger">{{$errors->first('local_apresentar')}}</span>
+                                @endif
+                            </div>
+
+                            <div class="col-md-6">
+                                {{Form::label('prescricao_medica', "Prescrição Médica")}}
+                                {{ Form::textarea('prescricao_medica', null, ['placeholder'=>"Prescrição Médica", 'class'=>"form-control input-sm", 'cols'=>"50", 'rows'=>"3"]) }}
+                                @if($errors->has('prescricao_medica'))
+                                <span class="text-danger">{{$errors->first('prescricao_medica')}}</span>
                                 @endif
                             </div>
                         </div>
@@ -114,20 +129,22 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Nome Completo</th>
-                                            <th>Data Entrada</th>
-                                            <th>Data Saída</th>
+                                            <th>Local apresentar</th>
+                                            <th>Data Iníco</th>
+                                            <th>Data Apresentação</th>
                                             <th>Operações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($getFerias as $ferias)
+                                        @foreach($getGuiaMedica as $guia_medica)
                                         <tr>
-                                            <td>{{$ferias->numero}}</td>
+                                            <td>{{$guia_medica->numero}}</td>
                                             <td>{{$getFuncionario->pessoa->nome}}</td>
-                                            <td>{{$ferias->data_entrada}}</td>
-                                            <td>{{$ferias->data_saida}}</td>
+                                            <td>{{$guia_medica->local_apresentar}}</td>
+                                            <td>{{$guia_medica->data_repouso}}</td>
+                                            <td>{{$guia_medica->data_retoma}}</td>
                                             <td class="actions-hover actions-fade">
-                                            <a href="/reports/guia_feria/{{$ferias->id}}"><i class="fa fa-file-o fa-2x"></i></a>&nbsp;
+                                            <a href="/reports/guia_medica/{{$guia_medica->id}}"><i class="fa fa-file-o fa-2x"></i></a>&nbsp;
                                                 <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>
                                             </td>
                                         </tr>

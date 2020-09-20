@@ -14,8 +14,20 @@ class CreateGuiaMedicasTable extends Migration
     public function up()
     {
         Schema::create('guia_medicas', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->bigInteger('id_funcionario')->unsigned()->index();
+            $table->text('local_apresentar');
+            $table->date('data_repouso')->nullable();
+            $table->date('data_retoma')->nullable();
+            $table->text('prescricao_medica')->nullable();
+            $table->bigInteger('ano');
+            $table->bigInteger('numero')->nullable();
+            $table->string('estado')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('guia_medicas', function (Blueprint $table) {
+            $table->foreign('id_funcionario')->references('id')->on('funcionarios')->onUpdate('cascade');
         });
     }
 

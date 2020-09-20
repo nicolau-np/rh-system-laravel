@@ -49,5 +49,12 @@ class Funcionario extends Model
         return $this->hasMany(FolhaSalarial::class, 'id_funcionario', 'id');
     }
 
+    public function guia_medica(){
+        return $this->hasMany(GuiaMedica::class, 'id_funcionario', 'id');
+    }
+
+    public function declaracao(){
+        return $this->hasMany(Declaracao::class, 'id_funcionario', 'id');
+    }
 
 }

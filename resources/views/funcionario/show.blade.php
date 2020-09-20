@@ -55,7 +55,7 @@
                         <div class="widget-content-expanded">
                             <ul class="simple-todo-list">
                                 <li>
-                                <a href="/reports/declaracao/{{$getFuncionario->id}}" class="btn btn-success btn-sm"><i class="fa fa-download"></i> Decl.</a>
+                                <a href="/declaracao/list/{{$getFuncionario->id}}" class="btn btn-success btn-sm"><i class="fa fa-download"></i> Decl.</a>
                                     <a href="/reports/carta_recomend/{{$getFuncionario->id}}" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> Cart. Rec.</a>
                                 </li>
 
@@ -77,6 +77,7 @@
 
                     <div class="ferias" style="display: block; float:right;">
                         <a class="btn btn-primary btn-sm" href="/ferias/list/{{$getFuncionario->id}}">Ferias</a>
+                        <a class="btn btn-success btn-sm" href="/guia_medica/list/{{$getFuncionario->id}}">G. Médica</a>
                     </div>
 
                 </div>

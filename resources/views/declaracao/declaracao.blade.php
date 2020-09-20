@@ -27,7 +27,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            {{Form::open(['class'=>'formFuncionario', 'url'=>"/ferias/store/$getFuncionario->id", 'enctype'=>"multipart/form-data", 'method'=>'put'])}}
+            {{Form::open(['class'=>'formFuncionario', 'url'=>"/declaracao/store/$getFuncionario->id", 'enctype'=>"multipart/form-data", 'method'=>'put'])}}
             <section class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions">
@@ -35,7 +35,7 @@
                         <a href="#" class="fa fa-times"></a>
                     </div>
 
-                    <h2 class="panel-title">Férias de Funcionários</h2>
+                    <h2 class="panel-title">Declaração de Funcionários</h2>
 
                     <p class="panel-subtitle">
                         Deve preencher os campos obrigatórios. <span class="text-danger">*</span>
@@ -62,28 +62,18 @@
                                 @endif
                             </div>
 
-                            <div class="mb-md hidden-lg hidden-xl"></div>
+                        
+                        </div>
 
-
-                            <div class="col-lg-3">
-                                {{Form::label('data_entrada', "Data de Entrada")}} <span class="text-danger">*</span>
-                                {{Form::date('data_entrada', null, ['placeholder'=>'Data de Entrada','class'=>'form-control input-sm'])}}
-
-                                @if($errors->has('data_entrada'))
-                                <span class="text-danger">{{$errors->first('data_entrada')}}</span>
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                {{Form::label('efeito', "Efeito")}} <span class="text-danger">*</span>
+                                {{ Form::textarea('efeito', null, ['placeholder'=>"Efeito", 'class'=>"form-control input-sm", 'cols'=>"50", 'rows'=>"3"]) }}
+                                @if($errors->has('efeito'))
+                                <span class="text-danger">{{$errors->first('efeito')}}</span>
                                 @endif
                             </div>
 
-                            <div class="mb-md hidden-lg hidden-xl"></div>
-                            
-                            <div class="col-lg-3">
-                                {{Form::label('data_saida', "Data de Fim")}} <span class="text-danger">*</span>
-                                {{Form::date('data_saida', null, ['placeholder'=>'Data de Fim','class'=>'form-control input-sm'])}}
-
-                                @if($errors->has('data_saida'))
-                                <span class="text-danger">{{$errors->first('data_saida')}}</span>
-                                @endif
-                            </div>
                         </div>
 
                 </div>
@@ -114,20 +104,18 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Nome Completo</th>
-                                            <th>Data Entrada</th>
-                                            <th>Data Saída</th>
+                                            <th>Efeito</th>
                                             <th>Operações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($getFerias as $ferias)
+                                        @foreach($getDeclaracao as $declaracao)
                                         <tr>
-                                            <td>{{$ferias->numero}}</td>
+                                            <td>{{$declaracao->numero}}</td>
                                             <td>{{$getFuncionario->pessoa->nome}}</td>
-                                            <td>{{$ferias->data_entrada}}</td>
-                                            <td>{{$ferias->data_saida}}</td>
+                                            <td>{{$declaracao->efeito}}</td>
                                             <td class="actions-hover actions-fade">
-                                            <a href="/reports/guia_feria/{{$ferias->id}}"><i class="fa fa-file-o fa-2x"></i></a>&nbsp;
+                                            <a href="/reports/declaracao/{{$declaracao->id}}"><i class="fa fa-file-o fa-2x"></i></a>&nbsp;
                                                 <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>
                                             </td>
                                         </tr>

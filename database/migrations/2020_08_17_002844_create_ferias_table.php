@@ -21,6 +21,7 @@ class CreateFeriasTable extends Migration
             $table->date('data_saida');
             $table->string('estado');
             $table->bigInteger('ano');
+            $table->bigInteger('numero');
             $table->timestamps();
         });
 

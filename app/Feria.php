@@ -13,7 +13,8 @@ class Feria extends Model
         'data_entrada',
         'data_saida',
         'estado',
-        'ano'
+        'ano',
+        'numero'
     ];
 
     public function funcionario(){
