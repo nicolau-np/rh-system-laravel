@@ -17,14 +17,20 @@ class FolhaSalarial extends Model
         'sub_comunicacao',
         'rem_horas_extras',
         'rem_premios',
-        'rem_outros'
+        'rem_outros',
+        'irt',
+        'ss',
+        'outros',
+        'total'
     ];
 
-    public function funcionario(){
+    public function funcionario()
+    {
         return $this->belongsTo(Funcionario::class, 'id_funcionario', 'id');
     }
 
-    public function salario(){
+    public function salario()
+    {
         return $this->belongsTo(Salario::class, 'id_salario', 'id');
     }
 }

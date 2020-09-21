@@ -17,6 +17,7 @@ class CreateSalariosTable extends Migration
             $table->bigIncrements('id');
             $table->string('mes');
             $table->bigInteger('ano');
+            $table->bigInteger('dias_trabalho');
             $table->timestamps();
         });
     }

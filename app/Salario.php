@@ -10,7 +10,8 @@ class Salario extends Model
 
     protected $fillable = [
         'mes',
-        'ano'
+        'ano',
+        'dias_trabalho'
     ];
 
     public function folha_salarial(){

@@ -19,11 +19,16 @@ class CreateFolhaSalarialsTable extends Migration
             $table->bigInteger('id_funcionario')->unsigned()->index();
 
             $table->decimal('salario_base', 10,2);
+
             $table->decimal('sub_alimentacao', 10,2)->nullable();
             $table->decimal('sub_transporte', 10,2)->nullable();
             $table->decimal('sub_comunicacao', 10,2)->nullable();
 
-            
+            $table->decimal('irt', 10,2)->nullable();
+            $table->decimal('ss', 10,2)->nullable();
+            $table->decimal('outros', 10,2)->nullable();
+            $table->decimal('total', 10,2)->nullable();
+
             $table->decimal('rem_horas_extras', 10,2)->nullable();
             $table->decimal('rem_premios', 10,2)->nullable();
             $table->decimal('rem_outros', 10,2)->nullable();
