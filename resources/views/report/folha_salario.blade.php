@@ -1,5 +1,5 @@
 <?php 
-use App\Http\Controllers\ReportController;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,68 +30,99 @@ use App\Http\Controllers\ReportController;
                         <td rowspan="2">Categoria Ocupacional</td>
                         <td rowspan="2">Salário Base</td>
                         <td rowspan="2">Dias de Trabalho</td>
-                        <td rowspan="2">Salários P/ tempo de trabalho</td>
-                        <td colspan="3">Remunerações Adicionais</td>
+                        <td colspan="3">Subsídios</td>
                         <td rowspan="2">Remuneração Íliquida</td>
                         <td colspan="4">Descontos Oficiais</td>
-                      <td colspan="3">Subsídios</td>
                         <td rowspan="2">Líquido a Receber</td>
            </tr>
     
            <tr>
-                 <td>Horas Extras</td>
-                   <td>Prémios</td>
-                   <td>Outras</td>
-    
+             
+            <td>Alimentação</td>
+            <td>Transporte</td>
+            <td>Comunicação</td>
+
                     <td>I.R.T.</td>
                     <td>S.S.</td>
-                    <td>Outros</td>
+                    <td>Faltas</td>
                     <td>Total</td>
     
-                    <td>Alimentação</td>
-                    <td>Transporte</td>
-                    <td>Comunicação</td>
+                  
             </tr>
         </thead>
 
         <tbody>
             <?php 
-            $ss = 0;
-            $a = 0;
-            $salario_iliquido = 0;
+         $a = 0;
+         $salario_liquido = 0;
+
+         //variaveis de totais
+        $total_salario_base =0;
+
+        $total_sub_transporte =0;
+        $total_sub_alimentacao =0;
+        $total_sub_comunicacao =0;
+
+        $total_salario_iliquido =0;
+
+        $total_des_ss =0;
+        $total_des_irt =0;
+        $total_des_falta =0;
+        $total_des_total =0;
+
+        $total_salario_liquido =0;
+
+         //fim totais
+
             foreach ($getFolha_salarial as $salario) {
                 $a ++;
-                $salario_iliquido = $salario->salario_base;
-                $ss = $salario_iliquido*0.03;
+               $salario_liquido = ($salario->salario_iliquido - $salario->des_total);
+            
+               //calculos totais
+               $total_salario_base = $total_salario_base + $salario->salario_base;
 
-                $irt = ReportController::irt($salario_iliquido, $ss);
+               $total_sub_alimentacao = $total_sub_alimentacao + $salario->sub_alimentacao;
+               $total_sub_comunicacao = $total_sub_comunicacao + $salario->sub_comunicacao;
+               $total_sub_transporte = $total_sub_transporte + $salario->sub_transporte;
+
+               $total_salario_iliquido = $total_salario_iliquido + $salario->salario_iliquido;
+               
+               $total_des_ss = $total_des_ss + $salario->des_ss;
+               $total_des_irt = $total_des_irt + $salario->des_irt;
+               $total_des_falta = $total_des_falta + $salario->des_falta;
+               $total_des_total = $total_des_total + $salario->des_total;
+               
+               $total_salario_liquido = $total_salario_liquido + $salario_liquido;
+               //fim calculos
+            
             ?>
             <tr>
                 <td>{{$a}}</td>
             <td>{{$salario->funcionario->pessoa->nome}}</td>
             <td>{{$salario->funcionario->cargo->cargo}}</td>
             <td>{{number_format($salario->salario_base,2,',','.')}}</td>
-                <td>22</td>
-                <td></td>
+            <td>{{$salario->salario->dias_trabalho}}</td>
                 
-            <td>{{number_format($salario->rem_horas_extras,2,',','.')}}</td>
-                <td>{{number_format($salario->rem_premios,2,',','.')}}</td>
-                <td>{{number_format($salario->rem_outros,2,',','.')}}</td>
-
-            <td>{{number_format($salario_iliquido,2,',','.')}}</td>
-
-            <td>{{number_format($irt,2,',','.')}}</td>
-            <td>{{number_format($ss,2,',','.')}}</td>
-                <td></td>
-                <td></td>
-
             <td>{{number_format($salario->sub_alimentacao,2,',','.')}}</td>
             <td>{{number_format($salario->sub_transporte,2,',','.')}}</td>  
             <td>{{number_format($salario->sub_comunicacao,2,',','.')}}</td>
 
-                <td></td>
+            <td>{{number_format($salario->salario_iliquido,2,',','.')}}</td>
+
+            <td>{{number_format($salario->des_irt,2,',','.')}}</td>
+            <td>{{number_format($salario->des_ss,2,',','.')}}</td>
+            <td>{{number_format($salario->des_falta,2,',','.')}}</td>
+            <td>{{number_format($salario->des_total,2,',','.')}}</td>
+
+            <td>{{number_format($salario_liquido,2,',','.')}}</td>
             </tr>
         <?php } ?>
+        <tr>
+            <td colspan="3"><b>TOTAL</b></td>
+            <td>{{number_format($total_salario_base,2,',','.')}}</td>
+            <td></td>
+        <td>{{number_format($total_sub_transporte,2,',','.')}}</td>
+        </tr>
         </tbody>
     </table>
 </body>

@@ -52,24 +52,5 @@ public static $tabela_irt;
       
     }
 
-    public static function irt($salario_iliquido, $ss){
-        $ss_resto = ($salario_iliquido - $ss);
-        $percentagem = 0;
-        $irt = self::$tabela_irt->where('inicio','<=',$ss_resto)->where('ate','>=', $ss_resto)->first();
-        if($irt){
-            if($irt->inicio == 0){
-                  return 0;
-            }else{
-      
-              //calculo da percentagem nos 3 simples
-              $percentagem = $irt->taxa_percentagem/100;
-      
-              $irt_resultado = self::$calculos->irt($ss_resto, $irt->parcela_fixa, $percentagem, $irt->excesso);
-             return $irt_resultado;
-             
-            }
-            
-        }
-    
-    }
+
 }
