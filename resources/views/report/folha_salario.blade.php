@@ -9,9 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Folha de Salário</title>
     <style>
-        @page{
+       /* @page{
             margin: 0;
-        }
+        }*/
     </style>
 </head>
 <body>
@@ -117,11 +117,22 @@
             <td>{{number_format($salario_liquido,2,',','.')}}</td>
             </tr>
         <?php } ?>
-        <tr>
+        <tr style="color:red;">
             <td colspan="3"><b>TOTAL</b></td>
             <td>{{number_format($total_salario_base,2,',','.')}}</td>
             <td></td>
+        <td>{{number_format($total_sub_alimentacao,2,',','.')}}</td>
         <td>{{number_format($total_sub_transporte,2,',','.')}}</td>
+        <td>{{number_format($total_sub_comunicacao,2,',','.')}}</td>
+
+        <td>{{number_format($total_salario_iliquido,2,',','.')}}</td>
+
+        <td>{{number_format($total_des_irt,2,',','.')}}</td>
+        <td>{{number_format($total_des_ss,2,',','.')}}</td>
+        <td>{{number_format($total_des_falta,2,',','.')}}</td>
+        <td>{{number_format($total_des_total,2,',','.')}}</td>
+
+        <td>{{number_format($total_salario_liquido,2,',','.')}}</td>
         </tr>
         </tbody>
     </table>
