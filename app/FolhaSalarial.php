@@ -12,16 +12,17 @@ class FolhaSalarial extends Model
         'id_salario',
         'id_funcionario',
         'salario_base',
+        'total_faltas',
+        'salario_iliquido',
+
         'sub_alimentacao',
         'sub_transporte',
         'sub_comunicacao',
-        'rem_horas_extras',
-        'rem_premios',
-        'rem_outros',
-        'irt',
-        'ss',
-        'outros',
-        'total'
+
+        'des_irt',
+        'des_ss',
+        'des_falta',
+        'des_total'
     ];
 
     public function funcionario()

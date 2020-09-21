@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Falta;
 use App\FolhaSalarial;
 use App\Funcionario;
 use App\Negocio\Globais;
@@ -72,7 +73,9 @@ class SalarioController extends Controller
         $data['folha_salarial'] = [
             'id_funcionario' => null,
             'id_salario' => null,
-            'salario_base' => null
+            'salario_base' => null,
+            'total_faltas'=>null,
+            'salario_iliquido'=>null
         ];
 
         if (Salario::where('mes', $data['salario']['mes'])->where('ano', $data['salario']['ano'])->first()) {
@@ -86,8 +89,22 @@ class SalarioController extends Controller
                 $data['folha_salarial']['id_funcionario'] = $prioridade;
                 $funcionario = Funcionario::where('id', $data['folha_salarial']['id_funcionario'])->first();
                 $data['folha_salarial']['salario_base'] = $funcionario->salario_base;
+                $data['folha_salarial']['salario_iliquido'] = $funcionario->salario_base;
+                
 
+                $data['falta']=[
+                    'id_funcionario'=>$data['folha_salarial']['id_funcionario'],
+                    'mes'=>$data['salario']['mes'],
+                    'ano'=>$data['salario']['ano'],
+                    'estado'=>"on"
+                    
+                ];
+                
+                $faltas = Falta::where($data['falta'])->get();
+
+                $data['folha_salarial']['total_faltas'] = $faltas->count();
                 $folha_salarial = FolhaSalarial::create($data['folha_salarial']);
+                
             }
 
             if ($folha_salarial) {

@@ -79,8 +79,9 @@
                                             <th rowspan="2">Funcionário</th>
                                             <th rowspan="2">Categoria</th>
                                             <th rowspan="2">Salário Base</th>
-                                            <th colspan="3">Subcídios</th>
-                                            <th colspan="3">Remunerações Adicionais</th>
+                                            <th rowspan="2">Faltas</th>
+                                            <th colspan="3">Subsídios</th>
+                                            <th rowspan="2">Salário Ilíquido</th>
                                             <th colspan="4">Descontos</th>
                                         </tr>
                                         <tr>
@@ -88,13 +89,9 @@
                                             <th class="thbo">Transporte</th>
                                             <th class="thbo">Comunicação</th>
 
-                                            <th class="thbo">Horas Extras</th>
-                                            <th class="thbo">Prêmios</th>
-                                            <th class="thbo">Outros</th>
-
                                             <th class="thbo">I.R.T</th>
                                             <th class="thbo">S.S</th>
-                                            <th class="thbo">Outros</th>
+                                            <th class="thbo">Falta</th>
                                             <th class="thbo">Total</th>
                                         </tr>
                                     </thead>
@@ -107,19 +104,17 @@
                                             <td class="td_nome">{{$folha_salarios->funcionario->pessoa->nome}}</td>
                                             <td>{{$folha_salarios->funcionario->cargo->cargo}}</td>
                                             <td class="td_salario">{{number_format($folha_salarios->salario_base,2,',','.')}}</td>
-
+                                        <td>{{$folha_salarios->total_faltas}}</td>
                                             <td>{{Form::number('sub_alimentacao', $folha_salarios->sub_alimentacao, ['placeholder'=>"Akz", 'class'=>"sub_alimentacao txt_folha", 'data-coluna'=>"sub_alimentacao", 'data-id'=>$folha_salarios->id])}}</td>
                                             <td>{{Form::number('sub_transporte', $folha_salarios->sub_transporte, ['placeholder'=>"Akz", 'class'=>"sub_transporte txt_folha", 'data-coluna'=>"sub_transporte", 'data-id'=>$folha_salarios->id])}}</td>
                                             <td>{{Form::number('sub_comunicacao', $folha_salarios->sub_comunicacao, ['placeholder'=>"Akz", 'class'=>"sub_comunicacao txt_folha", 'data-coluna'=>"sub_comunicacao", 'data-id'=>$folha_salarios->id])}}</td>
+                                            <td>{{number_format($folha_salarios->salario_iliquido,2,',','.')}}</td>
+                                      
 
-                                        <td>{{Form::number('rem_horas_extras', $folha_salarios->rem_horas_extras, ['placeholder'=>"Akz", 'class'=>"rem_horas_extras txt_folha", 'data-coluna'=>"rem_horas_extras", 'data-id'=>$folha_salarios->id])}}</td>
-                                        <td>{{Form::number('rem_premios', $folha_salarios->rem_premios, ['placeholder'=>"Akz", 'class'=>"rem_premios txt_folha", 'data-coluna'=>"rem_premios", 'data-id'=>$folha_salarios->id])}}</td>
-                                        <td>{{Form::number('rem_outros', $folha_salarios->rem_outros, ['placeholder'=>"Akz", 'class'=>"rem_outros txt_folha", 'data-coluna'=>"rem_outros", 'data-id'=>$folha_salarios->id])}}</td>
-
-                                        <td>{{$folha_salarios->irt}}</td>
-                                        <td>{{$folha_salarios->ss}}</td>
-                                        <td>{{$folha_salarios->outros}}</td>
-                                        <td>{{$folha_salarios->total}}</td>
+                                        <td>{{$folha_salarios->des_irt}}</td>
+                                        <td>{{$folha_salarios->des_ss}}</td>
+                                        <td>{{$folha_salarios->des_falta}}</td>
+                                        <td>{{$folha_salarios->des_total}}</td>
 
                                         </tr>
                                        @endforeach
@@ -180,6 +175,7 @@
             }
         });
 
+
         $('.sub_comunicacao').on("keypress", function (e) {
             if (e.which == 13) {
                 var valor = $(this).val();
@@ -199,65 +195,7 @@
         });
         //fim
 
-        //remuneracoes
-        $('.rem_horas_extras').on("keypress", function (e) {
-            if (e.which == 13) {
-                var valor = $(this).val();
-                var id_folhaSalarial = $(this).data('id');
-                var coluna = $(this).data('coluna');
-               if (valor != "" && valor >= 0) {
-                    var pagina = "{{route('updateFolhaSalarial')}}";
-                   var retorno = update_salario(pagina, id_folhaSalarial, coluna, valor);
-                    if (retorno == true) {
-                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
-                    }
-                } else {
-                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
-                }
-              
-            }
-        });
-
-        $('.rem_premios').on("keypress", function (e) {
-            if (e.which == 13) {
-                var valor = $(this).val();
-                var id_folhaSalarial = $(this).data('id');
-                var coluna = $(this).data('coluna');
-               if (valor != "" && valor >= 0) {
-                    var pagina = "{{route('updateFolhaSalarial')}}";
-                   var retorno = update_salario(pagina, id_folhaSalarial, coluna, valor);
-                    if (retorno == true) {
-                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
-                    }
-                } else {
-                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
-                }
-              
-            }
-        });
-
-
-        $('.rem_outros').on("keypress", function (e) {
-            if (e.which == 13) {
-                var valor = $(this).val();
-                var id_folhaSalarial = $(this).data('id');
-                var coluna = $(this).data('coluna');
-               if (valor != "" && valor >= 0) {
-                    var pagina = "{{route('updateFolhaSalarial')}}";
-                   var retorno = update_salario(pagina, id_folhaSalarial, coluna, valor);
-                    if (retorno == true) {
-                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
-                    }
-                } else {
-                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
-                }
-              
-            }
-        });
         
-        
-        //fim
-
         function update_salario(pagina, id_folhaSalarial, coluna, valor) {
             $.ajax({
                 method: "post",
