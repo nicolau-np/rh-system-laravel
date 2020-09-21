@@ -113,7 +113,7 @@
 
                                         <td>{{$folha_salarios->des_irt}}</td>
                                         <td>{{number_format($folha_salarios->des_ss,2,',','.')}}</td>
-                                        <td>{{$folha_salarios->des_falta}}</td>
+                                        <td>{{number_format($folha_salarios->des_falta,2,',','.')}}</td>
                                         <td>{{$folha_salarios->des_total}}</td>
 
                                         </tr>

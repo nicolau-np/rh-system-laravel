@@ -8,6 +8,7 @@ class Calculos
     protected $inss_desconto;
     protected $inss_resto;
     protected $irt;
+    protected $falta;
 
     public function inss_desconto($salario_base)
     {
@@ -29,5 +30,10 @@ class Calculos
         $this->irt = $parcela_fixa + $percentagem * ($total);
 
         return $this->irt;
+    }
+
+    public function faltas($numero_falta){
+        $this->falta = $numero_falta * 1000;
+        return $this->falta;
     }
 }

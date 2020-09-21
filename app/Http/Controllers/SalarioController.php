@@ -158,9 +158,11 @@ class SalarioController extends Controller
            $folha = FolhaSalarial::find($request->id_folhaSalarial);
            $soma_salarioIliquido = ($folha->salario_base + $folha->sub_alimentacao + $folha->sub_transporte + $folha->sub_comunicacao);
            $ss = $this->calculos->inss_desconto($soma_salarioIliquido);
+           $desconto_falta = $this->calculos->faltas($folha->total_faltas);
            $data['salarioIliquido'] = [
                 'salario_iliquido'=>$soma_salarioIliquido,
-                'des_ss'=>$ss
+                'des_ss'=>$ss,
+                'des_falta'=>$desconto_falta
            ];
            //alterar salario iliquido
            FolhaSalarial::find($request->id_folhaSalarial)->update($data['salarioIliquido']);
