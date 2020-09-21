@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Falta;
 use App\FolhaSalarial;
 use App\Funcionario;
+use App\Negocio\Calculos;
 use App\Negocio\Globais;
 use App\Salario;
 use Illuminate\Http\Request;
@@ -12,10 +13,12 @@ use Illuminate\Http\Request;
 class SalarioController extends Controller
 {
     public static $globais;
+    protected $calculos;
 
-    public function __construct(Globais $globais)
+    public function __construct(Globais $globais, Calculos $calculos)
     {
         self::$globais = $globais;
+        $this->calculos = $calculos;
     }
 
     public function index()
@@ -145,11 +148,26 @@ class SalarioController extends Controller
     public function updateFolhaSalarial(Request $request)
     {
         $coluna = $request->coluna;
-        $data = [
+        $data['subsidio'] = [
             "$coluna" => $request->valor
+            
         ];
-
-        $folha_salarial = FolhaSalarial::find($request->id_folhaSalarial)->update($data);
-        return response()->json($data);
+        //alterar subsidios
+        if(FolhaSalarial::find($request->id_folhaSalarial)->update($data['subsidio'])){
+            
+           $folha = FolhaSalarial::find($request->id_folhaSalarial);
+           $soma_salarioIliquido = ($folha->salario_base + $folha->sub_alimentacao + $folha->sub_transporte + $folha->sub_comunicacao);
+           $ss = $this->calculos->inss_desconto($soma_salarioIliquido);
+           $data['salarioIliquido'] = [
+                'salario_iliquido'=>$soma_salarioIliquido,
+                'des_ss'=>$ss
+           ];
+           //alterar salario iliquido
+           FolhaSalarial::find($request->id_folhaSalarial)->update($data['salarioIliquido']);
+           
+           
+           return response()->json($data['salarioIliquido']);
+        }
+       
     }
 }
