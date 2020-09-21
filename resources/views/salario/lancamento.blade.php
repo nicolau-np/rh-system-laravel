@@ -81,7 +81,7 @@
                                             <th rowspan="2">Salário Base</th>
                                             <th colspan="3">Subcídios</th>
                                             <th colspan="3">Remunerações Adicionais</th>
-                                        
+                                            <th colspan="4">Descontos</th>
                                         </tr>
                                         <tr>
                                             <th class="thbo">Alimentação</th>
@@ -91,6 +91,11 @@
                                             <th class="thbo">Horas Extras</th>
                                             <th class="thbo">Prêmios</th>
                                             <th class="thbo">Outros</th>
+
+                                            <th class="thbo">I.R.T</th>
+                                            <th class="thbo">S.S</th>
+                                            <th class="thbo">Outros</th>
+                                            <th class="thbo">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -110,6 +115,11 @@
                                         <td>{{Form::number('rem_horas_extras', $folha_salarios->rem_horas_extras, ['placeholder'=>"Akz", 'class'=>"rem_horas_extras txt_folha", 'data-coluna'=>"rem_horas_extras", 'data-id'=>$folha_salarios->id])}}</td>
                                         <td>{{Form::number('rem_premios', $folha_salarios->rem_premios, ['placeholder'=>"Akz", 'class'=>"rem_premios txt_folha", 'data-coluna'=>"rem_premios", 'data-id'=>$folha_salarios->id])}}</td>
                                         <td>{{Form::number('rem_outros', $folha_salarios->rem_outros, ['placeholder'=>"Akz", 'class'=>"rem_outros txt_folha", 'data-coluna'=>"rem_outros", 'data-id'=>$folha_salarios->id])}}</td>
+
+                                        <td>{{$folha_salarios->irt}}</td>
+                                        <td>{{$folha_salarios->ss}}</td>
+                                        <td>{{$folha_salarios->outros}}</td>
+                                        <td>{{$folha_salarios->total}}</td>
 
                                         </tr>
                                        @endforeach
