@@ -8,6 +8,7 @@ use App\Funcionario;
 use App\Negocio\Calculos;
 use App\Negocio\Globais;
 use App\Salario;
+use App\TabelaIRT;
 use Illuminate\Http\Request;
 
 class SalarioController extends Controller
@@ -145,7 +146,7 @@ class SalarioController extends Controller
         return view('salario.lancamento', $data);
     }
 
-    public function updateFolhaSalarial(Request $request)
+    public function updateFolhaSalarial(Request $request) //calculos
     {
         $coluna = $request->coluna;
         $data['subsidio'] = [
@@ -155,20 +156,45 @@ class SalarioController extends Controller
         //alterar subsidios
         if(FolhaSalarial::find($request->id_folhaSalarial)->update($data['subsidio'])){
             
+            //alterar salario iliquido
            $folha = FolhaSalarial::find($request->id_folhaSalarial);
            $soma_salarioIliquido = ($folha->salario_base + $folha->sub_alimentacao + $folha->sub_transporte + $folha->sub_comunicacao);
            $ss = $this->calculos->inss_desconto($soma_salarioIliquido);
            $desconto_falta = $this->calculos->faltas($folha->total_faltas);
+
+            //calculo irt
+            $tabela_irt = TabelaIRT::where('inicio', '<=', $folha->salario_base)->where('ate', '>=', $folha->salario_base)->first();
+            
+            if(!$tabela_irt){
+                $irt = 0;
+            }else{
+                $percentagem = $tabela_irt->taxa_percentagem/100;
+                $irt = $this->calculos->irt($folha->salario_base, $tabela_irt->excesso, $ss, $percentagem, $tabela_irt->parcela_fixa);
+            }
+            //fim
+
+
            $data['salarioIliquido'] = [
                 'salario_iliquido'=>$soma_salarioIliquido,
                 'des_ss'=>$ss,
-                'des_falta'=>$desconto_falta
+                'des_falta'=>$desconto_falta,
+                'des_irt'=>$irt
            ];
-           //alterar salario iliquido
+          
            FolhaSalarial::find($request->id_folhaSalarial)->update($data['salarioIliquido']);
+           //fim
            
+           //desconto total
+           $des_total = FolhaSalarial::find($request->id_folhaSalarial);
+           $desconto_total = ($des_total->des_irt + $des_total->des_ss + $des_total->des_falta);
            
-           return response()->json($data['salarioIliquido']);
+           $data['des_total'] = [
+                'des_total'=>$desconto_total
+           ];
+
+           FolhaSalarial::find($request->id_folhaSalarial)->update($data['des_total']);
+           //fim
+           return response()->json($data['des_total']);
         }
        
     }

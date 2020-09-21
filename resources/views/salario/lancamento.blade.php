@@ -111,10 +111,10 @@
                                             <td>{{number_format($folha_salarios->salario_iliquido,2,',','.')}}</td>
                                       
 
-                                        <td>{{$folha_salarios->des_irt}}</td>
+                                        <td>{{number_format($folha_salarios->des_irt,2,',','.')}}</td>
                                         <td>{{number_format($folha_salarios->des_ss,2,',','.')}}</td>
                                         <td>{{number_format($folha_salarios->des_falta,2,',','.')}}</td>
-                                        <td>{{$folha_salarios->des_total}}</td>
+                                        <td>{{number_format($folha_salarios->des_total,2,',','.')}}</td>
 
                                         </tr>
                                        @endforeach

@@ -39,7 +39,7 @@ class TabelaIRTSeeder extends Seeder
                 'excesso'=>100000
             ),array(
                 'escalao'=>"4º Escalão",
-                'inicio'=> 1500001,
+                'inicio'=> 150001,
                 'ate'=>200000,
                 'parcela_fixa'=>12250,
                 'taxa_percentagem'=> 16,
