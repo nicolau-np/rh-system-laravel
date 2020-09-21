@@ -59,12 +59,14 @@ class SalarioController extends Controller
         $request->validate([
             'prioridade' => ['required'],
             'mes' => ['required', 'Integer'],
-            'ano' => ['required', 'Integer']
+            'ano' => ['required', 'Integer'],
+            'dias_trabalho'=>['required', 'Integer']
         ]);
 
         $data['salario'] = [
             'mes' => $request->mes,
-            'ano' => $request->ano
+            'ano' => $request->ano,
+            'dias_trabalho'=>$request->dias_trabalho
         ];
 
         $data['folha_salarial'] = [

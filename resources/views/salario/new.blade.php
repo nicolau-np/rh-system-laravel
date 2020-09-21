@@ -124,6 +124,15 @@ $.ajax({
                                 @endif
                             </div>
 
+                            
+                            <div class="mb-md hidden-lg hidden-xl"></div>
+                            <div class="col-lg-2">
+                                {{Form::label('dias_trabalho', "Dias de Trabalho")}} <span class="text-danger">*</span>
+                                {{Form::number('dias_trabalho', null, ['class'=>'form-control input-sm', 'placeholder'=>'Dias de Trabalho'])}}
+                                @if($errors->has('dias_trabalho'))
+                                <span class="text-danger">{{$errors->first('dias_trabalho')}}</span>
+                                @endif
+                            </div>
                         </div>
 
 <div class="row form-group">
