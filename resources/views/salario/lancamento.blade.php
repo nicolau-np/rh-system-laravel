@@ -79,7 +79,7 @@
                                             <th rowspan="2">Funcionário</th>
                                             <th rowspan="2">Categoria</th>
                                             <th rowspan="2">Salário Base</th>
-                                            <th rowspan="2">Faltas</th>
+                                            <th rowspan="2">Nº Faltas</th>
                                             <th colspan="3">Subsídios</th>
                                             <th rowspan="2">Salário Ilíquido</th>
                                             <th colspan="4">Descontos</th>
