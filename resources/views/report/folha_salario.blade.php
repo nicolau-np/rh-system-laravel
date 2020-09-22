@@ -12,6 +12,8 @@
      @page{
            font-family: Arial, Helvetica, sans-serif;
            font-size: 12px;
+           margin-left: 2%;
+           margin-right: 2%;
         }
 
 
@@ -48,6 +50,13 @@
     margin-left: 35%;
 }
 
+.tb{
+    width: 23%;
+}
+
+.tdtb0{
+    text-align: center;
+}
     </style>
 </head>
 <body>
@@ -76,18 +85,18 @@
     </div> <br /><br />
    
 
-            <table border=1>
+            <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000">
                 <thead>
                     <tr>
-                    <td rowspan="2" width="25px">Nº</td>
-                        <td rowspan="2">Beneficiário</td>
-                        <td rowspan="2">Categoria Ocupacional</td>
-                        <td rowspan="2">Salário Base</td>
-                        <td rowspan="2">Dias de Trabalho</td>
-                        <td colspan="3">Subsídios</td>
-                        <td rowspan="2">Remuneração Iliquida</td>
-                        <td colspan="4">Descontos Oficiais</td>
-                        <td rowspan="2">Liquido a Receber</td>
+                    <td rowspan="2" width="25px" class="tdtb0">Nº</td>
+                        <td rowspan="2" class="tdtb0">Beneficiário</td>
+                        <td rowspan="2" class="tdtb0">Categoria Ocupacional</td>
+                        <td rowspan="2" class="tdtb0">Salário Base</td>
+                        <td rowspan="2" class="tdtb0">Dias de Trabalho</td>
+                        <td colspan="3" class="tdtb0">Subsídios</td>
+                        <td rowspan="2" class="tdtb0">Remuneração Iliquida</td>
+                        <td colspan="4" class="tdtb0">Descontos Oficiais</td>
+                        <td rowspan="2" class="tdtb0">Liquido a Receber</td>
            </tr>
     
            <tr>
@@ -194,7 +203,7 @@
     <br/>
     <br/>
     <div class="tabela">
-       <table border="1">
+       <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" class="tb">
       
            <tr>
                <td>S. Iliquido</td>
