@@ -50,7 +50,9 @@ protected $globais;
 
         $data = [
             'getFolha_salarial'=>$folha_salarial,
-            'getMes'=>$mes
+            'getMes'=>$mes,
+            'getMes2'=>$folha->mes,
+            'getAno'=>$folha->ano
         ];
        
       $pdf = PDF::loadView("report.folha_salario", $data)->setPaper('A4', 'landscape');
