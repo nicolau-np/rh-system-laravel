@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Declaracao;
+use App\Feria;
 use App\FolhaSalarial;
 use Illuminate\Http\Request;
 use PDF;
@@ -42,7 +43,16 @@ protected $globais;
 
     public function guia_feria($id)
     {
-        echo "guia ferias";
+        $guia_ferias = Feria::find($id);
+        if(!$guia_ferias){
+            return back()->with(['error'=>'Nao encontrou']);
+        }
+        $data = [
+            'getFeria'=>$guia_ferias
+        ];
+        $pdf = PDF::loadView("report.guia_ferias", $data)->setPaper('A4', 'normal');
+
+        return $pdf->stream('declaracao' . date('Y') . '.pdf');
     }
 
     public function guia_medica($id){
