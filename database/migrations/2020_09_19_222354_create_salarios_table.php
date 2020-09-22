@@ -18,6 +18,7 @@ class CreateSalariosTable extends Migration
             $table->string('mes');
             $table->bigInteger('ano');
             $table->bigInteger('dias_trabalho');
+            $table->bigInteger('entidade_patronal');
             $table->timestamps();
         });
     }

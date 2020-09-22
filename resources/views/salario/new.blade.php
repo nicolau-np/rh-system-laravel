@@ -133,6 +133,15 @@ $.ajax({
                                 <span class="text-danger">{{$errors->first('dias_trabalho')}}</span>
                                 @endif
                             </div>
+
+                            <div class="col-lg-3">
+                                {{Form::label('entidade_patronal', "Entidade Patronal %")}} <span class="text-danger">*</span>
+                                {{Form::number('entidade_patronal', null, ['class'=>'form-control input-sm', 'placeholder'=>'Entidade Patronal %'])}}
+                                @if($errors->has('entidade_patronal'))
+                                <span class="text-danger">{{$errors->first('entidade_patronal')}}</span>
+                                @endif
+                            </div>
+                            
                         </div>
 
 <div class="row form-group">
