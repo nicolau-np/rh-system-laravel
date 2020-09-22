@@ -7,6 +7,7 @@ use App\FolhaSalarial;
 use Illuminate\Http\Request;
 use PDF;
 use App\Funcionario;
+use App\GuiaMedica;
 use App\Negocio\Globais;
 use App\Salario;
 
@@ -45,7 +46,16 @@ protected $globais;
     }
 
     public function guia_medica($id){
-        echo "guia medica";
+        $guia_medica = GuiaMedica::find($id);
+        if(!$guia_medica){
+            return back()->with(['error'=>'Nao encontrou']);
+        }
+        $data = [
+            'getGuia_medica'=>$guia_medica
+        ];
+        $pdf = PDF::loadView("report.guia_medica", $data)->setPaper('A4', 'normal');
+
+        return $pdf->stream('declaracao' . date('Y') . '.pdf');
     }
 
     public function folha_salario($id)
