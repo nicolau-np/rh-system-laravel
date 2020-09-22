@@ -222,10 +222,10 @@
               <td  class="tdsub">{{number_format($total_des_ss,2,',','.')}}</td>
            </tr>
            <tr>
-            <td>Empresa 8%</td>
+           <td>Empresa {{$getEntidade_patronal}}%</td>
              <td  class="tdsub">
                  <?php 
-                    $inns8 = $total_salario_iliquido*(8/100);
+                    $inns8 = $total_salario_iliquido*($getEntidade_patronal/100);
                  ?>
                  {{number_format($inns8,2,',','.')}}
              </td>
