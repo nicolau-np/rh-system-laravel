@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Declaracao;
 use App\FolhaSalarial;
 use Illuminate\Http\Request;
 use PDF;
@@ -21,7 +22,16 @@ protected $globais;
 
     public function declaracao($id)
     {
-        echo "Declaracao";
+        $declaraco = Declaracao::find($id);
+        if(!$declaraco){
+            return back()->with(['error'=>'Nao encontrou']);
+        }
+        $data = [
+            'getDeclaracao'=>$declaraco
+        ];
+        $pdf = PDF::loadView("report.declaracao", $data)->setPaper('A4', 'normal');
+
+        return $pdf->stream('declaracao' . date('Y') . '.pdf');
     }
 
     public function carta_recomend($id)
