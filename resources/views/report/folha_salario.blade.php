@@ -12,6 +12,30 @@
        /* @page{
             margin: 0;
         }*/
+
+        .rodape1{
+    display: block;
+    float: left;
+}
+            .rodape2{
+                display: block;
+                float: center;
+                margin-left: 43%;
+            }
+            .rodape3{
+                display: block;
+                float: right;
+            }
+            .footer{
+                margin-left: 26%;
+                margin-right: 2%;
+                float: center;
+            }
+            .tabela{
+                display: block;
+                float: left;
+            }
+
     </style>
 </head>
 <body>
@@ -31,9 +55,9 @@
                         <td rowspan="2">Salário Base</td>
                         <td rowspan="2">Dias de Trabalho</td>
                         <td colspan="3">Subsídios</td>
-                        <td rowspan="2">Remuneração Íliquida</td>
+                        <td rowspan="2">Remuneração Iliquida</td>
                         <td colspan="4">Descontos Oficiais</td>
-                        <td rowspan="2">Líquido a Receber</td>
+                        <td rowspan="2">Liquido a Receber</td>
            </tr>
     
            <tr>
@@ -136,5 +160,53 @@
         </tr>
         </tbody>
     </table>
+
+    <br/>
+    <br/>
+    <div class="tabela">
+       <table border="1">
+      
+           <tr>
+               <td>S. Iliquido</td>
+               <td>{{number_format($total_salario_base,2,',','.')}}</td>
+           </tr>
+           <tr>
+               <td>INSS 3%</td>
+              <td>{{number_format($total_des_ss,2,',','.')}}</td>
+           </tr>
+           <tr>
+            <td>Empresa 8%</td>
+             <td>
+                 <?php 
+                    $inns8 = $total_salario_iliquido*(8/100);
+                 ?>
+                 {{number_format($inns8,2,',','.')}}
+             </td>
+           </tr>
+           <tr>
+            <td>IRT</td>
+             <td>{{number_format($total_des_irt,2,',','.')}}</td>
+           </tr>
+           <tr>
+            <td>S. Liquido</td>
+             <td>{{number_format($total_salario_liquido,2,',','.')}}</td>
+           </tr>
+       </table>
+    </div>
+    <div class="footer">
+        
+        <div class="rodape2">
+            Categoria: __________________________<br/><br/>
+            Categoria: __________________________
+        </div>
+        <div class="rodape1">
+            Elaborado Por: _______________________<br/><br/>
+            Conferido Por: _______________________
+        </div>
+        <div class="rodape3">
+            Data: {{date('d-m-Y')}} <br/> <br/>
+            Data: {{date('d-m-Y')}}
+        </div>
+    </div>
 </body>
 </html>
