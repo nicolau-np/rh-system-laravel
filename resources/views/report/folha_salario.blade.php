@@ -171,7 +171,7 @@
                <td>{{number_format($total_salario_base,2,',','.')}}</td>
            </tr>
            <tr>
-               <td>INSS 3%</td>
+               <td>S.S. 3%</td>
               <td>{{number_format($total_des_ss,2,',','.')}}</td>
            </tr>
            <tr>
@@ -184,7 +184,7 @@
              </td>
            </tr>
            <tr>
-            <td>IRT</td>
+            <td>I.R.T.</td>
              <td>{{number_format($total_des_irt,2,',','.')}}</td>
            </tr>
            <tr>
