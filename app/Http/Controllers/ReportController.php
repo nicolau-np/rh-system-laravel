@@ -5,18 +5,17 @@ namespace App\Http\Controllers;
 use App\FolhaSalarial;
 use Illuminate\Http\Request;
 use PDF;
-use App\Negocio\Calculos;
 use App\Funcionario;
-use App\TabelaIRT;
+use App\Negocio\Globais;
+use App\Salario;
 
 class ReportController extends Controller
 {
-public static $calculos;
-public static $tabela_irt;
-    public function __construct(Calculos $calculos, TabelaIRT $tabela_irt)
+
+protected $globais;
+    public function __construct(Globais $globais)
     {
-        self::$calculos = $calculos;
-        self::$tabela_irt = $tabela_irt;
+      $this->globais = $globais;
     }
 
 
@@ -41,9 +40,17 @@ public static $tabela_irt;
 
     public function folha_salario($id)
     {
+        $folha = Salario::where('id', $id)->first();
+        if(!$folha){
+            return back()->with(['error'=>"Nao encontrou"]);
+        }
         $folha_salarial = FolhaSalarial::where('id_salario', $id)->get();
+        $this->globais->setMes($folha->mes);
+        $mes = $this->globais->converterMes();
+
         $data = [
-            'getFolha_salarial'=>$folha_salarial
+            'getFolha_salarial'=>$folha_salarial,
+            'getMes'=>$mes
         ];
        
       $pdf = PDF::loadView("report.folha_salario", $data)->setPaper('A4', 'landscape');

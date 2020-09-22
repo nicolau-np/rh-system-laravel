@@ -9,9 +9,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Folha de Salário</title>
     <style>
-       /* @page{
-            margin: 0;
-        }*/
+     @page{
+           font-family: Arial, Helvetica, sans-serif;
+           font-size: 12px;
+        }
+
 
         .rodape1{
     display: block;
@@ -39,14 +41,14 @@
     </style>
 </head>
 <body>
-    Folha de Remunerações <br />
+    <h2>Folha de Remunerações</h2> <br />
 
 
-    Nome da Empresa: nome_da_empresa<br />
-    Mês de Referencia: <br />
-    NIF: nif_empresa<br /><br />
+    Nome da Empresa: Evoluyr Tech<br />
+Mês de Referencia: {{$getMes}}<br />
+    NIF: 5000508942<br /><br />
 
-            <table border=2 style="font-family:'arial'; font-size:12px;">
+            <table border=2>
                 <thead>
                     <tr>
                     <td rowspan="2" width="25px">Nº</td>
