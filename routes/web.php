@@ -71,6 +71,13 @@ Route::group(['prefix' => '/guia_medica', 'middleware'=>"auth"], function () {
     Route::put('/store/{id}', 'GuiaMedicaController@store');
 });
 
+Route::group(['prefix' => '/departamentos', 'middleware'=>"auth"], function () {
+    Route::get('/list', "DepartamentoController@index");
+    Route::get('/new', "DepartamentoController@create");
+    Route::post('/store', "DepartamentoController@store");
+    Route::get('/add_cargo/{id}', "DepartamentoController@show");
+});
+
 Route::post('/login', "UsuarioController@login");
 Route::post('/getMunicipio', "FuncionarioController@getMunicipio")->name('getMunicipio');
 

@@ -16,4 +16,8 @@ class Cargo extends Model
     public function funcionario(){
         return $this->hasOne(Funcionario::class, 'id_cargo', 'id');
     }
+
+    public function dep_cargo(){
+        return $this->hasMany(DepartamentoCategoria::class, 'id_categoria', 'id');
+    }
 }

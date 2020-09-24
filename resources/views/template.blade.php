@@ -313,6 +313,13 @@
 									</a>
 								</li>
 
+								<li class="@if($menu=='Departamentos') nav-active @endif">
+									<a href="/departamentos/list">
+										<i class="fa fa-tasks" aria-hidden="true"></i>
+										<span>Departamentos</span>
+									</a>
+								</li>
+
 								<li class="nav-parent">
 									<a>
 										<i class="fa fa-table" aria-hidden="true"></i>
@@ -373,7 +380,7 @@
 								</li>
 								<li class="nav-parent">
 									<a>
-										<i class="fa fa-tasks" aria-hidden="true"></i>
+										<i class="fa fa-cogs" aria-hidden="true"></i>
 										<span>Configurações</span>
 									</a>
 									<ul class="nav nav-children">
