@@ -68,7 +68,7 @@ text-align: center;
 <br/>
 <br/>
 <div class="subrodape">
-Lubango aos {{date('d')}} de {{$getDeclaracao->mes}} de {{$getDeclaracao->ano}}
+Lubango aos {{date('d')}} de {{$getMes}} de {{date('Y')}}
 </div>
 <br/>
 <br/>

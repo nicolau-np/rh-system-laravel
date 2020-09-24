@@ -24,12 +24,15 @@ protected $globais;
 
     public function declaracao($id)
     {
+        $this->globais->setMes(date('m'));
+        $mes = $this->globais->converterMes();
         $declaraco = Declaracao::find($id);
         if(!$declaraco){
             return back()->with(['error'=>'Nao encontrou']);
         }
         $data = [
-            'getDeclaracao'=>$declaraco
+            'getDeclaracao'=>$declaraco,
+            'getMes'=>$mes
         ];
         $pdf = PDF::loadView("report.declaracao", $data)->setPaper('A4', 'normal');
 
@@ -43,12 +46,15 @@ protected $globais;
 
     public function guia_feria($id)
     {
+        $this->globais->setMes(date('m'));
+        $mes = $this->globais->converterMes();
         $guia_ferias = Feria::find($id);
         if(!$guia_ferias){
             return back()->with(['error'=>'Nao encontrou']);
         }
         $data = [
-            'getFeria'=>$guia_ferias
+            'getFeria'=>$guia_ferias,
+            'getMes'=>$mes
         ];
         $pdf = PDF::loadView("report.guia_ferias", $data)->setPaper('A4', 'normal');
 
@@ -56,12 +62,15 @@ protected $globais;
     }
 
     public function guia_medica($id){
+        $this->globais->setMes(date('m'));
+        $mes = $this->globais->converterMes();
         $guia_medica = GuiaMedica::find($id);
         if(!$guia_medica){
             return back()->with(['error'=>'Nao encontrou']);
         }
         $data = [
-            'getGuia_medica'=>$guia_medica
+            'getGuia_medica'=>$guia_medica,
+            'getMes'=>$mes
         ];
         $pdf = PDF::loadView("report.guia_medica", $data)->setPaper('A4', 'normal');
 

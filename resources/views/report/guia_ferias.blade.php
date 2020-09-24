@@ -69,7 +69,7 @@ text-align: center;
 <br/>
 <br/>
 <div class="subrodape">
-Lubango aos {{date('d')}} de {{$getFeria->mes}} de {{$getFeria->ano}}
+Lubango aos {{date('d')}} de {{$getMes}} de {{date('Y')}}
 </div>
 <br/>
 <br/>
