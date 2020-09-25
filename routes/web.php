@@ -35,6 +35,7 @@ Route::group(['prefix'=>'/usuarios', 'middleware'=>'auth'], function(){
     Route::get('/list', "UsuarioController@index");
     Route::get('/new/{id_pessoa}', "UsuarioController@create");
     Route::post('/update_perfil', "UsuarioController@update_perfil");
+    Route::put('/store/{id_pessoa}', "UsuarioController@store");
 });
 
 Route::group(['prefix' => '/ferias', 'middleware'=>'auth'], function () {

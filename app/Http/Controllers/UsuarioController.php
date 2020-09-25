@@ -42,13 +42,19 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id_pessoa)
     {
+        $pessoa = Pessoa::find($id_pessoa);
+        if(!$pessoa){
+            return back()->with(['error'=>"Nao encontrou pessoa"]);
+        }
+
         $data = [
             'titulo' => "Usuários",
             'menu' => "Usuários",
             'submenu' => "Novo",
-            'tipo' => "form"
+            'tipo' => "form",
+            'getPessoa'=>$pessoa
         ];
         return view('usuario.new', $data);
     }
@@ -59,9 +65,9 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+       echo "hello";
     }
 
     /**
@@ -145,7 +151,6 @@ class UsuarioController extends Controller
 
     public function perfil()
     {
-        //echo Auth::user()->pessoa->id;
         $id = Auth::user()->pessoa->id;
         $perfil = $this->usuarios->where('id_pessoa', $id)->first();
         $data = [
