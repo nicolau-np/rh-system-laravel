@@ -6,6 +6,7 @@ use App\Pessoa;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -67,7 +68,29 @@ class UsuarioController extends Controller
      */
     public function store(Request $request, $id)
     {
-       echo "hello";
+        $pessoa = Pessoa::find($id);
+        if(!$pessoa){
+            return back()->with(['error'=>"Nao encontrou pessoa"]);
+        }
+
+      $request->validate([
+          'nome'=>['required', 'string'],
+          'estado'=>['required', 'string'],
+          'email'=>['required', 'string', 'unique:usuarios,email'],
+          'acesso'=>['required', 'string'],
+      ]);
+
+      $data = [
+        'id_pessoa'=>$id, 
+        'email'=>$request->email, 
+        'password'=>Hash::make('olamundo2015'), 
+        'estado'=>$request->estado, 
+        'acesso'=>$request->acesso
+      ];
+
+      if(User::create($data)){
+        return back()->with(['success'=>"Feito com sucesso"]);
+      }
     }
 
     /**
