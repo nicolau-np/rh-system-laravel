@@ -33,7 +33,7 @@ Route::group(['prefix'=>'/funcionarios', 'middleware'=>'auth'], function(){
 Route::group(['prefix'=>'/usuarios', 'middleware'=>'auth'], function(){
     Route::get('/perfil', "UsuarioController@perfil");
     Route::get('/list', "UsuarioController@index");
-    Route::get('/new', "UsuarioController@create");
+    Route::get('/new/{id_pessoa}', "UsuarioController@create");
     Route::post('/update_perfil', "UsuarioController@update_perfil");
 });
 
@@ -76,6 +76,7 @@ Route::group(['prefix' => '/departamentos', 'middleware'=>"auth"], function () {
     Route::get('/new', "DepartamentoController@create");
     Route::post('/store', "DepartamentoController@store");
     Route::get('/add_cargo/{id}', "DepartamentoController@show");
+    Route::put('/store_depCargo/{id}', "DepartamentoController@store_depCargo");
 });
 
 Route::post('/login', "UsuarioController@login");

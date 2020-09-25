@@ -79,7 +79,7 @@ class DepartamentoController extends Controller
             return back()->with(['error'=>"Nao encontrou departamento"]);
         }
 
-        $dep_cargo = DepartamentoCategoria::where('id_departamento', $id)->paginate(4);
+       $dep_cargo = DepartamentoCategoria::where('id_departamento', $id)->get();
         $cargos = Cargo::pluck('cargo', 'id');
         $data = [
             'titulo' => "Departamentos",
@@ -125,5 +125,27 @@ class DepartamentoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function store_depCargo(Request $request, $id){
+       $departamento = Departamento::find($id);
+        if(!$departamento){
+            return back()->with(['error'=>"Nao encontrou departamento"]);
+        }
+
+        $request->validate([
+            'nome'=>['required', 'string'],
+            'cargo'=>['required', 'Integer']
+        ]);
+
+        $data = [
+            'id_departamento'=>$id,
+            'id_categoria'=>$request->cargo,
+            'descricao'=>$request->descricao
+        ];
+
+        if(DepartamentoCategoria::create($data)){
+            return back()->with(['success'=>"Feito com sucesso"]);
+        }
     }
 }

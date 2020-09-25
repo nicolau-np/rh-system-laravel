@@ -81,6 +81,7 @@
                                                 <a href="/funcionarios/show/{{$funcionarios->id}}"><i class="fa fa-eye fa-2x"></i></a>&nbsp;
                                                 <a href="/funcionarios/edit/{{$funcionarios->id}}"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
                                                 <a href="/funcionarios/docs/{{$funcionarios->id}}"><i class="fa fa-briefcase fa-2x"></i></a>&nbsp;
+                                                <a href="/usuarios/new/{{$funcionarios->pessoa->id}}"><i class="fa fa-lock fa-2x"></i></a>&nbsp;
                                                 <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
                                             </td>
                                         </tr>

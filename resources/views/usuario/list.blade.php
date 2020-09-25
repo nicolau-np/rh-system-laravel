@@ -44,8 +44,7 @@
                                 <div class="form-inline">
                                     <input type="search" class="form-control" placeholder="Search" aria-controls="datatable-default">&nbsp;
                                     <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-search"></i></a>&nbsp;
-                                    <a href="/usuarios/new" class="btn btn-success btn-sm" title="Novo"><i class="fa fa-plus"></i></a>&nbsp;
-                                   
+                                                                       
                                 </div>
                             </form>
 

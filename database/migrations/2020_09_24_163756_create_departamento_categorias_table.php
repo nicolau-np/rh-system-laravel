@@ -20,6 +20,11 @@ class CreateDepartamentoCategoriasTable extends Migration
             $table->text('descricao')->nullable();
             $table->timestamps();
         });
+
+        Schema::table('departamento_categorias', function (Blueprint $table){
+            $table->foreign('id_departamento')->references('id')->on('departamentos')->onUpdate('cascade');
+            $table->foreign('id_categoria')->references('id')->on('cargos')->onUpdate('cascade');
+        });
     }
 
     /**

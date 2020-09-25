@@ -80,6 +80,17 @@
                           
                         </div>
 
+                        <div class="row form-group">
+                            <div class="col-lg-4">
+                                {{Form::label('descricao', "Descrição")}}
+                                <textarea name="descricao" id="descricao" cols="30" rows="5" placeholder="Descrição" class="form-control"></textarea>
+
+                                @if($errors->has('descricao'))
+                                <span class="text-danger">{{$errors->first('descricao')}}</span>
+                                @endif
+                            </div>
+                        </div>
+
                 </div>
                 <footer class="panel-footer">
                     <div style="text-align:right">
@@ -117,8 +128,8 @@
                                         @foreach($getDepCargo as $dep_cargo)
                                         <tr>
                                             <td>{{$dep_cargo->id}}</td>
-                                            <td>{{$dep_cargo->departamento->nome}}</td>
-                                            <td>{{$dep_cargo->departamento->descricao}}</td>
+                                        <td>{{$getDepartamento->nome}}</td>
+                                        <td>{{$getDepartamento->descricao}}</td>
                                             <td>{{$dep_cargo->cargo->cargo}}</td>
                                             <td class="actions-hover actions-fade">
                                                 <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
