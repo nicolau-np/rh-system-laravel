@@ -44,7 +44,7 @@
                                 <div class="form-inline">
                                     <input type="search" class="form-control" placeholder="Search" aria-controls="datatable-default">&nbsp;
                                     <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-search"></i></a>&nbsp;
-                                    <a href="/clientes/new" class="btn btn-success btn-sm" title="Novo"><i class="fa fa-plus"></i></a>&nbsp;
+                                    <a href="/candidaturas/new" class="btn btn-success btn-sm" title="Novo"><i class="fa fa-plus"></i></a>&nbsp;
                                     </div>
                             </form>
 
@@ -60,24 +60,26 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Nome</th>
-                                            <th>Província</th>
-                                            <th>Município</th>
-                                            <th>Tipo</th>
-                                            <th>Data de Contrato</th>
+                                            <th>Curso</th>
+                                            <th>Ensino</th>
+                                            <th>Instituição</th>
+                                            <th>Gênero</th>
+                                            <th>Idade</th>
                                             <th>Operações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($getClientes as $clientes)
+                                        @foreach($getCandidaturas as $candidaturas)
                                         <tr>
-                                            <td>{{$clientes->id}}</td>
-                                            <td>{{$clientes->nome}}</td>
-                                            <td>{{$clientes->municipio->provincia->provincia}}</td>
-                                            <td>{{$clientes->municipio->municipio}}</td>
-                                            <td>{{$clientes->tipo}}</td>
-                                            <td>{{date('d/m/Y', strtotime($clientes->inicio_contrato))}}</td>
+                                            <td>{{$candidaturas->id}}</td>
+                                            <td>{{$candidaturas->nome}}</td>
+                                            <td>{{$candidaturas->curso}}</td>
+                                            <td>{{$candidaturas->ensino}}</td>
+                                            <td>{{$candidaturas->instituicao}}</td>
+                                            <td>{{$candidaturas->genero}}</td>
+                                            <td>Idade</td>
                                             <td class="actions-hover actions-fade">
-                                                <a href="/clientes/edit/{{$clientes->id}}"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
+                                                <a href="/candidaturas/add_doc/{{$candidaturas->id}}"><i class="fa fa-plus fa-2x"></i></a>&nbsp;
                                                 <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
                                             </td>
                                         </tr>
@@ -91,7 +93,7 @@
 
                     <div class="row">
                         <div class="col-sm-12 col-md-6" style="text-align: right;">
-                            {{$getClientes->links()}}
+                            {{$getCandidaturas->links()}}
                         </div>
                     </div>
                 </div>

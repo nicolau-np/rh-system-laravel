@@ -327,6 +327,13 @@
 									</a>
 								</li>
 
+								<li class="@if($menu=='Candidaturas') nav-active @endif">
+									<a href="/candidaturas/list">
+										<i class="fa fa-briefcase" aria-hidden="true"></i>
+										<span>Candidaturas</span>
+									</a>
+								</li>
+
 								<li class="nav-parent">
 									<a>
 										<i class="fa fa-table" aria-hidden="true"></i>
