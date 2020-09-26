@@ -1,3 +1,6 @@
+@php 
+$idade = 0;
+@endphp
 @extends('template')
 
 @section('content')
@@ -60,11 +63,11 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Nome</th>
+                                            <th>Telefone</th>
+                                            <th>Idade</th>
                                             <th>Curso</th>
                                             <th>Ensino</th>
-                                            <th>Instituição</th>
-                                            <th>Gênero</th>
-                                            <th>Idade</th>
+                                            <th>Candidata em</th>
                                             <th>Operações</th>
                                         </tr>
                                     </thead>
@@ -73,11 +76,18 @@
                                         <tr>
                                             <td>{{$candidaturas->id}}</td>
                                             <td>{{$candidaturas->nome}}</td>
+                                            <td>{{$candidaturas->telefone}}</td>
+                                            <td>
+                                                @php
+                                                $string_data = explode("-", $candidaturas->data_nascimento);
+                                                $idade = date('Y') - $string_data[0];
+                                                @endphp
+                                                {{$idade}}
+                                            </td>
                                             <td>{{$candidaturas->curso}}</td>
                                             <td>{{$candidaturas->ensino}}</td>
-                                            <td>{{$candidaturas->instituicao}}</td>
-                                            <td>{{$candidaturas->genero}}</td>
-                                            <td>Idade</td>
+                                            <td>{{$candidaturas->candidata}}</td>
+                                            
                                             <td class="actions-hover actions-fade">
                                                 <a href="/candidaturas/add_doc/{{$candidaturas->id}}"><i class="fa fa-plus fa-2x"></i></a>&nbsp;
                                                 <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;

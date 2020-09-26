@@ -69,7 +69,7 @@ class CandidaturaController extends Controller
             'candidata' => $request->candidata,
             'telefone' => $request->telefone,
             'data_nascimento' => $request->data_nascimento,
-            'genero' => $request->telefone,
+            'genero' => $request->genero,
         ];
 
 
