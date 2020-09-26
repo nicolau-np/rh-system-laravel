@@ -80,6 +80,10 @@ Route::group(['prefix' => '/departamentos', 'middleware'=>"auth"], function () {
     Route::put('/store_depCargo/{id}', "DepartamentoController@store_depCargo");
 });
 
+Route::group(['prefix' => '/clientes', 'middleware'=>"auth"], function () {
+    Route::get('/list', "ClienteController@index");
+});
+
 Route::post('/login', "UsuarioController@login");
 Route::post('/getMunicipio', "FuncionarioController@getMunicipio")->name('getMunicipio');
 

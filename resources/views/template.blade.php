@@ -320,6 +320,13 @@
 									</a>
 								</li>
 
+								<li class="@if($menu=='Clientes') nav-active @endif">
+									<a href="/clientes/list">
+										<i class="fa fa-users" aria-hidden="true"></i>
+										<span>Clientes</span>
+									</a>
+								</li>
+
 								<li class="nav-parent">
 									<a>
 										<i class="fa fa-table" aria-hidden="true"></i>
