@@ -15,7 +15,7 @@ class CreateCandidaturasTable extends Migration
     {
         Schema::create('candidaturas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nome')->unique();
+            $table->string('nome');
             $table->string('curso');
             $table->string('ensino');
             $table->string('candidata');

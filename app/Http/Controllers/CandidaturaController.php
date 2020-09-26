@@ -16,11 +16,11 @@ class CandidaturaController extends Controller
     {
         $candidaturas = Candidatura::paginate(4);
         $data = [
-            'titulo'=>"Candidaturas",
-            'menu'=>"Candidaturas",
-            'submenu'=>"Listar",
-            'tipo'=>"view",
-            'getCandidaturas'=>$candidaturas
+            'titulo' => "Candidaturas",
+            'menu' => "Candidaturas",
+            'submenu' => "Listar",
+            'tipo' => "view",
+            'getCandidaturas' => $candidaturas
         ];
 
         return view("candidatura.list", $data);
@@ -34,10 +34,10 @@ class CandidaturaController extends Controller
     public function create()
     {
         $data = [
-            'titulo'=>"Candidaturas",
-            'menu'=>"Candidaturas",
-            'submenu'=>"Novo",
-            'tipo'=>"form"
+            'titulo' => "Candidaturas",
+            'menu' => "Candidaturas",
+            'submenu' => "Novo",
+            'tipo' => "form"
         ];
 
         return view("candidatura.new", $data);
@@ -51,7 +51,31 @@ class CandidaturaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => ['required', 'string', 'min:12', 'max:255'],
+            'genero' => ['required', 'string'],
+            'data_nascimento' => ['required', 'date'],
+            'curso' => ['required', 'string'],
+            'candidata' => ['required', 'string'],
+            'tecnico' => ['required', 'string'],
+            'telefone' => ['required', 'Integer']
+
+        ]);
+
+        $data = [
+            'nome' => $request->nome,
+            'curso' => $request->curso,
+            'ensino' => $request->tecnico,
+            'candidata' => $request->candidata,
+            'telefone' => $request->telefone,
+            'data_nascimento' => $request->data_nascimento,
+            'genero' => $request->telefone,
+        ];
+
+
+        if (Candidatura::create($data)) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 
     /**
