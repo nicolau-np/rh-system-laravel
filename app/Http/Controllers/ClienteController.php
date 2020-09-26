@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Provincia;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -33,7 +34,16 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        $provincias = Provincia::pluck('provincia', 'id');
+        $data = [
+            'titulo'=>"Clientes",
+            'menu'=>"Clientes",
+            'submenu'=>"Novo",
+            'tipo'=>"form",
+            'getProvincia'=>$provincias
+        ];
+
+        return view("cliente.new", $data);
     }
 
     /**
@@ -44,7 +54,27 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'nome'=>['required', 'string', 'min:12', 'max:255'],
+                'tipo'=>['required', 'string'],
+                'provincia'=>['required', 'Integer'],
+                'municipio'=>['required', 'Integer'],
+                'inicio_contrato'=>['required', 'date']
+            ]
+        );
+
+        $data = [
+            'id_municipio'=>$request->municipio,
+            'nome'=>$request->nome,
+            'inicio_contrato'=>$request->inicio_contrato,
+            'fim_contrato'=>$request->fim_contrato,
+            'tipo'=>$request->tipo
+        ];
+
+        if(Cliente::create($data)){
+            return back()->with(['success'=>"Feito com sucesso"]);
+        }
     }
 
     /**
