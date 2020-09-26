@@ -18,7 +18,8 @@ class CreateCandidaturasTable extends Migration
             $table->string('nome')->unique();
             $table->string('curso');
             $table->string('ensino');
-            $table->string('instituicao');
+            $table->string('candidata');
+            $table->bigInteger('telefone');
             $table->date('data_nascimento');
             $table->string('genero');
             $table->timestamps();

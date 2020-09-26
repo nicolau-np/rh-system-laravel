@@ -33,7 +33,14 @@ class CandidaturaController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'titulo'=>"Candidaturas",
+            'menu'=>"Candidaturas",
+            'submenu'=>"Novo",
+            'tipo'=>"form"
+        ];
+
+        return view("candidatura.new", $data);
     }
 
     /**

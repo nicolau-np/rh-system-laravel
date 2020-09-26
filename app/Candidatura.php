@@ -12,7 +12,8 @@ class Candidatura extends Model
         'nome',
         'curso',
         'ensino',
-        'instituicao',
+        'candidata',
+        'telefone',
         'data_nascimento',
         'genero',
     ];
