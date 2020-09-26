@@ -86,7 +86,19 @@ class CandidaturaController extends Controller
      */
     public function show($id)
     {
-        //
+        $candidaturas = Candidatura::find($id);
+        if(!$candidaturas){
+            return back()->with(['error'=>"nao encontrou"]);
+        }
+        $data = [
+            'titulo' => "Candidaturas",
+            'menu' => "Candidaturas",
+            'submenu' => "Documentos",
+            'tipo' => "view",
+            'getCandidaturas' => $candidaturas
+        ];
+
+        return view("candidatura.show", $data);
     }
 
     /**
