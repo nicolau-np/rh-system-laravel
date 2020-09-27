@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Faturacao;
 use App\Provincia;
 use Illuminate\Http\Request;
 
@@ -129,12 +130,14 @@ class ClienteController extends Controller
         if(!$cliente){
             return back()->with(['error'=>"Nao encontrou"]);
         }
+        $faturacao = Faturacao::where('id_cliente', $id)->get();
         $data = [
             'titulo'=>"Clientes",
             'menu'=>"Clientes",
             'submenu'=>"Novo",
             'tipo'=>"form",
-            'getCliente'=>$cliente
+            'getCliente'=>$cliente,
+            'getFaturacao'=>$faturacao
         ];
 
         return view("cliente.faturacao", $data);
