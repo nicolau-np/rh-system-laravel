@@ -123,6 +123,6 @@ class ClienteController extends Controller
     }
 
     public function faturacao(){
-        
+        echo "faturacao";
     }
 }
