@@ -142,4 +142,8 @@ class ClienteController extends Controller
 
         return view("cliente.faturacao", $data);
     }
+
+    public function store_faturacao(Request $request){
+        
+    }
 }

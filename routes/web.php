@@ -85,6 +85,7 @@ Route::group(['prefix' => '/clientes', 'middleware'=>"auth"], function () {
     Route::get('/new', "ClienteController@create");
     Route::post('/store', "ClienteController@store");
     Route::get('/faturacao/{id}', "ClienteController@faturacao");
+    Route::put('/store_faturacao/{id}', "ClienteController@store_faturacao");
 });
 
 Route::group(['prefix' => '/candidaturas', 'middleware'=>"auth"], function () {
