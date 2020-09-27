@@ -144,6 +144,6 @@ class ClienteController extends Controller
     }
 
     public function store_faturacao(Request $request){
-        
+    
     }
 }
