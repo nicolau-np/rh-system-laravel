@@ -144,6 +144,37 @@ class ClienteController extends Controller
     }
 
     public function store_faturacao(Request $request, $id){
-    
+        $cliente = Cliente::find($id);
+        if(!$cliente){
+            return back()->with(['error'=>"Nao encontrou"]);
+        }
+
+        $request->validate([
+            'nome'=>['required', 'string'],
+            'data_faturacao'=>['required', 'date'],
+            'quantidade'=>['required', 'Integer'],
+            'tipo'=>['required', 'string'],
+            'pc_unitario'=>['required', 'Integer']
+            ]);
+
+            $string_mes = explode("-", $request->data_faturacao);
+            $total = $request->quantidade * $request->pc_unitario;
+
+            $data = [
+                'id_cliente'=>$id,
+                'mes'=>$string_mes[1],
+                'ano'=>$string_mes[0],
+                'quantidate'=>$request->quantidade,
+                'pc_unitario'=>$request->pc_unitario,
+                'total'=>$total,
+                'tipo'=>$request->tipo,
+                'data_faturacao'=>$request->data_faturacao,
+                'descricao'=>$request->descricao
+            ];
+
+            if(Faturacao::create($data)){
+                return back()->with(['success'=>"Feito com sucesso"]);
+            }
+            
     }
 }

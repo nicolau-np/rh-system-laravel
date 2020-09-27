@@ -16,6 +16,7 @@ class Faturacao extends Model
         'pc_unitario',
         'total',
         'tipo',
+        'data_faturacao',
         'descricao'
     ];
 

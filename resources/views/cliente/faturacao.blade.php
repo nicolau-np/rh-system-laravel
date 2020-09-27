@@ -54,7 +54,7 @@
 
   
                         <div class="row form-group">
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 {{Form::label('nome', "Nome Completo")}} <span class="text-danger">*</span>
                                 {{Form::text('nome', $getCliente->nome, ['class'=>'form-control input-sm', 'placeholder'=>'Nome Completo'])}}
                                 @if($errors->has('nome'))
@@ -66,24 +66,59 @@
 
 
                             <div class="col-lg-3">
-                                {{Form::label('data_entrada', "Data de Entrada")}} <span class="text-danger">*</span>
-                                {{Form::date('data_entrada', null, ['placeholder'=>'Data de Entrada','class'=>'form-control input-sm'])}}
+                                {{Form::label('data_faturacao', "Data de Faturação")}} <span class="text-danger">*</span>
+                                {{Form::date('data_faturacao', null, ['placeholder'=>'Data de Faturação','class'=>'form-control input-sm'])}}
 
-                                @if($errors->has('data_entrada'))
-                                <span class="text-danger">{{$errors->first('data_entrada')}}</span>
+                                @if($errors->has('data_faturacao'))
+                                <span class="text-danger">{{$errors->first('data_faturacao')}}</span>
                                 @endif
                             </div>
 
                             <div class="mb-md hidden-lg hidden-xl"></div>
                             
-                            <div class="col-lg-3">
-                                {{Form::label('data_saida', "Data de Fim")}} <span class="text-danger">*</span>
-                                {{Form::date('data_saida', null, ['placeholder'=>'Data de Fim','class'=>'form-control input-sm'])}}
+                            <div class="col-lg-2">
+                                {{Form::label('quantidade', "Quantidade")}} <span class="text-danger">*</span>
+                                {{Form::number('quantidade', null, ['placeholder'=>'Quantidade','class'=>'form-control input-sm'])}}
 
-                                @if($errors->has('data_saida'))
-                                <span class="text-danger">{{$errors->first('data_saida')}}</span>
+                                @if($errors->has('quantidade'))
+                                <span class="text-danger">{{$errors->first('quantidade')}}</span>
                                 @endif
                             </div>
+                            <div class="mb-md hidden-lg hidden-xl"></div>
+                            <div class="col-lg-2">
+                                {{Form::label('pc_unitario', "P. Unitário")}} <span class="text-danger">*</span>
+                                {{Form::number('pc_unitario', null, ['placeholder'=>'P. Unitário"','class'=>'form-control input-sm'])}}
+
+                                @if($errors->has('pc_unitario'))
+                                <span class="text-danger">{{$errors->first('pc_unitario')}}</span>
+                                @endif
+                            </div>
+                            <div class="mb-md hidden-lg hidden-xl"></div>
+                            <div class="col-lg-2">
+                                {{Form::label('tipo', "Tipo")}} <span class="text-danger">*</span>
+                                {{Form::select('tipo',
+                                                                [
+                                                                'Manuteção Correctiva'=>'Manuteção Correctiva',
+                                                                'Manuteção Preventiva'=>'Manuteção Preventiva',
+                                                                'Reparação'=>'Reparação',
+                                                                  'Montagem'=>'Montagem'
+                                                                ],null,
+                                                                ['placeholder'=>'Tipo',
+                                                                 'class'=>'form-control input-sm'
+                                                                ]
+                                                                )}}
+                                @if($errors->has('tipo'))
+                                <span class="text-danger">{{$errors->first('tipo')}}</span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                {{Form::label('Descrição', "Descrição")}}
+                                <textarea name="descricao" id="descricao" cols="10" rows="5" class="form-control input-sm" placeholder="Descrição"></textarea>
+                            </div>
+                           
                         </div>
 
                 </div>
@@ -114,7 +149,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Nome Cliente</th>
-                                            <th>Mês</th>
+                                            <th>Data</th>
                                             <th>Qt.</th>
                                             <th>P. Unitário</th>
                                             <th>Total</th>

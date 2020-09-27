@@ -22,6 +22,7 @@ class CreateFaturacaosTable extends Migration
             $table->decimal('pc_unitario', 10,2);
             $table->decimal('total', 10,2);
             $table->string('tipo');
+            $table->date('data_faturacao');
             $table->string('descricao')->nullable();
             $table->timestamps();
         });
