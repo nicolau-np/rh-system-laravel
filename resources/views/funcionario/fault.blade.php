@@ -147,7 +147,7 @@
                                             <td>{{$faltas->dia_semana}}-{{$faltas->mes}}-{{$faltas->ano}}</td>
                                             <td class="actions-hover actions-fade">
                                                
-                                                <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
+                                                <a href="#" title="Eliminar"><i class="fa fa-trash-o fa-2x" ></i></a>&nbsp;
                                             </td>
                                         </tr>
                                         @endforeach

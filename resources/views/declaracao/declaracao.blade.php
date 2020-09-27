@@ -115,8 +115,8 @@
                                             <td>{{$getFuncionario->pessoa->nome}}</td>
                                             <td>{{$declaracao->efeito}}</td>
                                             <td class="actions-hover actions-fade">
-                                            <a href="/reports/declaracao/{{$declaracao->id}}"><i class="fa fa-file-o fa-2x"></i></a>&nbsp;
-                                                <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>
+                                            <a href="/reports/declaracao/{{$declaracao->id}}" title="Imprimir"><i class="fa fa-file-o fa-2x"></i></a>&nbsp;
+                                                <a href="#" title="Eliminar"><i class="fa fa-trash-o fa-2x" ></i></a>
                                             </td>
                                         </tr>
                                         @endforeach

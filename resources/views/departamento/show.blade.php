@@ -132,7 +132,7 @@
                                         <td>{{$getDepartamento->descricao}}</td>
                                             <td>{{$dep_cargo->cargo->cargo}}</td>
                                             <td class="actions-hover actions-fade">
-                                                <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
+                                                <a href="#" title="Eliminar"><i class="fa fa-trash-o fa-2x" ></i></a>&nbsp;
                                             </td>
                                         </tr>
                                         @endforeach

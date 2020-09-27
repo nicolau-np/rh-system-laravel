@@ -72,9 +72,9 @@
                                             <td>{{$departamento->nome}}</td>
                                             <td>{{$departamento->descricao}}</td>
                                             <td class="actions-hover actions-fade">
-                                                <a href="/departamentos/add_cargo/{{$departamento->id}}"><i class="fa fa-link fa-2x"></i></a>&nbsp;
-                                                <a href="/departamentos/edit/{{$departamento->id}}"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
-                                                <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
+                                                <a href="/departamentos/add_cargo/{{$departamento->id}}" title="Linkar Cargos"><i class="fa fa-link fa-2x"></i></a>&nbsp;
+                                                <a href="/departamentos/edit/{{$departamento->id}}" title="Editar"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
+                                                <a href="#" title="Eliminar"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
                                             </td>
                                         </tr>
                                         @endforeach

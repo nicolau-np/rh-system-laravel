@@ -89,8 +89,8 @@ $idade = 0;
                                             <td>{{$candidaturas->candidata}}</td>
                                             
                                             <td class="actions-hover actions-fade">
-                                                <a href="/candidaturas/add_doc/{{$candidaturas->id}}"><i class="fa fa-plus fa-2x"></i></a>&nbsp;
-                                                <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
+                                                <a href="/candidaturas/add_doc/{{$candidaturas->id}}" title="Adicionar Documento"><i class="fa fa-plus fa-2x"></i></a>&nbsp;
+                                                <a href="#" title="Eliminar"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
                                             </td>
                                         </tr>
                                         @endforeach

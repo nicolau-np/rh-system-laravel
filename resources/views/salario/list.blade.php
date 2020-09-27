@@ -78,10 +78,10 @@ use App\Http\Controllers\SalarioController;
                                             <td>{{$mes}}</td>
                                             <td>{{$salarios->ano}}</td>
                                            <td class="actions-hover actions-fade">
-                                                <a href="/salarios/show/{{$salarios->id}}"><i class="fa fa-eye fa-2x"></i></a>&nbsp;
-                                                <a href="/salarios/edit/{{$salarios->id}}"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
-                                                <a href="/salarios/lacamento/{{$salarios->id}}"><i class="fa fa-file fa-2x"></i></a>&nbsp;
-                                                <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
+                                                <a href="/salarios/show/{{$salarios->id}}" title="Visualizar"><i class="fa fa-eye fa-2x"></i></a>&nbsp;
+                                                <a href="/salarios/edit/{{$salarios->id}}" title="Editar"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
+                                                <a href="/salarios/lacamento/{{$salarios->id}}" title="Lançamento"><i class="fa fa-file fa-2x"></i></a>&nbsp;
+                                                <a href="#" title="Eliminar"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
                                             </td>
                                         </tr>
                                         <?php 

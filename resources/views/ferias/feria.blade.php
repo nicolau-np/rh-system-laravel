@@ -127,8 +127,8 @@
                                             <td>{{$ferias->data_entrada}}</td>
                                             <td>{{$ferias->data_saida}}</td>
                                             <td class="actions-hover actions-fade">
-                                            <a href="/reports/guia_feria/{{$ferias->id}}"><i class="fa fa-file-o fa-2x"></i></a>&nbsp;
-                                                <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>
+                                            <a href="/reports/guia_feria/{{$ferias->id}}" title="Imprimir"><i class="fa fa-file-o fa-2x"></i></a>&nbsp;
+                                                <a href="#" title="Eliminar"><i class="fa fa-trash-o fa-2x" ></i></a>
                                             </td>
                                         </tr>
                                         @endforeach

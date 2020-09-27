@@ -77,8 +77,9 @@
                                             <td>{{$clientes->tipo}}</td>
                                             <td>{{date('d/m/Y', strtotime($clientes->inicio_contrato))}}</td>
                                             <td class="actions-hover actions-fade">
-                                                <a href="/clientes/edit/{{$clientes->id}}"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
-                                                <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
+                                                <a href="/clientes/faturacao/{{$clientes->id}}" title="Faturação"><i class="fa fa-money fa-2x"></i></a>&nbsp;
+                                                <a href="/clientes/edit/{{$clientes->id}}" title="Editar"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
+                                                <a href="#"><i class="fa fa-trash-o fa-2x" title="Eliminar"></i></a>&nbsp;
                                             </td>
                                         </tr>
                                         @endforeach

@@ -144,8 +144,8 @@
                                             <td>{{$guia_medica->data_repouso}}</td>
                                             <td>{{$guia_medica->data_retoma}}</td>
                                             <td class="actions-hover actions-fade">
-                                            <a href="/reports/guia_medica/{{$guia_medica->id}}"><i class="fa fa-file-o fa-2x"></i></a>&nbsp;
-                                                <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>
+                                            <a href="/reports/guia_medica/{{$guia_medica->id}}" title="Imprimir"><i class="fa fa-file-o fa-2x"></i></a>&nbsp;
+                                                <a href="#" title="Eliminar"><i class="fa fa-trash-o fa-2x"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach

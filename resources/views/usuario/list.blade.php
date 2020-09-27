@@ -77,8 +77,8 @@
                                             <td>{{$usuarios->acesso}}</td>
                                             <td>{{$usuarios->estado}}</td>
                                             <td class="actions-hover actions-fade">
-                                                <a href="/usuarios/edit/{{$usuarios->id}}"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
-                                                <a href="#"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
+                                                <a href="/usuarios/edit/{{$usuarios->id}}" title="Editar"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
+                                                <a href="#" title="Eliminar"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
                                             </td>
                                         </tr>
                                         @endforeach
