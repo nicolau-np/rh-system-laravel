@@ -148,12 +148,12 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Nome Cliente</th>
                                             <th>Data</th>
-                                            <th>Qt.</th>
+                                           <th>Qt.</th>
                                             <th>P. Unitário</th>
                                             <th>Total</th>
                                             <th>Tipo</th>
+                                            <th>Descrição</th>
                                             <th>Operações</th>
                                         </tr>
                                     </thead>
@@ -161,12 +161,12 @@
                                         @foreach ($getFaturacao as $faturacao)
                                         <tr>
                                         <td>{{$faturacao->id}}</td>
-                                        <td>{{$getCliente->nome}}</td>
-                                        <td>{{$faturacao->mes}}</td>
+                                        <td>{{date('d/m/Y', strtotime($faturacao->data_faturacao))}}</td>
                                         <td>{{$faturacao->quantidate}}</td>
                                         <td>{{number_format($faturacao->pc_unitario,2,',','.')}}</td>
                                         <td>{{number_format($faturacao->total,2,',','.')}}</td>
                                         <td>{{$faturacao->tipo}}</td>
+                                        <td>{{$faturacao->descricao}}</td>
                                         <td>
                                             <a href="#"><i class="fa fa-trash-o fa-2x" title="Eliminar"></i></a>&nbsp;
                                         </td>
