@@ -162,6 +162,17 @@
                                 <span class="text-danger">{{$errors->first('municipio')}}</span>
                                 @endif
                             </div>
+                             
+                            <div class="mb-md hidden-lg hidden-xl"></div>
+                            <div class="col-lg-2">
+                                {{Form::label('tipo_servico', "Tipo de serviço")}} <span class="text-danger">*</span>
+                                {{Form::text('tipo_servico', null, ['class'=>'form-control input-sm', 'placeholder'=>'Tipo de Serviço'])}}
+                               
+                                 @if($errors->has('tipo_servico'))
+                                <span class="text-danger">{{$errors->first('tipo_servico')}}</span>
+                                @endif
+                            </div>
+
                           
                         </div>
                     

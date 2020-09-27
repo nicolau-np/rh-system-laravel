@@ -60,7 +60,8 @@ class ClienteController extends Controller
                 'tipo'=>['required', 'string'],
                 'provincia'=>['required', 'Integer'],
                 'municipio'=>['required', 'Integer'],
-                'inicio_contrato'=>['required', 'date']
+                'inicio_contrato'=>['required', 'date'],
+                'tipo_servico'=>['required', 'string']
             ]
         );
 
@@ -69,7 +70,8 @@ class ClienteController extends Controller
             'nome'=>$request->nome,
             'inicio_contrato'=>$request->inicio_contrato,
             'fim_contrato'=>$request->fim_contrato,
-            'tipo'=>$request->tipo
+            'tipo'=>$request->tipo,
+            'tipo_servico'=>$request->tipo_servico
         ];
 
         if(Cliente::create($data)){
@@ -122,7 +124,19 @@ class ClienteController extends Controller
         //
     }
 
-    public function faturacao(){
-        echo "faturacao";
+    public function faturacao($id){
+        $cliente = Cliente::find($id);
+        if(!$cliente){
+            return back()->with(['error'=>"Nao encontrou"]);
+        }
+        $data = [
+            'titulo'=>"Clientes",
+            'menu'=>"Clientes",
+            'submenu'=>"Novo",
+            'tipo'=>"form",
+            'getCliente'=>$cliente
+        ];
+
+        return view("cliente.faturacao", $data);
     }
 }

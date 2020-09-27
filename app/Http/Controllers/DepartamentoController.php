@@ -53,12 +53,12 @@ class DepartamentoController extends Controller
     {
         $request->validate([
             'nome' => ['required', 'string', 'min:9', 'max:255', 'unique:departamentos,nome']
-            
+
         ]);
 
         $data = [
-            'nome'=>$request->nome,
-            'descricao'=>$request->descricao
+            'nome' => $request->nome,
+            'descricao' => $request->descricao
         ];
 
         if (Departamento::create($data)) {
@@ -75,20 +75,20 @@ class DepartamentoController extends Controller
     public function show($id)
     {
         $departamento = Departamento::find($id);
-        if(!$departamento){
-            return back()->with(['error'=>"Nao encontrou departamento"]);
+        if (!$departamento) {
+            return back()->with(['error' => "Nao encontrou departamento"]);
         }
 
-       $dep_cargo = DepartamentoCategoria::where('id_departamento', $id)->get();
+        $dep_cargo = DepartamentoCategoria::where('id_departamento', $id)->get();
         $cargos = Cargo::pluck('cargo', 'id');
         $data = [
             'titulo' => "Departamentos",
             'menu' => "Departamentos",
             'submenu' => "Cargo",
             'tipo' => "form",
-            'getDepCargo'=>$dep_cargo,
-            'getDepartamento'=>$departamento,
-            'getCargos'=>$cargos
+            'getDepCargo' => $dep_cargo,
+            'getDepartamento' => $departamento,
+            'getCargos' => $cargos
         ];
         return view("departamento.show", $data);
     }
@@ -127,25 +127,29 @@ class DepartamentoController extends Controller
         //
     }
 
-    public function store_depCargo(Request $request, $id){
-       $departamento = Departamento::find($id);
-        if(!$departamento){
-            return back()->with(['error'=>"Nao encontrou departamento"]);
+    public function store_depCargo(Request $request, $id)
+    {
+        $departamento = Departamento::find($id);
+        if (!$departamento) {
+            return back()->with(['error' => "Nao encontrou departamento"]);
         }
 
         $request->validate([
-            'nome'=>['required', 'string'],
-            'cargo'=>['required', 'Integer']
+            'nome' => ['required', 'string'],
+            'cargo' => ['required', 'Integer']
         ]);
 
         $data = [
-            'id_departamento'=>$id,
-            'id_categoria'=>$request->cargo,
-            'descricao'=>$request->descricao
+            'id_departamento' => $id,
+            'id_categoria' => $request->cargo,
+            'descricao' => $request->descricao
         ];
 
-        if(DepartamentoCategoria::create($data)){
-            return back()->with(['success'=>"Feito com sucesso"]);
+        if (DepartamentoCategoria::where('id_categoria', $data['id_categoria'])) {
+            return back()->with(['error' => "Já cadastrou em um departamento"]);
+        }
+        if (DepartamentoCategoria::create($data)) {
+            return back()->with(['success' => "Feito com sucesso"]);
         }
     }
 }

@@ -20,6 +20,7 @@ class CreateClientesTable extends Migration
             $table->date('inicio_contrato');
             $table->date('fim_contrato')->nullable();
             $table->string('tipo');
+            $table->string('tipo_servico');
             $table->timestamps();
         });
 
