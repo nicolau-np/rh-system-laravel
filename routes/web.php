@@ -107,6 +107,12 @@ Route::group(['prefix' => '/contas', 'middleware'=>"auth"], function () {
     Route::post('/store', "ConfiguracoesController@conta_store");
 });
 
+Route::group(['prefix' => '/bancos', 'middleware'=>"auth"], function () {
+    Route::get('/list', "ExtraController@banco_list");
+    Route::get('/new', "ExtraController@banco_new");
+    Route::post('/store', "ExtraController@banco_store");
+});
+
 Route::post('/login', "UsuarioController@login");
 Route::post('/getMunicipio', "FuncionarioController@getMunicipio")->name('getMunicipio');
 

@@ -358,7 +358,7 @@
 									</ul>
 								</li>
 
-								<li class="nav-parent">
+								<li class="@if($titulo == 'Extras') nav-parent nav-expanded nav-active @else nav-parent @endif">
 									<a>
 										<i class="fa fa-copy" aria-hidden="true"></i>
 										<span>Extras</span>
@@ -384,8 +384,8 @@
 												Cargos
 											</a>
 										</li>
-										<li>
-											<a href="pages-user-profile.html">
+										<li class="@if($menu == 'Bancos') nav-active @endif">
+											<a href="/bancos/list">
 												Bancos
 											</a>
 										</li>

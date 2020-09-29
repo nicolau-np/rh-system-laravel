@@ -84,7 +84,7 @@
                                             <td>{{$empresa->data_aniversario}}</td>
                                            <td class="actions-hover actions-fade">
                                                 <a href="/empresa/show/{{$empresa->id}}" title="Visualizar"><i class="fa fa-eye fa-2x"></i></a>&nbsp;
-                                                <a href="/contas/link/{{$empresa->id}}" title="Editar"><i class="fa fa-pencil fa-2x"></i></a>&nbsp;
+                                             
                                            </td>
                                         </tr>
                                        @endforeach
