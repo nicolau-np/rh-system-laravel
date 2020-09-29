@@ -79,7 +79,7 @@ class ConfiguracoesController extends Controller
             'logotipo' => null
         ];
 
-        if ($request->hasFile('logotipo') && $request->documento->isValid()) {
+        if ($request->hasFile('logotipo') && $request->logotipo->isValid()) {
             $path_file = $request->logotipo->store('logotipo');
             $data['logotipo'] = $path_file;
         }
