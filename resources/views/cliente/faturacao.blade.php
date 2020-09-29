@@ -35,7 +35,7 @@
                         <a href="#" class="fa fa-times"></a>
                     </div>
 
-                    <h2 class="panel-title">Férias de Funcionários</h2>
+                    <h2 class="panel-title">Faturação</h2>
 
                     <p class="panel-subtitle">
                         Deve preencher os campos obrigatórios. <span class="text-danger">*</span>

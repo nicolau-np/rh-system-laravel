@@ -97,6 +97,8 @@ Route::group(['prefix' => '/candidaturas', 'middleware'=>"auth"], function () {
 
 Route::group(['prefix' => '/empresa', 'middleware'=>"auth"], function () {
     Route::get('/list', "ConfiguracoesController@empresa_list");
+    Route::get('/new', "ConfiguracoesController@empresa_new");
+    Route::post('/store', "ConfiguracoesController@empresa_store");
 });
 
 Route::group(['prefix' => '/contas', 'middleware'=>"auth"], function () {
