@@ -16,4 +16,8 @@ class Banco extends Model
     public function conta_bancarias(){
         return $this->hasMany(ContaBancaria::class, 'id_banco', 'id');
     }
+
+    public function conta_empresa(){
+        return $this->hasMany(ContaEmpresa::class, 'id_banco', 'id');
+    }
 }

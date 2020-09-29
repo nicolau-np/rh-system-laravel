@@ -95,6 +95,14 @@ Route::group(['prefix' => '/candidaturas', 'middleware'=>"auth"], function () {
     Route::get('/add_doc/{id_candidatura}', "CandidaturaController@show");
 });
 
+Route::group(['prefix' => '/empresa', 'middleware'=>"auth"], function () {
+    Route::get('/list', "ConfiguracoesController@empresa_list");
+});
+
+Route::group(['prefix' => '/contas', 'middleware'=>"auth"], function () {
+    Route::get('/list', "ConfiguracoesController@conta_list");
+});
+
 Route::post('/login', "UsuarioController@login");
 Route::post('/getMunicipio', "FuncionarioController@getMunicipio")->name('getMunicipio');
 

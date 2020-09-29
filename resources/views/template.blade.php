@@ -399,15 +399,17 @@
 									</a>
 									<ul class="nav nav-children">
 										<li>
-											<a href="ui-elements-typography.html">
-												Usuários
+											<a href="/empresa/list">
+												Empresa
 											</a>
 										</li>
+									
 										<li>
-											<a href="ui-elements-icons.html">
-												Funcionários
+											<a href="/contas/list">
+												Contas
 											</a>
 										</li>
+
 
 									</ul>
 								</li>
