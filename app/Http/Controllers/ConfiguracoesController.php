@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Banco;
 use App\ContaEmpresa;
 use App\Empresa;
 use Illuminate\Http\Request;
@@ -49,6 +50,18 @@ class ConfiguracoesController extends Controller
     }
     public function conta_new()
     {
+        $bancos = Banco::pluck('sigla', 'id');
+        $empresa = Empresa::first()->pluck('nome', 'id');
+        $data = [
+            'titulo' => "Configuraçoes",
+            'menu' => "Contas",
+            'submenu' => "Novo",
+            'tipo' => "form",
+            'getEmpresa'=>$empresa,
+            'getBancos'=>$bancos
+        ];
+
+        return view("configuracoes.conta.new", $data);
     }
 
     public function empresa_store(Request $request)
@@ -86,6 +99,26 @@ class ConfiguracoesController extends Controller
 
         if (Empresa::create($data)) {
             return back()->with(['success' => "Feito com sucesso"]);
+        }
+    }
+
+    public function conta_store(Request $request){
+        $request->validate([
+            'banco'=>['required', 'Integer'],
+            'empresa'=>['required', 'Integer'],
+            'conta'=>['required', 'string', 'min:7', 'max:25'],
+            'iban'=>['required', 'string', 'min:20', 'max:255', 'unique:conta_empresas,iban']
+        ]);
+
+        $data = [
+            'id_banco'=>$request->banco,
+            'id_empresa'=>$request->empresa,
+            'conta'=>$request->conta,
+            'iban'=>$request->iban
+        ];
+
+        if(ContaEmpresa::create($data)){
+            return back()->with(['success'=>"Feito com sucesso"]);
         }
     }
 }

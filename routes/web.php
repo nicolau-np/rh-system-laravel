@@ -103,6 +103,8 @@ Route::group(['prefix' => '/empresa', 'middleware'=>"auth"], function () {
 
 Route::group(['prefix' => '/contas', 'middleware'=>"auth"], function () {
     Route::get('/list', "ConfiguracoesController@conta_list");
+    Route::get('/new', "ConfiguracoesController@conta_new");
+    Route::post('/store', "ConfiguracoesController@conta_store");
 });
 
 Route::post('/login', "UsuarioController@login");

@@ -392,19 +392,19 @@
 
 									</ul>
 								</li>
-								<li class="nav-parent">
+								<li class="@if($titulo == 'Configuraçoes') nav-parent nav-expanded nav-active @else nav-parent @endif">
 									<a>
 										<i class="fa fa-cogs" aria-hidden="true"></i>
 										<span>Configurações</span>
 									</a>
 									<ul class="nav nav-children">
-										<li>
+										<li class="@if($menu == 'Empresa') nav-active @endif">
 											<a href="/empresa/list">
 												Empresa
 											</a>
 										</li>
 									
-										<li>
+										<li class="@if($menu == 'Contas') nav-active @endif">
 											<a href="/contas/list">
 												Contas
 											</a>
