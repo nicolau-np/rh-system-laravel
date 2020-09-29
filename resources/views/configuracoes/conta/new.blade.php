@@ -54,7 +54,7 @@
                     @endif
 
                     <fieldset class="dados_pessoais">
-                        <legend><i class="fa fa-user"></i> Dados</legend>
+                        <legend><i class="fa fa-table"></i> Dados</legend>
                         <div class="row form-group">
                             <div class="col-lg-4">
                                 {{Form::label('empresa', "Empresa")}} <span class="text-danger">*</span>
