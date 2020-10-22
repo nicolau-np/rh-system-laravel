@@ -83,6 +83,7 @@
                                             <th colspan="3">Subsídios</th>
                                             <th rowspan="2">Salário Ilíquido</th>
                                             <th colspan="4">Descontos</th>
+                                            <th rowspan="2">Salário Líquido</th>
                                         </tr>
                                         <tr>
                                             <th class="thbo">Alimentação</th>
@@ -109,12 +110,15 @@
                                             <td>{{Form::number('sub_transporte', $folha_salarios->sub_transporte, ['placeholder'=>"Akz", 'class'=>"sub_transporte txt_folha", 'data-coluna'=>"sub_transporte", 'data-id'=>$folha_salarios->id])}}</td>
                                             <td>{{Form::number('sub_comunicacao', $folha_salarios->sub_comunicacao, ['placeholder'=>"Akz", 'class'=>"sub_comunicacao txt_folha", 'data-coluna'=>"sub_comunicacao", 'data-id'=>$folha_salarios->id])}}</td>
                                             <td>{{number_format($folha_salarios->salario_iliquido,2,',','.')}}</td>
+                                            
                                       
 
                                         <td>{{number_format($folha_salarios->des_irt,2,',','.')}}</td>
                                         <td>{{number_format($folha_salarios->des_ss,2,',','.')}}</td>
                                         <td>{{number_format($folha_salarios->des_falta,2,',','.')}}</td>
                                         <td>{{number_format($folha_salarios->des_total,2,',','.')}}</td>
+                                        
+                                        <td>{{number_format($folha_salarios->salario_liquido,2,',','.')}}</td>
 
                                         </tr>
                                        @endforeach

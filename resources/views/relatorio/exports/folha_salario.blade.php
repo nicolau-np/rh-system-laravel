@@ -100,7 +100,6 @@ $total_liquido = 0;
             $salario_tempo_trab = 0;
             $cont = 0;
             $irt = null;
-            $liquido_receber = 0;
             $total_desconto = 0;
             if(session()->has('prioridade')){
 
@@ -111,7 +110,7 @@ $total_liquido = 0;
             $desconto_falta = 0;
             $salario_tempo_trab = 0;
             $irt = null;
-            $liquido_receber = 0;
+            
             $total_desconto = 0;
 
             
@@ -126,22 +125,19 @@ $total_liquido = 0;
                 $desconto_falta = 0;
             }
          $salario_tempo_trab = $funcionarios->salario_base - $desconto_falta;   
-        
         $seg_social = RelatorioController::seg_social($funcionarios->salario_base);
-        
         $irt = RelatorioController::irt($funcionarios->salario_base, $seg_social);
-        $liquido_receber = $funcionarios->salario_base - $irt - $seg_social;
+        
+      
+        
         $total_desconto = $irt+$seg_social;
-
-
         $total_base = ($total_base + $funcionarios->salario_base);
         $total_salario_tempo_trabalho = ($total_salario_tempo_trabalho + $salario_tempo_trab);
         $total_irt = $total_irt + $irt;
         $total_inss = $total_inss + $seg_social;
         $total_geral_descontos = $total_geral_descontos + $total_desconto;
-        $total_liquido = $total_liquido + $liquido_receber;
-
-               
+        $total_liquido = $total_liquido + $funcionarios->salario_liquido;
+              
 ?>
 
 <tr>
@@ -162,7 +158,7 @@ $total_liquido = 0;
 <!--<td></td>
 <td></td>
 <td></td>-->
-<td>{{number_format($liquido_receber,2,',','.')}}</td>
+<td>{{number_format($funcionarios->salario_liquido,2,',','.')}}</td>
 
 </tr>
     <?php
