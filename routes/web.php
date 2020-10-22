@@ -10,7 +10,7 @@ Route::get('/', "HomeController@index")->name('home')->middleware('auth');
 Route::get('/loginForm', "UsuarioController@loginForm")->name('loginForm');
 Route::get('/logout', "UsuarioController@logout")->name("logout");
 
-Route::group(['prefix'=>'/funcionarios', 'middleware'=>'auth'], function(){
+Route::group(['prefix' => '/funcionarios', 'middleware' => 'auth'], function () {
     Route::get('/list', 'FuncionarioController@index');
     Route::get('/new', 'FuncionarioController@create');
     Route::get('/edit/{id}', "FuncionarioController@edit");
@@ -30,7 +30,7 @@ Route::group(['prefix'=>'/funcionarios', 'middleware'=>'auth'], function(){
     Route::post('/export_folha', "RelatorioController@export_folha");
 });*/
 
-Route::group(['prefix'=>'/usuarios', 'middleware'=>'auth'], function(){
+Route::group(['prefix' => '/usuarios', 'middleware' => 'auth'], function () {
     Route::get('/perfil', "UsuarioController@perfil");
     Route::get('/list', "UsuarioController@index");
     Route::get('/new/{id_pessoa}', "UsuarioController@create");
@@ -38,13 +38,12 @@ Route::group(['prefix'=>'/usuarios', 'middleware'=>'auth'], function(){
     Route::put('/store/{id_pessoa}', "UsuarioController@store");
 });
 
-Route::group(['prefix' => '/ferias', 'middleware'=>'auth'], function () {
+Route::group(['prefix' => '/ferias', 'middleware' => 'auth'], function () {
     Route::get('/list/{id}', 'FeriaController@index');
     Route::put('/store/{id}', 'FeriaController@store');
-   
 });
 
-Route::group(['prefix' => '/reports', 'middleware'=>'auth'], function () {
+Route::group(['prefix' => '/reports', 'middleware' => 'auth'], function () {
     Route::get('/declaracao/{id}', 'ReportController@declaracao');
     Route::get('/carta_recomend/{id}', 'ReportController@carta_recomend');
     Route::get('/guia_feria/{id}', 'ReportController@guia_feria');
@@ -52,27 +51,25 @@ Route::group(['prefix' => '/reports', 'middleware'=>'auth'], function () {
     Route::get('/guia_medica/{id_guia}', "ReportController@guia_medica");
 });
 
-Route::group(['prefix' => '/salarios', 'middleware'=>'auth'], function () {
+Route::group(['prefix' => '/salarios', 'middleware' => 'auth'], function () {
     Route::get('/list', 'SalarioController@index');
     Route::get('/new', 'SalarioController@create');
     Route::post('/store', 'SalarioController@store');
     Route::get('/lacamento/{id_salario}', 'SalarioController@lancamento');
     Route::post('/updateFolhaSalarial', 'SalarioController@updateFolhaSalarial')->name("updateFolhaSalarial");
-
-
 });
 
-Route::group(['prefix' => '/declaracao', 'middleware'=>"auth"], function () {
+Route::group(['prefix' => '/declaracao', 'middleware' => "auth"], function () {
     Route::get('/list/{id}', "DeclaracaoController@index");
     Route::put('/store/{id}', "DeclaracaoController@store");
 });
 
-Route::group(['prefix' => '/guia_medica', 'middleware'=>"auth"], function () {
+Route::group(['prefix' => '/guia_medica', 'middleware' => "auth"], function () {
     Route::get('/list/{id}', 'GuiaMedicaController@index');
     Route::put('/store/{id}', 'GuiaMedicaController@store');
 });
 
-Route::group(['prefix' => '/departamentos', 'middleware'=>"auth"], function () {
+Route::group(['prefix' => '/departamentos', 'middleware' => "auth"], function () {
     Route::get('/list', "DepartamentoController@index");
     Route::get('/new', "DepartamentoController@create");
     Route::post('/store', "DepartamentoController@store");
@@ -80,7 +77,7 @@ Route::group(['prefix' => '/departamentos', 'middleware'=>"auth"], function () {
     Route::put('/store_depCargo/{id}', "DepartamentoController@store_depCargo");
 });
 
-Route::group(['prefix' => '/clientes', 'middleware'=>"auth"], function () {
+Route::group(['prefix' => '/clientes', 'middleware' => "auth"], function () {
     Route::get('/list', "ClienteController@index");
     Route::get('/new', "ClienteController@create");
     Route::post('/store', "ClienteController@store");
@@ -88,29 +85,33 @@ Route::group(['prefix' => '/clientes', 'middleware'=>"auth"], function () {
     Route::put('/store_faturacao/{id}', "ClienteController@store_faturacao");
 });
 
-Route::group(['prefix' => '/candidaturas', 'middleware'=>"auth"], function () {
+Route::group(['prefix' => '/candidaturas', 'middleware' => "auth"], function () {
     Route::get('/list', "CandidaturaController@index");
     Route::get('/new', "CandidaturaController@create");
     Route::post('/store', "CandidaturaController@store");
     Route::get('/add_doc/{id_candidatura}', "CandidaturaController@show");
 });
 
-Route::group(['prefix' => '/empresa', 'middleware'=>"auth"], function () {
+Route::group(['prefix' => '/empresa', 'middleware' => "auth"], function () {
     Route::get('/list', "ConfiguracoesController@empresa_list");
     Route::get('/new', "ConfiguracoesController@empresa_new");
     Route::post('/store', "ConfiguracoesController@empresa_store");
 });
 
-Route::group(['prefix' => '/contas', 'middleware'=>"auth"], function () {
+Route::group(['prefix' => '/contas', 'middleware' => "auth"], function () {
     Route::get('/list', "ConfiguracoesController@conta_list");
     Route::get('/new', "ConfiguracoesController@conta_new");
     Route::post('/store', "ConfiguracoesController@conta_store");
 });
 
-Route::group(['prefix' => '/bancos', 'middleware'=>"auth"], function () {
+Route::group(['prefix' => '/bancos', 'middleware' => "auth"], function () {
     Route::get('/list', "ExtraController@banco_list");
     Route::get('/new', "ExtraController@banco_new");
     Route::post('/store', "ExtraController@banco_store");
+});
+
+Route::group(['prefix' => '/balancos', 'middleware' => "auth"], function () {
+    Route::get('/salarios', "BalancoController@salario");
 });
 
 Route::post('/login', "UsuarioController@login");

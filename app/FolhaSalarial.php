@@ -22,7 +22,8 @@ class FolhaSalarial extends Model
         'des_irt',
         'des_ss',
         'des_falta',
-        'des_total'
+        'des_total',
+        'salario_liquido'
     ];
 
     public function funcionario()

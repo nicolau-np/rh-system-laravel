@@ -30,6 +30,7 @@ class CreateFolhaSalarialsTable extends Migration
             $table->decimal('des_ss', 10,2)->nullable();
             $table->decimal('des_falta', 10,2)->nullable();
             $table->decimal('des_total', 10,2)->nullable();
+            $table->decimal('salario_liquido', 10,2)->nullable();
 
             $table->timestamps();
         });

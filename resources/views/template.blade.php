@@ -41,7 +41,12 @@
 	<script src="{{asset('assets/vendor/modernizr/modernizr.js')}}"></script>
 	<script src="{{asset('assets/vendor/jquery/jquery.js')}}"></script>
 	
-
+	@if ($tipo=="grafico")
+	<script src="{{asset('highcharts/highcharts.js')}}"></script>
+	<script src="{{asset('highcharts/modules/exporting.js')}}"></script>
+	<script src="{{asset('highcharts/modules/export-data.js')}}"></script>
+	<script src="{{asset('highcharts/modules/accessibility.js')}}"></script>
+	@endif
 </head>
 
 <body>
@@ -334,19 +339,14 @@
 									</a>
 								</li>
 
-								<li class="nav-parent">
+								<li class="@if($titulo == 'Balanços') nav-parent nav-expanded nav-active @else nav-parent @endif">
 									<a>
 										<i class="fa fa-table" aria-hidden="true"></i>
-										<span>Estatísticas</span>
+										<span>Balanços</span>
 									</a>
 									<ul class="nav nav-children">
-										<li>
-											<a href="tables-basic.html">
-												Funcionários
-											</a>
-										</li>
-										<li>
-											<a href="tables-advanced.html">
+										<li class="@if($menu == 'B. Salários') nav-active @endif">
+											<a href="/balancos/salarios">
 												Salários
 											</a>
 										</li>
@@ -590,6 +590,7 @@
 
 	<!-- Examples -->
 	<script src="{{asset('assets/javascripts/dashboard/examples.dashboard.js')}}"></script>
+	
 </body>
 
 </html>
