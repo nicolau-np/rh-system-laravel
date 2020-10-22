@@ -1,3 +1,11 @@
+@php
+use App\Http\Controllers\BalancoController; 
+$meses = [1,2,3,4,5,6,7,8,9,10,11,12];  
+$salario_iliquido = 0;
+$irt= 0;
+$ss = 0;
+$salario_liquido = 0; 
+@endphp
 @extends('template')
 
 @section('content')
@@ -110,18 +118,50 @@
                             },
                             series: [{
                                 name: 'Salário ILíquido',
-                                data: [{{number_format(11903,2,',','.')}}, 40200, 300020, 570000, 490000, 450000, 120000, 85140, 19990, 108811, 110020, 120000,]
+                                data: [
+                                    <?php
+                                    foreach($meses as $mes){
+                                        $salario_iliquido = 0;
+                                        $salario_iliquido = BalancoController::getSalario_iliquido($mes);
+                                        echo $salario_iliquido.","; 
+                                    }
+                                    ?>
+                                ]
                             }, {
                                 name: 'I.R.T',
-                                data: [11703, 20200, 300020, 570000, 490000, 450000, 120000, 85140, 19990, 108811, 80020, 90000,]
+                                data: [
+                                    <?php
+                                    foreach($meses as $mes){
+                                        $irt = 0;
+                                        $irt = BalancoController::getIrt($mes);
+                                        echo $irt.","; 
+                                    }
+                                    ?>
+                                ]
                             }, 
                             {
                                 name: 'S.S',
-                                data: [11903, 10200, 300220, 510000, 490000, 450100, 120000, 85140, 19990, 108811, 110020, 150000,]
+                                data: [
+                                    <?php
+                                    foreach($meses as $mes){
+                                        $ss = 0;
+                                        $ss = BalancoController::getSs($mes);
+                                        echo $ss.","; 
+                                    }
+                                    ?>
+                                ]
                             },
                             {
                                 name: 'Salário Líquido',
-                                data: [11903, 10200, 300220, 510000, 490000, 450100, 120000, 85140, 19990, 108811, 110020, 150000,]
+                                data: [
+                                    <?php
+                                    foreach($meses as $mes){
+                                        $salario_liquido = 0;
+                                        $salario_liquido = BalancoController::getSalario_liquido($mes);
+                                        echo $salario_liquido.","; 
+                                    }
+                                    ?>
+                                ]
                             }]
                         });
                                 </script>
