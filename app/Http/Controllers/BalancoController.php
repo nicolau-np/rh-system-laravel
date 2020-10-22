@@ -44,86 +44,38 @@ class BalancoController extends Controller
         return view("balanco.salario", $data);
     }
 
-    public static function getSalario_iliquido($mes)
+    public static function getGrafico($mes, $data)
     {
-     
-        $data['valores']['salario_iliquido'] = 0;
+
+        $retono = 0;
 
         $salario = Salario::where('mes', $mes)
             ->where('ano', 2020)->first();
         if ($salario) {
 
             $folha_salario = FolhaSalarial::where('id_salario', $salario->id)->get();
-            foreach ($folha_salario as $folha) {
-                $data['valores']['salario_iliquido'] = $data['valores']['salario_iliquido'] + $folha->salario_iliquido;
+            if ($data == "salario_iliquido") {
+                foreach ($folha_salario as $folha) {
+                    $retono = $retono + $folha->salario_iliquido;
+                }
+            } elseif ($data == "salario_liquido") {
+                foreach ($folha_salario as $folha) {
+                    $retono = $retono + $folha->salario_liquido;
+                }
+            } elseif ($data == "irt") {
+                foreach ($folha_salario as $folha) {
+                    $retono = $retono + $folha->des_irt;
+                }
+            } elseif ($data == "ss") {
+                foreach ($folha_salario as $folha) {
+                    $retono = $retono + $folha->des_ss;
+                }
             }
         } else {
-            $data['valores']['salario_iliquido'] = 0;
+            $retono = 0;
         }
 
 
-        return $data['valores']['salario_iliquido'];
-    }
-
-    public static function getIrt($mes)
-    {
-      
-        $data['valores']['irt'] = 0;
-
-        $salario = Salario::where('mes', $mes)
-            ->where('ano', 2020)->first();
-        if ($salario) {
-
-            $folha_salario = FolhaSalarial::where('id_salario', $salario->id)->get();
-            foreach ($folha_salario as $folha) {
-                $data['valores']['irt'] = $data['valores']['irt'] + $folha->des_irt;
-            }
-        } else {
-            $data['valores']['irt'] = 0;
-        }
-
-        return $data['valores']['irt'];
-    }
-
-    public static function getSs($mes)
-    {
-      
-        $data['valores']['ss'] = 0;
-
-        $salario = Salario::where('mes', $mes)
-            ->where('ano', 2020)->first();
-        if ($salario) {
-
-            $folha_salario = FolhaSalarial::where('id_salario', $salario->id)->get();
-            foreach ($folha_salario as $folha) {
-                $data['valores']['ss'] = $data['valores']['ss'] + $folha->des_ss;
-            }
-        } else {
-            $data['valores']['ss'] = 0;
-        }
-
-
-        return $data['valores']['ss'];
-    }
-
-    public static function getSalario_liquido($mes)
-    {
-      
-        $data['valores']['salario_liquido'] = 0;
-
-        $salario = Salario::where('mes', $mes)
-            ->where('ano', 2020)->first();
-        if ($salario) {
-
-            $folha_salario = FolhaSalarial::where('id_salario', $salario->id)->get();
-            foreach ($folha_salario as $folha) {
-                $data['valores']['salario_liquido'] = $data['valores']['salario_liquido'] + $folha->salario_liquido;
-            }
-        } else {
-            $data['valores']['salario_liquido'] = 0;
-        }
-
-
-        return $data['valores']['salario_liquido'];
+        return $retono;
     }
 }

@@ -1,10 +1,7 @@
 @php
 use App\Http\Controllers\BalancoController; 
 $meses = [1,2,3,4,5,6,7,8,9,10,11,12];  
-$salario_iliquido = 0;
-$irt= 0;
-$ss = 0;
-$salario_liquido = 0; 
+$retorno = 0;
 @endphp
 @extends('template')
 
@@ -121,9 +118,9 @@ $salario_liquido = 0;
                                 data: [
                                     <?php
                                     foreach($meses as $mes){
-                                        $salario_iliquido = 0;
-                                        $salario_iliquido = BalancoController::getSalario_iliquido($mes);
-                                        echo $salario_iliquido.","; 
+                                        $retorno = 0;
+                                        $retorno = BalancoController::getGrafico($mes, "salario_iliquido");
+                                        echo $retorno.","; 
                                     }
                                     ?>
                                 ]
@@ -132,9 +129,9 @@ $salario_liquido = 0;
                                 data: [
                                     <?php
                                     foreach($meses as $mes){
-                                        $irt = 0;
-                                        $irt = BalancoController::getIrt($mes);
-                                        echo $irt.","; 
+                                        $retorno = 0;
+                                        $retorno = BalancoController::getGrafico($mes, "irt");
+                                        echo $retorno.","; 
                                     }
                                     ?>
                                 ]
@@ -144,9 +141,9 @@ $salario_liquido = 0;
                                 data: [
                                     <?php
                                     foreach($meses as $mes){
-                                        $ss = 0;
-                                        $ss = BalancoController::getSs($mes);
-                                        echo $ss.","; 
+                                        $retorno = 0;
+                                        $retorno = BalancoController::getGrafico($mes, "ss");
+                                        echo $retorno.","; 
                                     }
                                     ?>
                                 ]
@@ -156,9 +153,9 @@ $salario_liquido = 0;
                                 data: [
                                     <?php
                                     foreach($meses as $mes){
-                                        $salario_liquido = 0;
-                                        $salario_liquido = BalancoController::getSalario_liquido($mes);
-                                        echo $salario_liquido.","; 
+                                        $retorno = 0;
+                                        $retorno = BalancoController::getGrafico($mes, "salario_liquido");
+                                        echo $retorno.","; 
                                     }
                                     ?>
                                 ]
