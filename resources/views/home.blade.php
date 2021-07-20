@@ -19,19 +19,17 @@
             <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
         </div>
     </header>
-
     <div class="row">
         <div class="col-md-12">
             <section class="panel">
-               
+
                 <div class="panel-body">
                 <img src="{{asset('assets/images/rh-system.jpg')}}" style="width:100%; height: 30em;" alt="">
                 </div>
             </section>
         </div>
-     
-    </div>
 
+    </div>
     <!-- start: page -->
     <div class="row">
         <div class="col-md-6 col-lg-12 col-xl-6">

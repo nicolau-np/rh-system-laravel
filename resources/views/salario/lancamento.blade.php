@@ -37,10 +37,7 @@
             <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
         </div>
     </header>
-
     <!-- start: page -->
-
-
     <div class="row">
 
         <div class="col-md-12">
@@ -62,7 +59,7 @@
                                     <input type="search" class="form-control" placeholder="Search" aria-controls="datatable-default">&nbsp;
                                     <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-search"></i></a>&nbsp;
                                 <a href="/reports/folha_salario/{{$getidSalario}}" class="btn btn-primary btn-sm" title="Imprimir"><i class="fa fa-print"></i></a>&nbsp;
-                                    
+
                                 </div>
                             </form>
 
@@ -97,10 +94,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       
+
                                        {{Form::open(['name'=>"formLancamento", 'class'=>"formLancamento", 'method'=>"post"])}}
                                         @foreach($getFolhaSalario as $folha_salarios)
-                                       
+
                                         <tr>
                                             <td class="td_nome">{{$folha_salarios->funcionario->pessoa->nome}}</td>
                                             <td>{{$folha_salarios->funcionario->cargo->cargo}}</td>
@@ -110,14 +107,14 @@
                                             <td>{{Form::number('sub_transporte', $folha_salarios->sub_transporte, ['placeholder'=>"Akz", 'class'=>"sub_transporte txt_folha", 'data-coluna'=>"sub_transporte", 'data-id'=>$folha_salarios->id])}}</td>
                                             <td>{{Form::number('sub_comunicacao', $folha_salarios->sub_comunicacao, ['placeholder'=>"Akz", 'class'=>"sub_comunicacao txt_folha", 'data-coluna'=>"sub_comunicacao", 'data-id'=>$folha_salarios->id])}}</td>
                                             <td>{{number_format($folha_salarios->salario_iliquido,2,',','.')}}</td>
-                                            
-                                      
+
+
 
                                         <td>{{number_format($folha_salarios->des_irt,2,',','.')}}</td>
                                         <td>{{number_format($folha_salarios->des_ss,2,',','.')}}</td>
                                         <td>{{number_format($folha_salarios->des_falta,2,',','.')}}</td>
                                         <td>{{number_format($folha_salarios->des_total,2,',','.')}}</td>
-                                        
+
                                         <td>{{number_format($folha_salarios->salario_liquido,2,',','.')}}</td>
 
                                         </tr>
@@ -132,7 +129,7 @@
 
                     <div class="row">
                         <div class="col-sm-12 col-md-6" style="text-align: right;">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -157,7 +154,7 @@
                 } else {
                     $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                 }
-              
+
             }
         });
 
@@ -175,7 +172,7 @@
                 } else {
                     $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                 }
-              
+
             }
         });
 
@@ -194,12 +191,12 @@
                 } else {
                     $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                 }
-              
+
             }
         });
         //fim
 
-        
+
         function update_salario(pagina, id_folhaSalarial, coluna, valor) {
             $.ajax({
                 method: "post",

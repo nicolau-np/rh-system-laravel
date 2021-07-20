@@ -41,7 +41,7 @@
 	<!-- Head Libs -->
 	<script src="{{asset('assets/vendor/modernizr/modernizr.js')}}"></script>
 	<script src="{{asset('assets/vendor/jquery/jquery.js')}}"></script>
-	
+
 	@if ($tipo=="grafico")
 	<script src="{{asset('highcharts/highcharts.js')}}"></script>
 	<script src="{{asset('highcharts/modules/exporting.js')}}"></script>
@@ -404,13 +404,12 @@
 												Empresa
 											</a>
 										</li>
-									
+
 										<li class="@if($menu == 'Contas') nav-active @endif">
 											<a href="/contas/list">
 												Contas
 											</a>
 										</li>
-
 
 									</ul>
 								</li>
@@ -484,7 +483,6 @@
 
 			</aside>
 			<!-- end: sidebar -->
-
 			@yield('content')
 
 		</div>
@@ -522,7 +520,7 @@
 										<span class="title">Hey, how are you?</span>
 									</div>
 								</li>
-						
+
 								<li class="status-offline">
 									<figure class="profile-picture">
 										<img src="{{asset('assets/images/!sample-user.jpg')}}" alt="Joseph Doe" class="img-circle">
@@ -544,7 +542,7 @@
 	@yield('content')
 	@endif
 	<!-- Vendor -->
-	
+
 	<script src="{{asset('assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js')}}"></script>
 	<script src="{{asset('assets/vendor/bootstrap/js/bootstrap.js')}}"></script>
 	<script src="{{asset('assets/vendor/nanoscroller/nanoscroller.js')}}"></script>
@@ -591,7 +589,7 @@
 
 	<!-- Examples -->
 	<script src="{{asset('assets/javascripts/dashboard/examples.dashboard.js')}}"></script>
-	
+
 </body>
 
 </html>

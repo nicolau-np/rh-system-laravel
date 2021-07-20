@@ -1,5 +1,5 @@
-<?php 
-use App\Http\Controllers\SalarioController; 
+<?php
+use App\Http\Controllers\SalarioController;
 ?>
 @extends('template')
 
@@ -26,7 +26,6 @@ use App\Http\Controllers\SalarioController;
 
     <!-- start: page -->
 
-
     <div class="row">
 
         <div class="col-md-12">
@@ -48,7 +47,7 @@ use App\Http\Controllers\SalarioController;
                                     <input type="search" class="form-control" placeholder="Search" aria-controls="datatable-default">&nbsp;
                                     <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-search"></i></a>&nbsp;
                                     <a href="/salarios/new" class="btn btn-success btn-sm" title="Novo"><i class="fa fa-plus"></i></a>&nbsp;
-                                    
+
                                 </div>
                             </form>
 
@@ -84,7 +83,7 @@ use App\Http\Controllers\SalarioController;
                                                 <a href="#" title="Eliminar"><i class="fa fa-trash-o fa-2x"></i></a>&nbsp;
                                             </td>
                                         </tr>
-                                        <?php 
+                                        <?php
                                           }
                                           ?>
                                     </tbody>
