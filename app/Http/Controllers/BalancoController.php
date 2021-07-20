@@ -12,8 +12,6 @@ class BalancoController extends Controller
 
     public function salario()
     {
-        
-
         $data = [
             'titulo' => "Balanços",
             'menu' => "B. Salários",
@@ -25,7 +23,6 @@ class BalancoController extends Controller
 
     public static function getGrafico($mes, $data)
     {
-
         $retono = 0;
 
         $salario = Salario::where('mes', $mes)
