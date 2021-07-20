@@ -36,5 +36,4 @@ class Pessoa extends Model
         return $this->hasOne(Funcionario::class, 'id_pessoa', 'id');
     }
 
-
 }
